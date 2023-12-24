@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    font-family: "Roboto", sans-serif;
+  }
+}
