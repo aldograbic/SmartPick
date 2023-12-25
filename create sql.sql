@@ -14,6 +14,14 @@ CREATE TABLE `user` (
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+-- Role table to store role names
+CREATE TABLE `role` (
+  `role_id` int NOT NULL,
+  `name` varchar(20) NOT NULL,
+  PRIMARY KEY (`role_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
 -- Product table to store product information
 CREATE TABLE product (
     product_id INT PRIMARY KEY AUTO_INCREMENT,
