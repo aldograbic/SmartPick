@@ -6,7 +6,19 @@
   </head>
   <body>
     <th:block th:insert="~{fragments/header :: header}"></th:block>
-    <main></main>
+    <main>
+      <img src="img/banner-1.png" alt="" class="w-full md:h-[30rem]" />
+      <div class="container flex flex-col gap-8 mx-auto p-6">
+        <div class="flex justify-center gap-8 mx-auto p-6 text-xl">
+          <div>MEN</div>
+          <div>WOMEN</div>
+          <div>CHILDREN</div>
+        </div>
+        <div>
+          <h2>FEATURED</h2>
+        </div>
+      </div>
+    </main>
     <th:block th:insert="~{fragments/footer :: footer}"></th:block>
   </body>
 </html>

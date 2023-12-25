@@ -10,4 +10,28 @@
   body {
     font-family: "Roboto", sans-serif;
   }
+
+  h1 {
+    @apply text-4xl font-bold;
+  }
+
+  h2 {
+    @apply text-2xl font-semibold;
+  }
+
+  input[type="text"],
+  input[type="password"],
+  input[type="email"] {
+    @apply block rounded-lg px-2.5 pb-2.5 pt-5 w-96 text-sm text-gray-900 bg-gray-50 border border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-cyan-800;
+  }
+
+  input[type="text"] + label,
+  input[type="password"] + label,
+  input[type="email"] + label {
+    @apply absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] start-2.5;
+  }
+
+  input[type="submit"] {
+    @apply text-lg border rounded-lg px-5 py-2.5  bg-cyan-800 text-gray-100 cursor-pointer hover:bg-cyan-900;
+  }
 }
