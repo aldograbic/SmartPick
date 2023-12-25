@@ -1,0 +1,57 @@
+<div
+  th:fragment="errorMessage"
+  th:if="${errorMessage}"
+  id="toast-success"
+  class="absolute right-0 z-30 flex items-center w-full p-4 mb-4 bg-white rounded-lg shadow"
+  role="alert"
+  x-data="{ errorMessage: true }"
+  x-show="errorMessage"
+  x-init="setTimeout(() => errorMessage = false, 10000)"
+  x-transition:enter="transition ease-out duration-300"
+  x-transition:enter-start="opacity-0 transform translate-y-4"
+  x-transition:enter-end="opacity-100 transform translate-y-0"
+  x-transition:leave="transition ease-in duration-300"
+  x-transition:leave-start="opacity-100 transform translate-y-0"
+  x-transition:leave-end="opacity-0 transform translate-y-4"
+>
+  <div
+    class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-red-500 bg-red-100 rounded-lg"
+  >
+    <svg
+      class="w-5 h-5"
+      aria-hidden="true"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="currentColor"
+      viewBox="0 0 20 20"
+    >
+      <path
+        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 11.793a1 1 0 1 1-1.414 1.414L10 11.414l-2.293 2.293a1 1 0 0 1-1.414-1.414L8.586 10 6.293 7.707a1 1 0 0 1 1.414-1.414L10 8.586l2.293-2.293a1 1 0 0 1 1.414 1.414L11.414 10l2.293 2.293Z"
+      />
+    </svg>
+    <span class="sr-only">Error icon</span>
+  </div>
+  <div th:text="${errorMessage}" class="ms-3"></div>
+  <button
+    type="button"
+    @click="errorMessage = false"
+    class="ms-auto -mx-1.5 -my-1.5 bg-white rounded-lg p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8"
+    data-dismiss-target="#toast-success"
+    aria-label="Close"
+  >
+    <span class="sr-only">Close</span>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke-width="1.5"
+      stroke="currentColor"
+      class="w-6 h-6"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="M6 18L18 6M6 6l12 12"
+      />
+    </svg>
+  </button>
+</div>
