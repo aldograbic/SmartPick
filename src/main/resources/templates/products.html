@@ -6,7 +6,170 @@
   </head>
   <body>
     <th:block th:insert="~{fragments/header :: header}"></th:block>
-    <main></main>
+    <main>
+      <div class="container flex flex-col gap-8 mx-auto p-6">
+        <div class="flex gap-4 text-2xl">
+          <a href="">MEN</a>
+          <a href="">WOMEN</a>
+          <a href="">CHILDREN</a>
+        </div>
+        <div class="flex items-center justify-between mb-16">
+          <div class="flex gap-8">
+            <a href="">Shirts</a>
+            <a href="">Jackets</a>
+            <a href="">Pants</a>
+            <a href="">Shoes</a>
+            <a href="">Handbags</a>
+            <a href="">Accessories</a>
+          </div>
+          <div class="relative text-gray-600">
+            <input
+              class="border border-b-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
+              type="search"
+              name="search"
+              placeholder="Search"
+            />
+            <button type="submit" class="absolute right-0 top-0 mt-3 mr-4">
+              <svg
+                class="text-gray-600 h-4 w-4 fill-current"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                version="1.1"
+                viewBox="0 0 56.966 56.966"
+                style="enable-background: new 0 0 56.966 56.966"
+                xml:space="preserve"
+              >
+                <path
+                  d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+        <div class="flex items-end gap-4">
+          <p class="text-3xl uppercase">women's shirts</p>
+          <p class="text-sm text-gray-400">12 products</p>
+        </div>
+        <div class="flex gap-8">
+          <p class="flex items-center gap-1">
+            SORT
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-4 h-4"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="m19.5 8.25-7.5 7.5-7.5-7.5"
+              />
+            </svg>
+          </p>
+          <p class="flex items-center gap-1">
+            SIZE
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-4 h-4"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="m19.5 8.25-7.5 7.5-7.5-7.5"
+              />
+            </svg>
+          </p>
+          <p class="flex items-center gap-1">
+            COLOR
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-4 h-4"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="m19.5 8.25-7.5 7.5-7.5-7.5"
+              />
+            </svg>
+          </p>
+          <p class="flex items-center gap-1">
+            PRICE
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-4 h-4"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="m19.5 8.25-7.5 7.5-7.5-7.5"
+              />
+            </svg>
+          </p>
+        </div>
+        <div class="grid grid-cols-5 gap-8">
+          <div class="border border-b-2 rounded-lg border-black h-full">
+            <div class="relative">
+              <img
+                src="img/shirt-placeholder.jpg"
+                alt=""
+                class="rounded-t-lg h-2/3 w-full"
+              />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                class="w-6 h-6 absolute top-2 right-2 text-gray-400"
+              >
+                <path
+                  d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z"
+                />
+              </svg>
+            </div>
+            <div class="p-2">
+              <p>Majica kratkih rukava</p>
+              <p>24.99 EUR</p>
+            </div>
+          </div>
+          <div class="border border-b-2 rounded-lg border-black h-full">
+            <div class="relative">
+              <img
+                src="img/shirt-placeholder.jpg"
+                alt=""
+                class="rounded-t-lg h-2/3 w-full"
+              />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                class="w-6 h-6 absolute top-2 right-2 text-gray-400"
+              >
+                <path
+                  d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z"
+                />
+              </svg>
+            </div>
+            <div class="p-2">
+              <p>Majica kratkih rukava</p>
+              <p>24.99 EUR</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
     <th:block th:insert="~{fragments/footer :: footer}"></th:block>
   </body>
 </html>

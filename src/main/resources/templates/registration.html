@@ -6,8 +6,9 @@
   </head>
   <body>
     <th:block th:insert="~{fragments/header :: header}"></th:block>
+    <th:block th:insert="~{fragments/errorMessage :: errorMessage}"></th:block>
     <main>
-      <div class="container flex items-center flex-col gap-8 mx-auto p-6">
+      <div class="container flex items-center flex-col gap-8 mx-auto p-6 mt-16">
         <h1>REGISTRATION</h1>
         <form
           action="/registration"
@@ -21,6 +22,7 @@
               name="firstName"
               class="peer"
               placeholder=" "
+              required
             />
             <label
               for="firstName"
@@ -36,6 +38,7 @@
               name="lastName"
               class="peer"
               placeholder=" "
+              required
             />
             <label
               for="lastName"
@@ -51,6 +54,7 @@
               name="email"
               class="peer"
               placeholder=" "
+              required
             />
             <label
               for="email"
@@ -66,6 +70,7 @@
               name="username"
               class="peer"
               placeholder=" "
+              required
             />
             <label
               for="username"
@@ -81,6 +86,7 @@
               name="password"
               class="peer"
               placeholder=" "
+              required
             />
             <label
               for="password"
@@ -96,6 +102,7 @@
               name="confirmPassword"
               class="peer"
               placeholder=" "
+              required
             />
             <label
               for="confirmPassword"
