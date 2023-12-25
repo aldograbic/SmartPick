@@ -22,8 +22,9 @@ public class DatabaseLoginSuccessHandler extends SavedRequestAwareAuthentication
     @Autowired
     UserRepository userRepository;
     
+    //DODAT ROLE BASED NAKON LOGINA ZA ADMINA I USERA
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws ServletException, IOException {
-        response.sendRedirect("/dashboard?success");
+        response.sendRedirect("/user-dashboard?success");
     }
 }
