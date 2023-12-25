@@ -6,7 +6,31 @@
   </head>
   <body>
     <th:block th:insert="~{fragments/header :: header}"></th:block>
-    <main></main>
+    <main>
+      <div
+        class="container flex justify-center items-center gap-24 mx-auto p-6 mt-24"
+      >
+        <img
+          src="img/error-403-illustration.svg"
+          alt="Error 404 illustration"
+          class="w-96"
+        />
+        <div class="md:text-lg flex-1 gap-8 flex flex-col">
+          <h1 class="md:text-6xl">INTERNAL SERVER ERROR</h1>
+          <p>
+            Oops! Something didn't quite go as planned on our end, but no
+            worries - our team is already on the case, working to sort things
+            out!<br />If the issue persists, please contact us.
+          </p>
+          <div class="flex items-center gap-4">
+            <a href="/user-dashboard" class="button w-fit"
+              >Return to Dashboard</a
+            >
+            <a href="/contact" class="w-fit link">Contact support &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </main>
     <th:block th:insert="~{fragments/footer :: footer}"></th:block>
   </body>
 </html>

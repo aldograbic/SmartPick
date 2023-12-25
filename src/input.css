@@ -8,6 +8,7 @@
   }
 
   body {
+    @apply min-h-screen;
     font-family: "Roboto", sans-serif;
   }
 
@@ -21,17 +22,115 @@
 
   input[type="text"],
   input[type="password"],
-  input[type="email"] {
+  input[type="email"],
+  textarea {
     @apply block rounded-lg px-2.5 pb-2.5 pt-5 w-96 text-sm text-gray-900 bg-gray-50 border border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-cyan-800;
   }
 
   input[type="text"] + label,
   input[type="password"] + label,
-  input[type="email"] + label {
+  input[type="email"] + label,
+  textarea + label {
     @apply absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] start-2.5;
   }
 
-  input[type="submit"] {
+  input[type="submit"],
+  .button {
     @apply text-lg border rounded-lg px-5 py-2.5  bg-cyan-800 text-gray-100 cursor-pointer hover:bg-cyan-900;
+  }
+
+  .embla {
+    position: relative;
+    max-width: 100%;
+    margin-left: auto;
+    background-color: rgb(243 244 246);
+    margin-right: auto;
+    margin-top: 15px;
+  }
+
+  .embla__viewport {
+    overflow: hidden;
+    width: 100%;
+  }
+
+  .embla__viewport.is-draggable {
+    cursor: move;
+    cursor: grab;
+  }
+
+  .embla__viewport.is-dragging {
+    cursor: grabbing;
+  }
+
+  .embla__container {
+    display: flex;
+    user-select: none;
+    -webkit-touch-callout: none;
+    -khtml-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    margin-left: -10px;
+  }
+
+  .embla__slide {
+    position: relative;
+    min-width: 100%;
+    padding-left: 10px;
+  }
+
+  .embla__slide__inner {
+    position: relative;
+    overflow: hidden;
+    height: 500px;
+  }
+
+  .embla__slide__img {
+    position: absolute;
+    display: block;
+    top: 50%;
+    left: 50%;
+    width: auto;
+    min-height: 100%;
+    min-width: 100%;
+    transform: translate(-50%, -50%);
+  }
+
+  .embla__button {
+    outline: 0;
+    cursor: pointer;
+    background-color: transparent;
+    touch-action: manipulation;
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    transform: translateY(-50%);
+    border: 0;
+    width: 30px;
+    height: 30px;
+    justify-content: center;
+    align-items: center;
+    fill: #0891b2;
+    padding: 0;
+  }
+
+  .embla__button:hover {
+    fill: rgb(14 116 144);
+  }
+
+  .embla__button:disabled {
+    cursor: default;
+    opacity: 0.3;
+  }
+
+  .embla__button__svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .embla__button--prev {
+    left: 27px;
+  }
+
+  .embla__button--next {
+    right: 27px;
   }
 }

@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <th:block th:insert="~{fragments/head :: head}"></th:block>
-    <title>Error 404 | SmartPick</title>
+    <title>Error 403 | SmartPick</title>
   </head>
   <body>
     <th:block th:insert="~{fragments/header :: header}"></th:block>
@@ -11,18 +11,22 @@
         class="container flex justify-center items-center gap-24 mx-auto p-6 mt-24"
       >
         <img
-          src="img/error-404-illustration.svg"
+          src="img/error-403-illustration.svg"
           alt="Error 404 illustration"
           class="w-96"
         />
         <div class="md:text-lg flex-1 gap-8 flex flex-col">
-          <h1 class="md:text-6xl">PAGE NOT FOUND</h1>
+          <h1 class="md:text-6xl">ACCESS DENIED</h1>
           <p>
-            Looks like you've hit a dead end. Our system couldn't locate the
-            requested page. Please double-check the URL for any typos or click
-            below to return to the main dashboard.
+            Oops! It seems like you don't have permission to access this page.
+            If you believe this is an error, please contact the support.
           </p>
-          <a href="/user-dashboard" class="button w-fit">Return to Dashboard</a>
+          <div class="flex items-center gap-4">
+            <a href="/user-dashboard" class="button w-fit"
+              >Return to Dashboard</a
+            >
+            <a href="/contact-us" class="w-fit link">Contact support &rarr;</a>
+          </div>
         </div>
       </div>
     </main>

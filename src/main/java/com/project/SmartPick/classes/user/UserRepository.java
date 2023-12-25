@@ -7,4 +7,5 @@ public interface UserRepository {
     void saveUser(User user);
     User findByConfirmationToken(String token);
     void updateEmailVerification(User user);
+    void contactUs(String name, String email, String message);
 }
