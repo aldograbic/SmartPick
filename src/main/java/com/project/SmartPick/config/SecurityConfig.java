@@ -31,8 +31,9 @@ public class SecurityConfig {
                 .disable()))
             .authorizeHttpRequests((auth) -> auth
                 .requestMatchers("/css/**", "/img/**", "/js/**").permitAll()
-                .requestMatchers("/", "/login", "/registration", "/contact-us", "/products", "/confirm").anonymous()
+                .requestMatchers("/", "/login", "/registration", "/contact-us", "/products", "/confirm").permitAll()
                 .requestMatchers("/user-dashboard").hasRole("USER")
+                .requestMatchers("/admin-dashboard").hasRole("ADMIN")
                 // .requestMatchers("/dashboard", "/contact-info").hasAnyRole("TENANT", "OWNER", "AGENT")
                 // .requestMatchers("/properties", "/tenants").hasAnyRole("OWNER", "AGENT")
                 .anyRequest().authenticated()

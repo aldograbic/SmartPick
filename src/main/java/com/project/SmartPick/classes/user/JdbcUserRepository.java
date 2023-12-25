@@ -56,4 +56,10 @@ public class JdbcUserRepository implements UserRepository{
         String sql = "UPDATE user SET email_verified = ? WHERE user_id = ?";
         jdbcTemplate.update(sql, user.isEmailVerified(), user.getUserId());
     }
+
+    @Override
+    public void contactUs(String name, String email, String message) {
+        String sql = "INSERT INTO contact_message(name, email, message) VALUES (?, ?, ?)";
+        jdbcTemplate.update(sql, name, email, message);
+    }
 }
