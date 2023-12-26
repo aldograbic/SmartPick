@@ -6,7 +6,108 @@
   </head>
   <body>
     <th:block th:insert="~{fragments/header :: header}"></th:block>
-    <main></main>
+    <main>
+      <div class="container flex flex-col gap-8 mx-auto p-6">
+        <h1 class="flex items-center gap-2">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-10 h-10"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z"
+            />
+          </svg>
+          My Cart <span>(3)</span>
+        </h1>
+        <hr />
+        <div class="md:flex gap-16 w-full">
+          <div class="grid basis-4/5 relative">
+            <div
+              class="flex border border-b-2 rounded-lg border-black h-64 p-4 gap-8"
+            >
+              <div class="relative">
+                <img
+                  src="img/shirt-placeholder.jpg"
+                  alt=""
+                  class="rounded-t-lg w-36 h-48"
+                />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  class="w-6 h-6 absolute top-2 right-2 text-gray-400"
+                >
+                  <path
+                    d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z"
+                  />
+                </svg>
+              </div>
+              <div>
+                <p>Majica kratkih rukava</p>
+                <div class="text-gray-600">
+                  <p>Color: White</p>
+                  <p>Size: S</p>
+                  <p>In Stock</p>
+                </div>
+              </div>
+              <div class="flex flex-col mr-24">
+                <p>Price</p>
+                <p>24.99 EUR</p>
+              </div>
+              <div class="flex flex-col">
+                <p>Quantity</p>
+                <select name="" id="" class="w-24"></select>
+              </div>
+              <div class="flex flex-col absolute right-4">
+                <p>Total</p>
+                <p>59.98 EUR</p>
+              </div>
+            </div>
+          </div>
+          <div class="grid basis-1/5 text-gray-600 text-sm">
+            <div class="flex justify-between">
+              <p>Shipping cost</p>
+              <p>5 EUR</p>
+            </div>
+            <div class="flex justify-between">
+              <p>Discount</p>
+              <p>- 0 EUR</p>
+            </div>
+            <div class="flex justify-between">
+              <p>Tax</p>
+              <p>2 EUR</p>
+            </div>
+            <div class="flex justify-between text-black text-lg">
+              <p>Estimated Total</p>
+              <p>66.98 EUR</p>
+            </div>
+            <button class="button flex items-center justify-center gap-2">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-6 h-6"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
+                />
+              </svg>
+              Checkout
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
     <th:block th:insert="~{fragments/footer :: footer}"></th:block>
   </body>
 </html>

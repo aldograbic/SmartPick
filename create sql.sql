@@ -55,14 +55,19 @@ CREATE TABLE `product` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Purchase table to store user purchases
-CREATE TABLE purchase (
-    purchase_id INT PRIMARY KEY AUTO_INCREMENT,
-    user_id INT,
-    product_id INT,
-    purchase_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES user(user_id),
-    FOREIGN KEY (product_id) REFERENCES product(product_id)
-);
+CREATE TABLE `purchase` (
+  `purchase_id` int NOT NULL AUTO_INCREMENT,
+  `user_id` int DEFAULT NULL,
+  `product_id` int DEFAULT NULL,
+  `quantity` int NOT NULL,
+  `purchase_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`purchase_id`),
+  KEY `user_id` (`user_id`),
+  KEY `product_id` (`product_id`),
+  CONSTRAINT `purchase_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
+  CONSTRAINT `purchase_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
 
 -- User behavior tracking table (simplified)
 CREATE TABLE user_behavior (
