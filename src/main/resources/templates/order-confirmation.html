@@ -8,17 +8,18 @@
     <th:block th:insert="~{fragments/header :: header}"></th:block>
     <main>
       <div class="container flex flex-col gap-8 mx-auto p-6">
-        <div class="flex justify-between">
-          <h1>Order Confirmation</h1>
-          <div class="flex gap-4">
-            <p class="text-sm text-gray-600">
-              Order Total: <span>64.99 EUR</span>
-            </p>
-            <button class="button">Place Order</button>
-          </div>
-        </div>
-
+        <h1>Thank you for your order</h1>
         <hr />
+        <img src="img/order-confirmation.svg" alt="" />
+        <p>
+          An email containing the specifics of your order has been sent to:
+          <span>aldo.grabic99@gmail.com</span>
+        </p>
+        <div>
+          <p>Order number:</p>
+          <p>Order total:</p>
+          <p>Order date:</p>
+        </div>
       </div>
     </main>
     <th:block th:insert="~{fragments/footer :: footer}"></th:block>

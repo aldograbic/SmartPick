@@ -7,15 +7,23 @@ public class Product {
     private int productId;
     private String name;
     private String description;
+    private String size;
+    private String color;
+    private String gender;
     private BigDecimal price;
     private Timestamp createdAt;
 
+    private ProductCategory category;
+
     public Product() {}
 
-    public Product(String name, String description, BigDecimal price) {
+    public Product(String name, String description, BigDecimal price, String size, String color, String gender) {
         this.name = name;
         this.description = description;
         this.price = price;
+        this.size = size;
+        this.color = color;
+        this.gender = gender;
     }
 
     public int getProductId() {
@@ -42,6 +50,30 @@ public class Product {
         this.description = description;
     }
 
+    public String getSize() {
+        return size;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
     public BigDecimal getPrice() {
         return price;
     }
@@ -56,5 +88,13 @@ public class Product {
 
     public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public ProductCategory getCategory() {
+        return category;
+    }
+
+    public void setCategory(ProductCategory category) {
+        this.category = category;
     }
 }

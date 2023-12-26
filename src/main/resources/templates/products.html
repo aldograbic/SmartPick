@@ -9,19 +9,20 @@
     <main>
       <div class="container flex flex-col gap-8 mx-auto p-6">
         <div class="flex gap-4 text-2xl">
-          <a href="">MEN</a>
-          <a href="">WOMEN</a>
-          <a href="">CHILDREN</a>
+          <a href="/products/men">MEN</a>
+          <a href="/products/women">WOMEN</a>
+          <a href="/products/children">CHILDREN</a>
         </div>
         <div class="flex items-center justify-between">
           <div class="flex gap-8">
-            <a href="">Shirts</a>
-            <a href="">Jackets</a>
-            <a href="">Pants</a>
-            <a href="">Shoes</a>
-            <a href="">Handbags</a>
-            <a href="">Accessories</a>
+            <th:block th:each="category : ${categories}">
+              <a
+                th:href="@{'/products/' + (${gender} ?: 'all') + '/' + ${category.name.toLowerCase()}}"
+                th:text="${category.name}"
+              ></a>
+            </th:block>
           </div>
+
           <div class="relative text-gray-600">
             <input
               class="border border-b-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
@@ -48,8 +49,27 @@
         </div>
         <hr />
         <div class="flex items-end gap-4">
-          <p class="text-3xl uppercase">women's shirts</p>
-          <p class="text-sm text-gray-400">12 products</p>
+          <p class="text-3xl uppercase">
+            <span th:if="${gender == null && category == null}"
+              >all products</span
+            >
+            <span
+              th:if="${gender != null && category == null}"
+              th:text="${gender} + '&rsquo;s products'"
+            ></span>
+            <span
+              th:if="${gender != null && gender != 'all' && category != null}"
+              th:text="${gender} + '&rsquo;s ' + ${category}"
+            ></span>
+            <span
+              th:if="${gender == 'all' && category != null}"
+              th:text="'all ' + ${category}"
+            ></span>
+          </p>
+          <p
+            th:text="${products.size() + ' products'}"
+            class="text-sm text-gray-400"
+          ></p>
         </div>
         <div class="flex gap-8">
           <p class="flex items-center gap-1">
@@ -121,52 +141,39 @@
             </svg>
           </p>
         </div>
-        <div class="grid grid-cols-5 gap-8">
-          <div class="border border-b-2 rounded-lg border-black h-full">
-            <div class="relative">
-              <img
-                src="img/shirt-placeholder.jpg"
-                alt=""
-                class="rounded-t-lg h-2/3 w-full"
-              />
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                class="w-6 h-6 absolute top-2 right-2 text-gray-400"
-              >
-                <path
-                  d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z"
+        <p th:if="${#lists.isEmpty(products)}" class="text-center">
+          No products available.
+        </p>
+        <div class="grid md:grid-cols-5 gap-8">
+          <div
+            th:each="product : ${products}"
+            class="border shadow-lg rounded-lg h-full"
+          >
+            <a
+              th:href="'/products/' + ${gender} + '/' + ${category} + '/' + ${product.productId}"
+            >
+              <div class="relative">
+                <img
+                  th:src="@{/img/shirt-placeholder.jpg}"
+                  alt=""
+                  class="rounded-t-lg h-2/3 w-full"
                 />
-              </svg>
-            </div>
-            <div class="p-2">
-              <p>Majica kratkih rukava</p>
-              <p>24.99 EUR</p>
-            </div>
-          </div>
-          <div class="border border-b-2 rounded-lg border-black h-full">
-            <div class="relative">
-              <img
-                src="img/shirt-placeholder.jpg"
-                alt=""
-                class="rounded-t-lg h-2/3 w-full"
-              />
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                class="w-6 h-6 absolute top-2 right-2 text-gray-400"
-              >
-                <path
-                  d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z"
-                />
-              </svg>
-            </div>
-            <div class="p-2">
-              <p>Majica kratkih rukava</p>
-              <p>24.99 EUR</p>
-            </div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  class="w-6 h-6 absolute top-2 right-2 text-gray-400"
+                >
+                  <path
+                    d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z"
+                  />
+                </svg>
+              </div>
+              <div class="p-2">
+                <p th:text="${product.name}"></p>
+                <p th:text="${product.price + ' EUR'}"></p>
+              </div>
+            </a>
           </div>
         </div>
       </div>
