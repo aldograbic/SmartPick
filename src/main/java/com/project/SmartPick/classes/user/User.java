@@ -12,6 +12,8 @@ public class User {
     private String email;
     private String password;
     private String profileImage;
+    private String address;
+    private String city;
     private boolean emailVerified;
     private String confirmationToken;
     private Timestamp createdAt;
@@ -22,12 +24,14 @@ public class User {
     public User() {
     }
 
-    public User(String firstName, String lastName, String username, String email, String password) {
+    public User(String firstName, String lastName, String username, String email, String password, String address, String city) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
         this.email = email;
         this.password = password;
+        this.address = address;
+        this.city = city;
     }
 
     public int getUserId() {
@@ -84,6 +88,22 @@ public class User {
 
     public void setProfileImage(String profileImage) {
         this.profileImage = profileImage;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public boolean isEmailVerified() {
