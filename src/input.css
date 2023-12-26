@@ -39,6 +39,10 @@
 
   input[type="submit"],
   .button {
-    @apply text-lg border rounded-lg px-5 py-2.5  bg-cyan-800 text-gray-100 cursor-pointer hover:bg-cyan-900;
+    @apply text-lg border rounded-lg px-5 py-2.5 bg-cyan-800 text-gray-100 cursor-pointer transition-colors hover:bg-cyan-900;
+  }
+
+  [x-cloak] {
+    @apply hidden;
   }
 }

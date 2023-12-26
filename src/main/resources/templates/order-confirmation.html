@@ -6,7 +6,21 @@
   </head>
   <body>
     <th:block th:insert="~{fragments/header :: header}"></th:block>
-    <main></main>
+    <main>
+      <div class="container flex flex-col gap-8 mx-auto p-6">
+        <div class="flex justify-between">
+          <h1>Order Confirmation</h1>
+          <div class="flex gap-4">
+            <p class="text-sm text-gray-600">
+              Order Total: <span>64.99 EUR</span>
+            </p>
+            <button class="button">Place Order</button>
+          </div>
+        </div>
+
+        <hr />
+      </div>
+    </main>
     <th:block th:insert="~{fragments/footer :: footer}"></th:block>
   </body>
 </html>
