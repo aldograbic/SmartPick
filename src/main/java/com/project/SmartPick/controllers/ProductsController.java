@@ -58,4 +58,28 @@ public class ProductsController {
         return "products";
     }
 
+    @GetMapping("/{gender}/{category}/{productId}")
+    public String getProduct(
+            @PathVariable String gender,
+            @PathVariable String category,
+            @PathVariable int productId,
+            Model model) {
+        
+        List<Product> products;
+
+        if ("all".equalsIgnoreCase(gender)) {
+            products = productRepository.findByCategoryName(category);
+        } else {
+            products = productRepository.findByGenderAndCategoryName(gender, category);
+        }
+
+        model.addAttribute("products", products);
+        model.addAttribute("categories", productRepository.getAllProductCategories());
+
+        Product product = productRepository.getProductByProductId(productId);
+        model.addAttribute("product", product);
+
+        return "product-details";
+    }
+
 }

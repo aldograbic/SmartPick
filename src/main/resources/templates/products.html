@@ -17,8 +17,8 @@
           <div class="flex gap-8">
             <th:block th:each="category : ${categories}">
               <a
-                th:href="@{'/products/' + (${gender} ?: 'all') + '/' + ${category.name.toLowerCase()}}"
-                th:text="${category.name}"
+                th:href="@{'/products/' + (${gender} ?: 'all') + '/' + ${category.categoryName.toLowerCase()}}"
+                th:text="${category.categoryName}"
               ></a>
             </th:block>
           </div>
@@ -265,7 +265,7 @@
             class="border shadow-lg rounded-lg h-full"
           >
             <a
-              th:href="'/products/' + ${product.gender.toLowerCase()} + '/' + ${category} + '/' + ${product.productId}"
+              th:href="'/products/' + ${product.gender.toLowerCase()} + '/' + ${product.category.categoryName} + '/' + ${product.productId}"
             >
               <div class="relative">
                 <img

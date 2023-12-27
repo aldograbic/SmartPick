@@ -2,13 +2,13 @@ package com.project.SmartPick.classes.product;
 
 public class ProductCategory {
     private int categoryId;
-    private String name;
+    private String categoryName;
 
     public ProductCategory() {}
 
-    public ProductCategory(int categoryId, String name) {
+    public ProductCategory(int categoryId, String categoryName) {
         this.categoryId = categoryId;
-        this.name = name;
+        this.categoryName = categoryName;
     }
 
     public int getCategoryId() {
@@ -19,12 +19,12 @@ public class ProductCategory {
         this.categoryId = categoryId;
     }
 
-    public String getName() {
-        return name;
+    public String getCategoryName() {
+        return categoryName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 
     
