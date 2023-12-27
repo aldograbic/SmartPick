@@ -13,4 +13,12 @@ public interface ProductRepository {
     List<Product> findByGenderAndCategoryName(String gender, String categoryName);
 
     List<Product> findByCategoryName(String categoryName);
+
+    List<Product> gellAllSavedProductsByUserId(int userId);
+
+    List<Product> getAllProductsInShoppingCartByUserId(int userId);
+
+    void saveProductForUser(int productId, int userId);
+
+    void putProductInShoppingCartForUser(int productId, int userId);
 }
