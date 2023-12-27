@@ -75,4 +75,29 @@ public class JdbcProductRepository implements ProductRepository {
         String sql = "INSERT INTO user_shopping_cart (user_id, product_id) VALUES (?, ?)";
         jdbcTemplate.update(sql, userId, productId);
     }
+
+    @Override
+    public void removeSavedProductForUser(int userId, int productId) {
+        String sql = "DELETE FROM user_likes WHERE user_id = ? AND product_id = ?";
+        jdbcTemplate.update(sql, userId, productId);
+    }
+
+    @Override
+    public void removeProductFromShoppingCartForUser(int userId, int productId) {
+        String sql = "DELETE FROM user_shopping_cart WHERE user_id = ? AND product_id = ?";
+        jdbcTemplate.update(sql, userId, productId);
+    }
+
+    @Override
+    public boolean hasUserSavedProduct(int userId, int productId) {
+        String sql = "SELECT COUNT(*) FROM user_likes WHERE user_id = ? AND product_id = ?";
+        Integer count = jdbcTemplate.queryForObject(sql, Integer.class, userId, productId);
+        return count != null && count > 0;
+    }
+
+    @Override
+    public Product getProductByProductId(int productId) {
+        String sql = "SELECT * FROM product WHERE product_id = ?";
+        return jdbcTemplate.queryForObject(sql, new ProductRowMapper(), productId);
+    }
 }

@@ -21,4 +21,12 @@ public interface ProductRepository {
     void saveProductForUser(int productId, int userId);
 
     void putProductInShoppingCartForUser(int productId, int userId);
+
+    void removeSavedProductForUser(int userId, int productId);
+
+    void removeProductFromShoppingCartForUser(int userId, int productId);
+
+    boolean hasUserSavedProduct(int userId, int productId);
+
+    Product getProductByProductId(int productId);
 }

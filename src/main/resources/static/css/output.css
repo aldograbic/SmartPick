@@ -719,6 +719,10 @@ input[type="submit"]:hover,
   right: -0.5rem;
 }
 
+.left-0 {
+  left: 0px;
+}
+
 .right-0 {
   right: 0px;
 }
@@ -851,6 +855,10 @@ input[type="submit"]:hover,
 
 .grid {
   display: grid;
+}
+
+.hidden {
+  display: none;
 }
 
 .h-10 {
@@ -992,10 +1000,6 @@ input[type="submit"]:hover,
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
-.grid-cols-5 {
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-}
-
 .flex-col {
   flex-direction: column;
 }
@@ -1034,6 +1038,10 @@ input[type="submit"]:hover,
 
 .gap-24 {
   gap: 6rem;
+}
+
+.gap-36 {
+  gap: 9rem;
 }
 
 .gap-4 {
@@ -1376,6 +1384,10 @@ input[type="submit"]:hover,
 
   .md\:h-\[30rem\] {
     height: 30rem;
+  }
+
+  .md\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .md\:grid-cols-5 {
