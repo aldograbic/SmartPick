@@ -23,12 +23,16 @@
               d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z"
             />
           </svg>
-          My Cart <span>(3)</span>
+          My Cart
+          <span th:text="${'(' + productsInShoppingCart?.size() + ')'}"></span>
         </h1>
         <hr />
         <div class="md:flex gap-16 w-full">
           <div class="grid basis-4/5 relative">
-            <div class="flex border shadow-lg rounded-lg h-64 p-4 gap-8">
+            <div
+              th:each="product : ${productsInShoppingCart}"
+              class="flex border shadow-lg rounded-lg h-64 p-4 gap-8"
+            >
               <div>
                 <img
                   src="img/shirt-placeholder.jpg"
@@ -37,16 +41,16 @@
                 />
               </div>
               <div>
-                <p>Majica kratkih rukava</p>
+                <p th:text="${product.name}"></p>
                 <div class="text-gray-600">
-                  <p>Color: White</p>
-                  <p>Size: S</p>
+                  <p th:text="${'Color: ' + product.color}"></p>
+                  <p th:text="${'Size: ' + product.size}"></p>
                   <p>In Stock</p>
                 </div>
               </div>
               <div class="flex flex-col mr-24">
                 <p>Price</p>
-                <p>24.99 EUR</p>
+                <p th:text="${product.price}"></p>
               </div>
               <div class="flex flex-col">
                 <p>Quantity</p>

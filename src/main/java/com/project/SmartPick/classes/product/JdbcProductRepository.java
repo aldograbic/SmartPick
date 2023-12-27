@@ -47,4 +47,32 @@ public class JdbcProductRepository implements ProductRepository {
                      "WHERE c.name = ?";
         return jdbcTemplate.query(sql, new ProductRowMapper(), categoryName);
     }
+
+    @Override
+    public List<Product> gellAllSavedProductsByUserId(int userId) {
+        String sql = "SELECT product.* FROM user_likes " + 
+                     "JOIN product ON user_likes.product_id = product.product_id " +
+                     "WHERE user_likes.user_id = ?";
+        return jdbcTemplate.query(sql, new ProductRowMapper(), userId);
+    }
+
+    @Override
+    public List<Product> getAllProductsInShoppingCartByUserId(int userId) {
+        String sql = "SELECT product.* FROM user_shopping_cart " +
+                     "JOIN product ON user_shopping_cart.product_id = product.product_id " +
+                     "WHERE user_shopping_cart.user_id = ?";
+        return jdbcTemplate.query(sql, new ProductRowMapper(), userId);
+    }
+
+    @Override
+    public void saveProductForUser(int productId, int userId) {
+        String sql = "INSERT INTO user_likes (user_id, product_id) VALUES (?, ?)";
+        jdbcTemplate.update(sql, userId, productId);
+    }
+
+    @Override
+    public void putProductInShoppingCartForUser(int productId, int userId) {
+        String sql = "INSERT INTO user_shopping_cart (user_id, product_id) VALUES (?, ?)";
+        jdbcTemplate.update(sql, userId, productId);
+    }
 }

@@ -71,75 +71,190 @@
             class="text-sm text-gray-400"
           ></p>
         </div>
-        <div class="flex gap-8">
-          <p class="flex items-center gap-1">
-            SORT
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              class="w-4 h-4"
+        <div
+          class="flex gap-8"
+          x-data="{ openSort: false, openSize: false, openColor: false, openPrice: false }"
+        >
+          <div class="relative">
+            <p
+              class="flex items-center gap-1 cursor-pointer"
+              @click="openSort =! openSort"
             >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="m19.5 8.25-7.5 7.5-7.5-7.5"
-              />
-            </svg>
-          </p>
-          <p class="flex items-center gap-1">
-            SIZE
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              class="w-4 h-4"
+              SORT
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-4 h-4"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="m19.5 8.25-7.5 7.5-7.5-7.5"
+                />
+              </svg>
+            </p>
+            <div
+              x-show="openSort"
+              class="absolute left-0 p-2 z-10 bg-white rounded-lg shadow-lg w-40 mt-2"
+              x-cloak
             >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="m19.5 8.25-7.5 7.5-7.5-7.5"
-              />
-            </svg>
-          </p>
-          <p class="flex items-center gap-1">
-            COLOR
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              class="w-4 h-4"
+              <a
+                href=""
+                class="block px-4 py-2 text-base hover:bg-gray-100 rounded-lg"
+              >
+                1
+              </a>
+              <a
+                href=""
+                class="block px-4 py-2 text-base hover:bg-gray-100 rounded-lg"
+              >
+                2</a
+              ><a
+                href=""
+                class="block px-4 py-2 text-base hover:bg-gray-100 rounded-lg"
+              >
+                3
+              </a>
+            </div>
+          </div>
+          <div class="relative">
+            <p
+              class="flex items-center gap-1 cursor-pointer"
+              @click="openSize =! openSize"
             >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="m19.5 8.25-7.5 7.5-7.5-7.5"
-              />
-            </svg>
-          </p>
-          <p class="flex items-center gap-1">
-            PRICE
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              class="w-4 h-4"
+              SIZE
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-4 h-4"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="m19.5 8.25-7.5 7.5-7.5-7.5"
+                />
+              </svg>
+            </p>
+            <div
+              x-show="openSize"
+              class="absolute left-0 p-2 z-10 bg-white rounded-lg shadow-lg w-40 mt-2"
+              x-cloak
             >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="m19.5 8.25-7.5 7.5-7.5-7.5"
-              />
-            </svg>
-          </p>
+              <a
+                href=""
+                class="block px-4 py-2 text-base hover:bg-gray-100 rounded-lg"
+              >
+                1
+              </a>
+              <a
+                href=""
+                class="block px-4 py-2 text-base hover:bg-gray-100 rounded-lg"
+              >
+                2</a
+              ><a
+                href=""
+                class="block px-4 py-2 text-base hover:bg-gray-100 rounded-lg"
+              >
+                3
+              </a>
+            </div>
+          </div>
+          <div class="relative">
+            <p
+              class="flex items-center gap-1 cursor-pointer"
+              @click="openColor =! openColor"
+            >
+              COLOR
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-4 h-4"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="m19.5 8.25-7.5 7.5-7.5-7.5"
+                />
+              </svg>
+            </p>
+            <div
+              x-show="openColor"
+              class="absolute left-0 p-2 z-10 bg-white rounded-lg shadow-lg w-40 mt-2"
+              x-cloak
+            >
+              <a
+                href=""
+                class="block px-4 py-2 text-base hover:bg-gray-100 rounded-lg"
+              >
+                1
+              </a>
+              <a
+                href=""
+                class="block px-4 py-2 text-base hover:bg-gray-100 rounded-lg"
+              >
+                2</a
+              ><a
+                href=""
+                class="block px-4 py-2 text-base hover:bg-gray-100 rounded-lg"
+              >
+                3
+              </a>
+            </div>
+          </div>
+          <div class="relative">
+            <p
+              class="flex items-center gap-1 cursor-pointer"
+              @click="openPrice =! openPrice"
+            >
+              PRICE
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-4 h-4"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="m19.5 8.25-7.5 7.5-7.5-7.5"
+                />
+              </svg>
+            </p>
+            <div
+              x-show="openPrice"
+              class="absolute left-0 p-2 z-10 bg-white rounded-lg shadow-lg w-40 mt-2"
+              x-cloak
+            >
+              <a
+                href=""
+                class="block px-4 py-2 text-base hover:bg-gray-100 rounded-lg"
+              >
+                1
+              </a>
+              <a
+                href=""
+                class="block px-4 py-2 text-base hover:bg-gray-100 rounded-lg"
+              >
+                2</a
+              ><a
+                href=""
+                class="block px-4 py-2 text-base hover:bg-gray-100 rounded-lg"
+              >
+                3
+              </a>
+            </div>
+          </div>
         </div>
         <p th:if="${#lists.isEmpty(products)}" class="text-center">
           No products available.
@@ -150,7 +265,7 @@
             class="border shadow-lg rounded-lg h-full"
           >
             <a
-              th:href="'/products/' + ${gender} + '/' + ${category} + '/' + ${product.productId}"
+              th:href="'/products/' + ${product.gender.toLowerCase()} + '/' + ${category} + '/' + ${product.productId}"
             >
               <div class="relative">
                 <img
@@ -158,16 +273,25 @@
                   alt=""
                   class="rounded-t-lg h-2/3 w-full"
                 />
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  class="w-6 h-6 absolute top-2 right-2 text-gray-400"
-                >
-                  <path
-                    d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z"
+                <form action="/saveProductForUser" method="post">
+                  <input
+                    type="hidden"
+                    name="productId"
+                    th:value="${product.productId}"
                   />
-                </svg>
+                  <button type="submit">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      class="w-6 h-6 absolute top-2 right-2 text-gray-400"
+                    >
+                      <path
+                        d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z"
+                      />
+                    </svg>
+                  </button>
+                </form>
               </div>
               <div class="p-2">
                 <p th:text="${product.name}"></p>
