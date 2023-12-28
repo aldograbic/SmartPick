@@ -6,8 +6,6 @@ public interface ProductRepository {
 
     List<Product> getAllProducts();
 
-    List<ProductCategory> getAllProductCategories();
-
     List<Product> findByGender(String gender);
 
     List<Product> findByGenderAndCategoryName(String gender, String categoryName);

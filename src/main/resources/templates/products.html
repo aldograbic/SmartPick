@@ -265,7 +265,7 @@
             class="border shadow-lg rounded-lg h-full"
           >
             <a
-              th:href="'/products/' + ${product.gender.toLowerCase()} + '/' + ${product.category.categoryName} + '/' + ${product.productId}"
+              th:href="'/products/' + ${product.gender.toLowerCase()} + '/' + ${product.category.categoryName.toLowerCase()} + '/' + ${product.productId}"
             >
               <div class="relative">
                 <img

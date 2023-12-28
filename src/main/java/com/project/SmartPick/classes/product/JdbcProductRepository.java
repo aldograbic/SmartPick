@@ -3,33 +3,31 @@ package com.project.SmartPick.classes.product;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.project.SmartPick.classes.productCategory.ProductCategoryRepository;
+
 import java.util.List;
 
 @Repository
 public class JdbcProductRepository implements ProductRepository {
 
     private final JdbcTemplate jdbcTemplate;
+    private final ProductCategoryRepository productCategoryRepository;
 
-    public JdbcProductRepository(JdbcTemplate jdbcTemplate) {
+    public JdbcProductRepository(JdbcTemplate jdbcTemplate, ProductCategoryRepository productCategoryRepository) {
         this.jdbcTemplate = jdbcTemplate;
+        this.productCategoryRepository = productCategoryRepository;
     }
 
     @Override
     public List<Product> getAllProducts() {
         String sql = "SELECT * FROM product";
-        return jdbcTemplate.query(sql, new ProductRowMapper());
-    }
-
-    @Override
-    public List<ProductCategory> getAllProductCategories() {
-        String sql = "SELECT * FROM product_category";
-        return jdbcTemplate.query(sql, new ProductCategoryRowMapper());
+        return jdbcTemplate.query(sql, new ProductRowMapper(productCategoryRepository));
     }
 
     @Override
     public List<Product> findByGender(String gender) {
         String sql = "SELECT * FROM product WHERE gender = ?";
-        return jdbcTemplate.query(sql, new ProductRowMapper(), gender);
+        return jdbcTemplate.query(sql, new ProductRowMapper(productCategoryRepository), gender);
     }
 
     @Override
@@ -37,7 +35,7 @@ public class JdbcProductRepository implements ProductRepository {
         String sql = "SELECT p.*, c.name AS category_name FROM product p " +
                      "JOIN product_category c ON p.category_id = c.category_id " +
                      "WHERE p.gender = ? AND c.name = ?";
-        return jdbcTemplate.query(sql, new ProductRowMapper(), gender, categoryName);
+        return jdbcTemplate.query(sql, new ProductRowMapper(productCategoryRepository), gender, categoryName);
     }
 
     @Override
@@ -45,7 +43,7 @@ public class JdbcProductRepository implements ProductRepository {
         String sql = "SELECT p.*, c.name AS category_name FROM product p " +
                      "JOIN product_category c ON p.category_id = c.category_id " +
                      "WHERE c.name = ?";
-        return jdbcTemplate.query(sql, new ProductRowMapper(), categoryName);
+        return jdbcTemplate.query(sql, new ProductRowMapper(productCategoryRepository), categoryName);
     }
 
     @Override
@@ -53,7 +51,7 @@ public class JdbcProductRepository implements ProductRepository {
         String sql = "SELECT product.* FROM user_likes " + 
                      "JOIN product ON user_likes.product_id = product.product_id " +
                      "WHERE user_likes.user_id = ?";
-        return jdbcTemplate.query(sql, new ProductRowMapper(), userId);
+        return jdbcTemplate.query(sql, new ProductRowMapper(productCategoryRepository), userId);
     }
 
     @Override
@@ -61,7 +59,7 @@ public class JdbcProductRepository implements ProductRepository {
         String sql = "SELECT product.* FROM user_shopping_cart " +
                      "JOIN product ON user_shopping_cart.product_id = product.product_id " +
                      "WHERE user_shopping_cart.user_id = ?";
-        return jdbcTemplate.query(sql, new ProductRowMapper(), userId);
+        return jdbcTemplate.query(sql, new ProductRowMapper(productCategoryRepository), userId);
     }
 
     @Override
@@ -98,6 +96,6 @@ public class JdbcProductRepository implements ProductRepository {
     @Override
     public Product getProductByProductId(int productId) {
         String sql = "SELECT * FROM product WHERE product_id = ?";
-        return jdbcTemplate.queryForObject(sql, new ProductRowMapper(), productId);
+        return jdbcTemplate.queryForObject(sql, new ProductRowMapper(productCategoryRepository), productId);
     }
 }

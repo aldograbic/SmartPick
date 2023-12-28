@@ -1,4 +1,4 @@
-package com.project.SmartPick.classes.product;
+package com.project.SmartPick.classes.productCategory;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

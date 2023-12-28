@@ -11,23 +11,26 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.project.SmartPick.classes.product.Product;
 import com.project.SmartPick.classes.product.ProductRepository;
+import com.project.SmartPick.classes.productCategory.ProductCategoryRepository;
 
 @Controller
 @RequestMapping("/products")
 public class ProductsController {
 
     private final ProductRepository productRepository;
+    private final ProductCategoryRepository productCategoryRepository;
 
     @Autowired
-    public ProductsController(ProductRepository productRepository) {
+    public ProductsController(ProductRepository productRepository, ProductCategoryRepository productCategoryRepository) {
         this.productRepository = productRepository;
+        this.productCategoryRepository = productCategoryRepository;
     }
 
     @GetMapping
     public String getAllProducts(Model model) {
         List<Product> products = productRepository.getAllProducts();
         model.addAttribute("products", products);
-        model.addAttribute("categories", productRepository.getAllProductCategories());
+        model.addAttribute("categories", productCategoryRepository.getAllProductCategories());
         return "products";
     }
 
@@ -35,7 +38,7 @@ public class ProductsController {
     public String getProductsByGender(@PathVariable String gender, Model model) {
         List<Product> products = productRepository.findByGender(gender);
         model.addAttribute("products", products);
-        model.addAttribute("categories", productRepository.getAllProductCategories());
+        model.addAttribute("categories", productCategoryRepository.getAllProductCategories());
         return "products";
     }
 
@@ -54,7 +57,7 @@ public class ProductsController {
         }
 
         model.addAttribute("products", products);
-        model.addAttribute("categories", productRepository.getAllProductCategories());
+        model.addAttribute("categories", productCategoryRepository.getAllProductCategories());
         return "products";
     }
 
@@ -74,12 +77,11 @@ public class ProductsController {
         }
 
         model.addAttribute("products", products);
-        model.addAttribute("categories", productRepository.getAllProductCategories());
+        model.addAttribute("categories", productCategoryRepository.getAllProductCategories());
 
         Product product = productRepository.getProductByProductId(productId);
         model.addAttribute("product", product);
 
         return "product-details";
     }
-
 }
