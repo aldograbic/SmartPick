@@ -735,6 +735,10 @@ input[type="submit"]:hover,
   position: relative;
 }
 
+.-bottom-1 {
+  bottom: -0.25rem;
+}
+
 .-bottom-4 {
   bottom: -1rem;
 }

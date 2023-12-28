@@ -28,16 +28,21 @@ public class SavedProductsController {
         return "saved-products";
     }
 
-    @PostMapping("/saveProductForUser")
-    public String saveProductForUser(@RequestParam("productId") int productId, HttpServletRequest request, RedirectAttributes redirectAttributes) {
+    @PostMapping("/toggleSaveProductForUser")
+    public String toggleSaveProductForUser(@RequestParam("productId") int productId, HttpServletRequest request, RedirectAttributes redirectAttributes) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
         int userId = userRepository.findByUsername(username).getUserId();
 
         try {
-            productRepository.saveProductForUser(productId, userId);
+            if(!productRepository.hasUserSavedProduct(userId, productId)) {
+                productRepository.saveProductForUser(productId, userId);
+            } else {
+                productRepository.removeSavedProductForUser(userId, productId);
+            }
+            
         } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("errorMessage", "An error occurred when saving the product. Please try again.");
+            redirectAttributes.addFlashAttribute("errorMessage", "An error occurred when saving/removing the product. Please try again.");
             return "redirect:" + getPreviousPageUrl(request);
         }
 

@@ -62,6 +62,7 @@ CREATE TABLE `purchase` (
   `user_id` int DEFAULT NULL,
   `product_id` int DEFAULT NULL,
   `quantity` int NOT NULL,
+  `total_price` decimal(10,2) NOT NULL,
   `purchase_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`purchase_id`),
   KEY `user_id` (`user_id`),

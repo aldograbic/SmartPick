@@ -31,6 +31,7 @@ public class ShoppingCartController {
 
     @PostMapping("/putProductInShoppingCartForUser")
     public String putProductInShoppingCartForUser(@RequestParam("productId") int productId, HttpServletRequest request, RedirectAttributes redirectAttributes) {
+
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
         int userId = userRepository.findByUsername(username).getUserId();
@@ -47,5 +48,22 @@ public class ShoppingCartController {
 
     private String getPreviousPageUrl(HttpServletRequest request) {
         return request.getHeader("Referer");
+    }
+
+    @PostMapping("/removeProductFromShoppingCartForUser")
+    public String removeProductFromShoppingCartForUser(@RequestParam("productId") int productId, RedirectAttributes redirectAttributes) {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        int userId = userRepository.findByUsername(username).getUserId();
+
+        try {
+            productRepository.removeProductFromShoppingCartForUser(userId, productId);
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("errorMessage", "An error occurred when removing the product from the shopping cart. Please try again.");
+            return "redirect:/shopping-cart";
+        }
+
+        return "redirect:/shopping-cart";
     }
 }
