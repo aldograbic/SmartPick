@@ -29,23 +29,42 @@
         <hr />
         <div class="md:flex gap-16 w-full">
           <div class="grid gap-8 basis-4/5 relative">
+            <p th:if="${productsInShoppingCart.size() == 0}">
+              Your shopping cart is currently empty.
+            </p>
             <div
               th:each="product : ${productsInShoppingCart}"
               class="flex border shadow-lg rounded-lg h-64 p-4 gap-8"
             >
               <div>
                 <img
-                  src="img/shirt-placeholder.jpg"
+                  src="img/shirt-placeholder.webp"
                   alt=""
                   class="rounded-t-lg w-36 h-48"
                 />
               </div>
-              <div>
-                <p th:text="${product.name}"></p>
-                <div class="text-gray-600">
-                  <p th:text="${'Color: ' + product.color}"></p>
-                  <p th:text="${'Size: ' + product.size}"></p>
-                  <p>In Stock</p>
+              <div class="relative">
+                <div>
+                  <p th:text="${product.name}" class="text-lg"></p>
+                  <div class="text-gray-600">
+                    <p th:text="${'Color: ' + product.color}"></p>
+                    <p th:text="${'Size: ' + product.size}"></p>
+                    <p>In Stock</p>
+                  </div>
+                  <div class="flex gap-4 absolute -bottom-1 text-gray-600">
+                    <a href="">Save</a>
+                    <form
+                      action="/removeProductFromShoppingCartForUser"
+                      method="post"
+                    >
+                      <input
+                        type="hidden"
+                        name="productId"
+                        th:value="${product.productId}"
+                      />
+                      <button type="submit">Remove</button>
+                    </form>
+                  </div>
                 </div>
               </div>
               <div class="flex flex-col mr-24">
