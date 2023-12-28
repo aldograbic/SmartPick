@@ -3,6 +3,8 @@ package com.project.SmartPick.classes.product;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 
+import com.project.SmartPick.classes.productCategory.ProductCategory;
+
 public class Product {
     private int productId;
     private String name;
@@ -12,6 +14,7 @@ public class Product {
     private String gender;
     private BigDecimal price;
     private Timestamp createdAt;
+    private int categoryId;
 
     private ProductCategory category;
 
@@ -96,5 +99,13 @@ public class Product {
 
     public void setCategory(ProductCategory category) {
         this.category = category;
+    }
+
+    public int getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
     }
 }

@@ -1,4 +1,4 @@
-package com.project.SmartPick.classes.product;
+package com.project.SmartPick.classes.productCategory;
 
 public class ProductCategory {
     private int categoryId;
@@ -25,7 +25,5 @@ public class ProductCategory {
 
     public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
-    }
-
-    
+    } 
 }

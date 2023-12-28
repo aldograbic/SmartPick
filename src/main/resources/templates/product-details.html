@@ -14,12 +14,12 @@
           <a href="/products">Products</a>
           &gt;
           <a
-            th:href="'/products/' + ${product.gender}"
+            th:href="'/products/' + ${product.gender.toLowerCase()}"
             th:text="${product.gender}"
           ></a>
           &gt;
           <a
-            th:href="'/products/' + ${product.gender} + '/' + ${product.category.categoryName}"
+            th:href="'/products/' + ${product.gender.toLowerCase()} + '/' + ${product.category.categoryName.toLowerCase()}"
             th:text="${product.category.categoryName}"
           ></a>
         </nav>
