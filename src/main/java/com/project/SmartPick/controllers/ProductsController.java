@@ -1,17 +1,26 @@
 package com.project.SmartPick.controllers;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.project.SmartPick.classes.product.Product;
 import com.project.SmartPick.classes.product.ProductRepository;
 import com.project.SmartPick.classes.productCategory.ProductCategoryRepository;
+import com.project.SmartPick.classes.user.UserRepository;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping("/products")
@@ -19,26 +28,36 @@ public class ProductsController {
 
     private final ProductRepository productRepository;
     private final ProductCategoryRepository productCategoryRepository;
+    private final UserRepository userRepository;
 
     @Autowired
-    public ProductsController(ProductRepository productRepository, ProductCategoryRepository productCategoryRepository) {
+    public ProductsController(ProductRepository productRepository, ProductCategoryRepository productCategoryRepository, UserRepository userRepository) {
         this.productRepository = productRepository;
         this.productCategoryRepository = productCategoryRepository;
+        this.userRepository = userRepository;
     }
 
     @GetMapping
     public String getAllProducts(Model model) {
         List<Product> products = productRepository.getAllProducts();
+        Map<Integer, Boolean> savedStatusMap = getSavedStatusMap(products);
+
         model.addAttribute("products", products);
         model.addAttribute("categories", productCategoryRepository.getAllProductCategories());
+        model.addAttribute("savedStatusMap", savedStatusMap);
+
         return "products";
     }
 
     @GetMapping("/{gender}")
     public String getProductsByGender(@PathVariable String gender, Model model) {
         List<Product> products = productRepository.findByGender(gender);
+        Map<Integer, Boolean> savedStatusMap = getSavedStatusMap(products);
+
         model.addAttribute("products", products);
         model.addAttribute("categories", productCategoryRepository.getAllProductCategories());
+        model.addAttribute("savedStatusMap", savedStatusMap);
+
         return "products";
     }
 
@@ -56,8 +75,12 @@ public class ProductsController {
             products = productRepository.findByGenderAndCategoryName(gender, category);
         }
 
+        Map<Integer, Boolean> savedStatusMap = getSavedStatusMap(products);
+
         model.addAttribute("products", products);
         model.addAttribute("categories", productCategoryRepository.getAllProductCategories());
+        model.addAttribute("savedStatusMap", savedStatusMap);
+
         return "products";
     }
 
@@ -76,12 +99,64 @@ public class ProductsController {
             products = productRepository.findByGenderAndCategoryName(gender, category);
         }
 
+        Map<Integer, Boolean> savedStatusMap = getSavedStatusMap(products);
+
         model.addAttribute("products", products);
         model.addAttribute("categories", productCategoryRepository.getAllProductCategories());
+        model.addAttribute("savedStatusMap", savedStatusMap);
 
         Product product = productRepository.getProductByProductId(productId);
         model.addAttribute("product", product);
 
         return "product-details";
     }
+
+    private Map<Integer, Boolean> getSavedStatusMap(List<Product> products) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Map<Integer, Boolean> savedStatusMap = new HashMap<>();
+    
+        if (authentication != null && authentication.isAuthenticated() && !"anonymousUser".equals(authentication.getPrincipal())) {
+            String username = authentication.getName();
+            int userId = userRepository.findByUsername(username).getUserId();
+    
+            for (Product product : products) {
+                boolean isSaved = productRepository.hasUserSavedProduct(userId, product.getProductId());
+                savedStatusMap.put(product.getProductId(), isSaved);
+            }
+        } else {
+            for (Product product : products) {
+                savedStatusMap.put(product.getProductId(), false);
+            }
+        }
+    
+        return savedStatusMap;
+    }
+
+    @ModelAttribute("highlightedCategory")
+    public String getHighlightedCategory(HttpServletRequest request) {
+        String requestURI = request.getRequestURI();
+        if (requestURI.contains("/men")) {
+            return "men";
+        } else if (requestURI.contains("/women")) {
+            return "women";
+        } else if (requestURI.contains("/children")) {
+            return "children";
+        } else {
+            return "";
+        }
+    }
+    
+    @GetMapping("/search")
+    public String searchProducts(@RequestParam("search") String search, Model model) {
+        
+        List<Product> searchResults = productRepository.getAllProductsByPrompt(search);
+        Map<Integer, Boolean> savedStatusMap = getSavedStatusMap(searchResults);
+
+        model.addAttribute("products", searchResults);
+        model.addAttribute("categories", productCategoryRepository.getAllProductCategories());
+        model.addAttribute("savedStatusMap", savedStatusMap);
+
+        return "products";
+    }
+
 }

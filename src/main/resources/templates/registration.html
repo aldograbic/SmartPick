@@ -3,6 +3,7 @@
   <head>
     <th:block th:insert="~{fragments/head :: head}"></th:block>
     <title>Registration | SmartPick</title>
+    <script th:src="@{js/registrationValidation.js}" defer="defer"></script>
   </head>
   <body>
     <th:block th:insert="~{fragments/header :: header}"></th:block>
@@ -10,7 +11,12 @@
     <main>
       <div class="container flex items-center flex-col gap-8 mx-auto p-6 mt-16">
         <h1>REGISTRATION</h1>
-        <form action="/registration" method="post" class="grid gap-4">
+        <form
+          action="/registration"
+          method="post"
+          class="grid gap-4"
+          onsubmit="return validateForm()"
+        >
           <div class="grid grid-cols-2 gap-8">
             <div class="relative">
               <input
@@ -119,6 +125,7 @@
                 class="peer"
                 placeholder=" "
                 required
+                oninput="validatePassword()"
               />
               <label
                 for="password"
@@ -135,6 +142,7 @@
                 class="peer"
                 placeholder=" "
                 required
+                oninput="checkPasswordsMatch()"
               />
               <label
                 for="confirmPassword"
@@ -142,6 +150,17 @@
                 >Confirm Password</label
               >
             </div>
+
+            <ul
+              id="passwordCriteria"
+              class="text-gray-600 list-disc list-inside"
+            >
+              <li id="lengthCriteria">At least 6 characters</li>
+              <li id="numberCriteria">At least one number</li>
+              <li id="specialCharCriteria">
+                Inclusion of at least one special character, e.g., ! @ # ?
+              </li>
+            </ul>
           </div>
           <div></div>
           <input type="submit" value="Register" />

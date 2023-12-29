@@ -49,4 +49,15 @@
   [x-cloak] {
     @apply hidden;
   }
+
+  .header-link::after {
+    content: "";
+    @apply absolute left-0 w-full h-0.5 -bottom-3 bg-cyan-800 visible;
+    transform: scaleX(0);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .header-link:hover::after {
+    transform: scaleX(1);
+  }
 }

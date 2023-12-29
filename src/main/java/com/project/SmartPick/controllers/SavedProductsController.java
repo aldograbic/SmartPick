@@ -1,14 +1,20 @@
 package com.project.SmartPick.controllers;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.project.SmartPick.classes.product.Product;
 import com.project.SmartPick.classes.product.ProductRepository;
 import com.project.SmartPick.classes.user.UserRepository;
 
@@ -24,7 +30,22 @@ public class SavedProductsController {
     private ProductRepository productRepository;
 
     @GetMapping("/saved-products")
-    public String getSavedProductsPage() {
+    public String getSavedProductsPage(Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        int userId = userRepository.findByUsername(username).getUserId();
+
+        List<Product> allProducts = productRepository.getAllProducts();
+
+        Map<Integer, Boolean> savedStatusMap = new HashMap<>();
+        for (Product product : allProducts) {
+            boolean isSaved = productRepository.hasUserSavedProduct(userId, product.getProductId());
+            savedStatusMap.put(product.getProductId(), isSaved);
+        }
+
+        model.addAttribute("products", allProducts);
+        model.addAttribute("savedStatusMap", savedStatusMap);
+
         return "saved-products";
     }
 
