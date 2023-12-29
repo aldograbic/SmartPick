@@ -98,4 +98,12 @@ public class JdbcProductRepository implements ProductRepository {
         String sql = "SELECT * FROM product WHERE product_id = ?";
         return jdbcTemplate.queryForObject(sql, new ProductRowMapper(productCategoryRepository), productId);
     }
+
+    @Override
+    public List<Product> getAllProductsByPrompt(String prompt) {
+        String sql = "SELECT * FROM product WHERE name LIKE ? OR description LIKE ?";
+        String searchTerm = "%" + prompt + "%";
+        
+        return jdbcTemplate.query(sql, new ProductRowMapper(productCategoryRepository), searchTerm, searchTerm);
+    }
 }

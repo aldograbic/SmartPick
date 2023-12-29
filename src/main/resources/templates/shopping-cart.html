@@ -52,7 +52,17 @@
                     <p>In Stock</p>
                   </div>
                   <div class="flex gap-4 absolute -bottom-1 text-gray-600">
-                    <a href="">Save</a>
+                    <form action="/toggleSaveProductForUser" method="post">
+                      <input
+                        type="hidden"
+                        name="productId"
+                        th:value="${product.productId}"
+                      />
+                      <button
+                        type="submit"
+                        th:text="${savedStatusMap[product.productId] ? 'Unsave' : 'Save'}"
+                      ></button>
+                    </form>
                     <form
                       action="/removeProductFromShoppingCartForUser"
                       method="post"
