@@ -26,6 +26,8 @@ public interface ProductRepository {
 
     boolean hasUserSavedProduct(int userId, int productId);
 
+    boolean isProductInShoppingCart(int productId, int userId);
+
     Product getProductByProductId(int productId);
 
     List<Product> getAllProductsByPrompt(String prompt);

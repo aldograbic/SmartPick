@@ -3,9 +3,15 @@
   <head>
     <th:block th:insert="~{fragments/head :: head}"></th:block>
     <title>Shopping Cart | SmartPick</title>
+    <script th:src="@{js/shoppingCart.js}" defer="defer"></script>
   </head>
   <body>
     <th:block th:insert="~{fragments/header :: header}"></th:block>
+    <th:block
+      th:insert="~{fragments/successMessage :: successMessage}"
+    ></th:block>
+    <th:block th:insert="~{fragments/errorMessage :: errorMessage}"></th:block>
+    <th:block th:insert="~{fragments/infoMessage :: infoMessage}"></th:block>
     <main>
       <div class="container flex flex-col gap-8 mx-auto p-6">
         <h1 class="flex items-center gap-2">
@@ -37,61 +43,62 @@
               class="flex border shadow-lg rounded-lg h-64 p-4 gap-8"
             >
               <div>
-                <img
-                  src="img/shirt-placeholder.webp"
-                  alt=""
-                  class="rounded-t-lg w-36 h-48"
-                />
+                <a
+                  th:href="'/products/' + ${product.gender.toLowerCase()} + '/' + ${product.category.categoryName.toLowerCase()} + '/' + ${product.productId}"
+                >
+                  <img
+                    src="img/shirt-placeholder.webp"
+                    alt=""
+                    class="rounded-t-lg w-36 h-48"
+                  />
+                </a>
               </div>
-              <div class="relative">
-                <div>
-                  <p th:text="${product.name}" class="text-lg"></p>
-                  <div class="text-gray-600">
-                    <p th:text="${'Color: ' + product.color}"></p>
-                    <p th:text="${'Size: ' + product.size}"></p>
-                    <p>In Stock</p>
-                  </div>
-                  <div class="flex gap-4 absolute -bottom-1 text-gray-600">
-                    <form action="/toggleSaveProductForUser" method="post">
-                      <input
-                        type="hidden"
-                        name="productId"
-                        th:value="${product.productId}"
-                      />
-                      <button
-                        type="submit"
-                        th:text="${savedStatusMap[product.productId] ? 'Unsave' : 'Save'}"
-                      ></button>
-                    </form>
-                    <form
-                      action="/removeProductFromShoppingCartForUser"
-                      method="post"
-                    >
-                      <input
-                        type="hidden"
-                        name="productId"
-                        th:value="${product.productId}"
-                      />
-                      <button type="submit">Remove</button>
-                    </form>
-                  </div>
+              <div class="relative w-48">
+                <p th:text="${product.name}" class="text-lg"></p>
+                <div class="text-gray-600">
+                  <p th:text="${'Color: ' + product.color}"></p>
+                  <p th:text="${'Size: ' + product.size}"></p>
+                  <p>In Stock</p>
+                </div>
+                <div class="flex gap-4 absolute -bottom-1 text-gray-600">
+                  <form action="/toggleSaveProductForUser" method="post">
+                    <input
+                      type="hidden"
+                      name="productId"
+                      th:value="${product.productId}"
+                    />
+                    <button
+                      type="submit"
+                      th:text="${savedStatusMap[product.productId] ? 'Unsave' : 'Save'}"
+                    ></button>
+                  </form>
+                  <form
+                    action="/removeProductFromShoppingCartForUser"
+                    method="post"
+                  >
+                    <input
+                      type="hidden"
+                      name="productId"
+                      th:value="${product.productId}"
+                    />
+                    <button type="submit">Remove</button>
+                  </form>
                 </div>
               </div>
               <div class="flex flex-col mr-24">
-                <p>Price</p>
+                <p class="mb-1.5">Price</p>
                 <p
-                  id="productPrice"
+                  class="productPrice"
                   th:data-price="${product.price}"
-                  th:text="${product.price}"
+                  th:text="${product.price + ' EUR'}"
                 ></p>
               </div>
               <div class="flex flex-col">
-                <p>Quantity</p>
+                <p class="mb-1.5">Quantity</p>
                 <select
                   name="quantity"
-                  id="quantity"
-                  class="w-24"
-                  onchange="calculateTotal()"
+                  class="w-24 quantity"
+                  onchange="calculateTotal(this)"
                 >
                   <option
                     th:each="number : ${#numbers.sequence(1, 10)}"
@@ -101,8 +108,8 @@
                 </select>
               </div>
               <div class="flex flex-col absolute right-4">
-                <p>Total</p>
-                <p id="totalPrice">0.00 EUR</p>
+                <p class="mb-1.5">Total</p>
+                <p class="totalPrice" th:text="${product.price + ' EUR'}"></p>
               </div>
             </div>
           </div>
@@ -121,7 +128,7 @@
             </div>
             <div class="flex justify-between text-black text-lg">
               <p>Estimated Total</p>
-              <p>66.98 EUR</p>
+              <p id="estimatedTotal"></p>
             </div>
             <button class="button flex items-center justify-center gap-2">
               <svg
@@ -145,25 +152,5 @@
       </div>
     </main>
     <th:block th:insert="~{fragments/footer :: footer}"></th:block>
-    <script th:inline="javascript">
-      function calculateTotal() {
-        var selectedQuantity = document.getElementById("quantity").value;
-
-        // Retrieve product price from the data attribute
-        var productPrice = document
-          .getElementById("productPrice")
-          .getAttribute("data-price");
-
-        // Parse product price as a float
-        productPrice = parseFloat(productPrice);
-
-        var totalPrice = (selectedQuantity * productPrice).toFixed(2);
-
-        document.getElementById("totalPrice").innerText = totalPrice + " EUR";
-      }
-
-      // Initialize the total calculation on page load
-      calculateTotal();
-    </script>
   </body>
 </html>

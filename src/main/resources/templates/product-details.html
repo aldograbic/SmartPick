@@ -6,25 +6,30 @@
   </head>
   <body>
     <th:block th:insert="~{fragments/header :: header}"></th:block>
+    <th:block
+      th:insert="~{fragments/successMessage :: successMessage}"
+    ></th:block>
+    <th:block th:insert="~{fragments/errorMessage :: errorMessage}"></th:block>
+    <th:block th:insert="~{fragments/infoMessage :: infoMessage}"></th:block>
     <main>
       <div class="container flex flex-col gap-8 mx-auto p-6">
         <nav class="text-gray-600">
           <a href="/">Home</a>
-          &gt;
+          /
           <a href="/products">Products</a>
-          &gt;
+          /
           <a
             th:href="'/products/' + ${product.gender.toLowerCase()}"
             th:text="${product.gender}"
           ></a>
-          &gt;
+          /
           <a
             th:href="'/products/' + ${product.gender.toLowerCase()} + '/' + ${product.category.categoryName.toLowerCase()}"
             th:text="${product.category.categoryName}"
           ></a>
         </nav>
         <div class="grid md:grid-cols-2 gap-36">
-          <img th:src="@{/img/shirt-placeholder.webp}" alt="" class="" />
+          <img th:src="@{/img/shirt-placeholder.webp}" alt="" />
           <div class="flex flex-col gap-8 text-xl">
             <p th:text="${product.name}" class="text-3xl"></p>
             <p th:text="${product.price + ' EUR'}"></p>

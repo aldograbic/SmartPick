@@ -62,14 +62,22 @@ public class ShoppingCartController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
         int userId = userRepository.findByUsername(username).getUserId();
+        String productName = productRepository.getProductByProductId(productId).getName();
 
-        try {
-            productRepository.putProductInShoppingCartForUser(productId, userId);
-        } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("errorMessage", "An error occurred when putting the product in shopping cart. Please try again.");
+        if (productRepository.isProductInShoppingCart(productId, userId)) {
+            redirectAttributes.addFlashAttribute("infoMessage", "Item '" + productName + "' is already in the shopping cart.");
             return "redirect:" + getPreviousPageUrl(request);
         }
-
+    
+        try {
+            productRepository.putProductInShoppingCartForUser(productId, userId);
+            redirectAttributes.addFlashAttribute("successMessage", "Item '" + productName + "' has been successfully added to the shopping cart.");
+    
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("errorMessage", "An error occurred when putting the product in the shopping cart. Please try again.");
+            return "redirect:" + getPreviousPageUrl(request);
+        }
+    
         return "redirect:" + getPreviousPageUrl(request);
     }
 
@@ -83,9 +91,12 @@ public class ShoppingCartController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
         int userId = userRepository.findByUsername(username).getUserId();
+        String productName = productRepository.getProductByProductId(productId).getName();
 
         try {
             productRepository.removeProductFromShoppingCartForUser(userId, productId);
+            redirectAttributes.addFlashAttribute("successMessage", "Item '" + productName + "' has been successfully removed from shopping cart.");
+
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("errorMessage", "An error occurred when removing the product from the shopping cart. Please try again.");
             return "redirect:/shopping-cart";
