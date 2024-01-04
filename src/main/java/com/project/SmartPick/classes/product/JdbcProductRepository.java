@@ -100,6 +100,14 @@ public class JdbcProductRepository implements ProductRepository {
     }
 
     @Override
+    public boolean isProductInShoppingCart(int productId, int userId) {
+        String sql = "SELECT COUNT(*) FROM user_shopping_cart WHERE user_id = ? AND product_id = ?";
+        Integer count = jdbcTemplate.queryForObject(sql, Integer.class, userId, productId);
+        return count != null && count > 0;
+    }
+
+
+    @Override
     public List<Product> getAllProductsByPrompt(String prompt) {
         String sql = "SELECT * FROM product WHERE name LIKE ? OR description LIKE ?";
         String searchTerm = "%" + prompt + "%";
