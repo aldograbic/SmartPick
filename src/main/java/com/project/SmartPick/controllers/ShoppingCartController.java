@@ -1,5 +1,6 @@
 package com.project.SmartPick.controllers;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -103,5 +104,13 @@ public class ShoppingCartController {
         }
 
         return "redirect:/shopping-cart";
+    }
+
+    @PostMapping("/processCheckout")
+    public String checkout(@RequestParam("estimatedTotal") BigDecimal estimatedTotal, RedirectAttributes redirectAttributes) {
+
+        redirectAttributes.addFlashAttribute("estimatedTotal", estimatedTotal);
+
+        return "redirect:/checkout";
     }
 }

@@ -6,19 +6,27 @@
   </head>
   <body>
     <th:block th:insert="~{fragments/header :: header}"></th:block>
+    <th:block
+      th:insert="~{fragments/successMessage :: successMessage}"
+    ></th:block>
+    <th:block th:insert="~{fragments/errorMessage :: errorMessage}"></th:block>
     <main>
       <div class="container flex flex-col gap-8 mx-auto p-6">
         <div class="flex justify-between">
           <h1>Checkout</h1>
-          <div class="flex gap-4">
+          <div class="flex items-center gap-8">
             <p class="text-sm text-gray-600">
-              Order Total: <span>64.99 EUR</span>
+              Order Total:
+              <span
+                th:text="${estimatedTotal + ' EUR'}"
+                class="text-2xl text-black"
+              ></span>
             </p>
-            <button class="button">Place Order</button>
+            <button class="button w-64">Place Order</button>
           </div>
         </div>
         <hr />
-        <div class="grid grid-cols-2">
+        <div class="grid grid-cols-2 gap-8">
           <div>
             <h2>Your information</h2>
             <hr />

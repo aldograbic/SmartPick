@@ -85,7 +85,7 @@ public class RegistrationController {
         user.setEmailVerified(true);
         userRepository.updateEmailVerification(user);
 
-        redirectAttributes.addFlashAttribute("successMessage", "You have successfully verified your e-mail address. Now you can log in to Managmently!");
+        redirectAttributes.addFlashAttribute("successMessage", "You have successfully verified your e-mail address. Now you can log in to SmartPick!");
 
         return "redirect:/";
     }
