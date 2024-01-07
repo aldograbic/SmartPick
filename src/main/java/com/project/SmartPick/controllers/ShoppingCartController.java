@@ -20,6 +20,7 @@ import com.project.SmartPick.classes.product.ProductRepository;
 import com.project.SmartPick.classes.user.UserRepository;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class ShoppingCartController {
@@ -107,10 +108,10 @@ public class ShoppingCartController {
     }
 
     @PostMapping("/processCheckout")
-    public String checkout(@RequestParam("estimatedTotal") BigDecimal estimatedTotal, RedirectAttributes redirectAttributes) {
+    public String checkout(@RequestParam("estimatedTotal") BigDecimal estimatedTotal, HttpSession session) {
 
-        redirectAttributes.addFlashAttribute("estimatedTotal", estimatedTotal);
-
+        session.setAttribute("estimatedTotal", estimatedTotal);
+        
         return "redirect:/checkout";
     }
 }
