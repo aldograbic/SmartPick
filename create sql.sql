@@ -56,20 +56,31 @@ CREATE TABLE `product` (
   CONSTRAINT `product_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `product_category` (`category_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Purchase table to store user purchases
-CREATE TABLE `purchase` (
-  `purchase_id` int NOT NULL AUTO_INCREMENT,
+-- Order table to store user orders
+CREATE TABLE `order` (
+  `order_id` int NOT NULL AUTO_INCREMENT,
   `user_id` int DEFAULT NULL,
-  `product_id` int DEFAULT NULL,
+  `order_total` decimal(10,2) NOT NULL,
+  `order_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`order_id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `order_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Order item table to store item order that references order
+CREATE TABLE `order_item` (
+  `order_item_id` int NOT NULL AUTO_INCREMENT,
+  `order_id` int NOT NULL,
+  `product_id` int NOT NULL,
   `quantity` int NOT NULL,
   `total_price` decimal(10,2) NOT NULL,
-  `purchase_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`purchase_id`),
-  KEY `user_id` (`user_id`),
+  PRIMARY KEY (`order_item_id`),
+  KEY `order_id` (`order_id`),
   KEY `product_id` (`product_id`),
-  CONSTRAINT `purchase_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
-  CONSTRAINT `purchase_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`)
+  CONSTRAINT `order_item_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `order` (`order_id`),
+  CONSTRAINT `order_item_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
 
 
 -- User behavior tracking table (simplified)

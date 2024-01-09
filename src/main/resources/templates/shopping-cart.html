@@ -33,103 +33,105 @@
           <span th:text="${'(' + productsInShoppingCart?.size() + ')'}"></span>
         </h1>
         <hr />
-        <div class="md:flex gap-16 w-full">
-          <div class="grid gap-8 basis-4/5 relative">
-            <p th:if="${productsInShoppingCart.size() == 0}">
-              Your shopping cart is currently empty.
-            </p>
-            <div
-              th:each="product : ${productsInShoppingCart}"
-              class="flex border shadow-lg rounded-lg h-64 p-4 gap-8"
-            >
-              <div>
-                <a
-                  th:href="'/products/' + ${product.gender.toLowerCase()} + '/' + ${product.category.categoryName.toLowerCase()} + '/' + ${product.productId}"
-                >
-                  <img
-                    src="img/shirt-placeholder.webp"
-                    alt=""
-                    class="rounded-t-lg w-36 h-48"
-                  />
-                </a>
-              </div>
-              <div class="relative w-48">
-                <p th:text="${product.name}" class="text-lg"></p>
-                <div class="text-gray-600">
-                  <p th:text="${'Color: ' + product.color}"></p>
-                  <p th:text="${'Size: ' + product.size}"></p>
-                  <p>In Stock</p>
-                </div>
-                <div class="flex gap-4 absolute -bottom-1 text-gray-600">
-                  <form action="/toggleSaveProductForUser" method="post">
-                    <input
-                      type="hidden"
-                      name="productId"
-                      th:value="${product.productId}"
-                    />
-                    <button
-                      type="submit"
-                      th:text="${savedStatusMap[product.productId] ? 'Unsave' : 'Save'}"
-                    ></button>
-                  </form>
-                  <form
-                    action="/removeProductFromShoppingCartForUser"
-                    method="post"
+        <form action="/processCheckout" method="post">
+          <div class="md:flex gap-16 w-full">
+            <div class="grid gap-8 basis-4/5 relative">
+              <p th:if="${productsInShoppingCart.size() == 0}">
+                Your shopping cart is currently empty.
+              </p>
+
+              <div
+                th:each="product : ${productsInShoppingCart}"
+                class="flex border shadow-lg rounded-lg h-64 p-4 gap-8"
+              >
+                <div>
+                  <a
+                    th:href="'/products/' + ${product.gender.toLowerCase()} + '/' + ${product.category.categoryName.toLowerCase()} + '/' + ${product.productId}"
                   >
-                    <input
-                      type="hidden"
-                      name="productId"
-                      th:value="${product.productId}"
+                    <img
+                      src="img/shirt-placeholder.webp"
+                      alt=""
+                      class="rounded-t-lg w-36 h-48"
                     />
-                    <button type="submit">Remove</button>
-                  </form>
+                  </a>
+                </div>
+                <div class="relative w-48">
+                  <p th:text="${product.name}" class="text-lg"></p>
+                  <div class="text-gray-600">
+                    <p th:text="${'Color: ' + product.color}"></p>
+                    <p th:text="${'Size: ' + product.size}"></p>
+                    <p>In Stock</p>
+                  </div>
+                  <div class="flex gap-4 absolute -bottom-1 text-gray-600">
+                    <form action="/toggleSaveProductForUser" method="post">
+                      <input
+                        type="hidden"
+                        name="productId"
+                        th:value="${product.productId}"
+                      />
+                      <button
+                        type="submit"
+                        th:text="${savedStatusMap[product.productId] ? 'Unsave' : 'Save'}"
+                      ></button>
+                    </form>
+                    <form
+                      action="/removeProductFromShoppingCartForUser"
+                      method="post"
+                    >
+                      <input
+                        type="hidden"
+                        name="productId"
+                        th:value="${product.productId}"
+                      />
+                      <button type="submit">Remove</button>
+                    </form>
+                  </div>
+                </div>
+                <div class="flex flex-col mr-24">
+                  <p class="mb-1.5">Price</p>
+                  <p
+                    class="productPrice"
+                    th:data-price="${product.price}"
+                    th:text="${product.price + ' EUR'}"
+                  ></p>
+                </div>
+                <div class="flex flex-col">
+                  <p class="mb-1.5">Quantity</p>
+                  <select
+                    th:name="'quantity_' + ${product.productId}"
+                    class="w-24 quantity"
+                    onchange="calculateTotal(this)"
+                  >
+                    <option
+                      th:each="number : ${#numbers.sequence(1, 10)}"
+                      th:text="${number}"
+                      th:value="${number}"
+                    ></option>
+                  </select>
+                </div>
+                <div class="flex flex-col absolute right-4">
+                  <p class="mb-1.5">Total</p>
+                  <p class="totalPrice" th:text="${product.price + ' EUR'}"></p>
                 </div>
               </div>
-              <div class="flex flex-col mr-24">
-                <p class="mb-1.5">Price</p>
-                <p
-                  class="productPrice"
-                  th:data-price="${product.price}"
-                  th:text="${product.price + ' EUR'}"
-                ></p>
+            </div>
+            <div
+              th:if="${productsInShoppingCart?.size() > 0}"
+              class="flex flex-col gap-8 basis-1/5 text-gray-600 text-sm"
+            >
+              <div class="flex justify-between">
+                <p>Shipping cost</p>
+                <p>5 EUR</p>
               </div>
-              <div class="flex flex-col">
-                <p class="mb-1.5">Quantity</p>
-                <select
-                  name="quantity"
-                  class="w-24 quantity"
-                  onchange="calculateTotal(this)"
-                >
-                  <option
-                    th:each="number : ${#numbers.sequence(1, 10)}"
-                    th:text="${number}"
-                    th:value="${number}"
-                  ></option>
-                </select>
+              <div class="flex justify-between">
+                <p>Discount</p>
+                <p>- 0 EUR</p>
               </div>
-              <div class="flex flex-col absolute right-4">
-                <p class="mb-1.5">Total</p>
-                <p class="totalPrice" th:text="${product.price + ' EUR'}"></p>
+              <div class="flex justify-between">
+                <p>Tax</p>
+                <p>2 EUR</p>
               </div>
-            </div>
-          </div>
-          <div
-            th:if="${productsInShoppingCart?.size() > 0}"
-            class="flex flex-col gap-8 basis-1/5 text-gray-600 text-sm"
-          >
-            <div class="flex justify-between">
-              <p>Shipping cost</p>
-              <p>5 EUR</p>
-            </div>
-            <div class="flex justify-between">
-              <p>Discount</p>
-              <p>- 0 EUR</p>
-            </div>
-            <div class="flex justify-between">
-              <p>Tax</p>
-              <p>2 EUR</p>
-            </div>
-            <form action="/processCheckout" method="post">
+
               <div class="flex justify-between text-black text-lg">
                 <p>Estimated Total</p>
                 <p id="estimatedTotal"></p>
@@ -155,9 +157,9 @@
                 </svg>
                 Checkout
               </button>
-            </form>
+            </div>
           </div>
-        </div>
+        </form>
       </div>
     </main>
     <th:block th:insert="~{fragments/footer :: footer}"></th:block>
