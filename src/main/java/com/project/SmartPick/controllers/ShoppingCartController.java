@@ -1,6 +1,7 @@
 package com.project.SmartPick.controllers;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.project.SmartPick.classes.order.OrderItem;
 import com.project.SmartPick.classes.product.Product;
 import com.project.SmartPick.classes.product.ProductRepository;
 import com.project.SmartPick.classes.user.UserRepository;
@@ -108,10 +110,34 @@ public class ShoppingCartController {
     }
 
     @PostMapping("/processCheckout")
-    public String checkout(@RequestParam("estimatedTotal") BigDecimal estimatedTotal, HttpSession session) {
+    public String processCheckout(@RequestParam("estimatedTotal") BigDecimal estimatedTotal,
+                                @RequestParam Map<String, String> params,
+                                HttpSession session, Model model) {
 
+        List<Product> products = productRepository.getAllProductsInShoppingCartByUserId(getUserIdFromAuthentication());
+
+        model.addAttribute("products", products);
+
+        List<OrderItem> orderItems = new ArrayList<>();
+
+        for (Product product : products) {
+            int productId = product.getProductId();
+            String quantityParam = params.get("quantity_" + productId);
+            int quantity = (quantityParam != null) ? Integer.parseInt(quantityParam) : 1;
+
+            BigDecimal totalPrice = product.getPrice().multiply(BigDecimal.valueOf(quantity));
+
+            OrderItem orderItem = new OrderItem();
+            orderItem.setProductId(productId);
+            orderItem.setQuantity(quantity);
+            orderItem.setTotalPrice(totalPrice);
+
+            orderItems.add(orderItem);
+        }
+
+        session.setAttribute("orderItems", orderItems);
         session.setAttribute("estimatedTotal", estimatedTotal);
-        
+
         return "redirect:/checkout";
     }
 }
