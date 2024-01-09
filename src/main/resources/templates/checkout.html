@@ -59,34 +59,40 @@
             </div>
           </div>
         </div>
-        <div th:each="orderItem : ${orderItems}">
-          <!-- <div>
-            <a
-              th:href="'/products/' + ${product.gender.toLowerCase()} + '/' + ${product.category.categoryName.toLowerCase()} + '/' + ${product.productId}"
-            >
-              <img
-                src="img/shirt-placeholder.webp"
-                alt=""
-                class="rounded-t-lg w-36 h-48"
-              />
-            </a>
-          </div> -->
-          <!-- <div class="relative w-48">
-            <p th:text="${orderItem.product.name}" class="text-lg"></p>
-            <div class="text-gray-600">
-              <p th:text="${'Color: ' + orderItem.product.color}"></p>
-              <p th:text="${'Size: ' + orderItem.product.size}"></p>
-              <p>In Stock</p>
+        <h2>Your items</h2>
+        <div class="grid grid-cols-2 gap-8">
+          <div
+            th:each="orderItem : ${orderItems}"
+            class="flex border relative shadow-lg rounded-lg h-full p-4 gap-8"
+          >
+            <div>
+              <a
+                th:href="'/products/' + ${orderItem.product.gender.toLowerCase()} + '/' + ${orderItem.product.category.categoryName.toLowerCase()} + '/' + ${orderItem.product.productId}"
+              >
+                <img
+                  src="img/shirt-placeholder.webp"
+                  alt=""
+                  class="rounded-lg w-36 h-48"
+                />
+              </a>
             </div>
-          </div> -->
+            <div class="relative w-48">
+              <p th:text="${orderItem.product.name}" class="text-lg"></p>
+              <div class="text-gray-600">
+                <p th:text="${'Color: ' + orderItem.product.color}"></p>
+                <p th:text="${'Size: ' + orderItem.product.size}"></p>
+                <p>In Stock</p>
+              </div>
+            </div>
 
-          <div class="flex flex-col">
-            <p class="mb-1.5">Quantity</p>
-            <p th:text="${orderItem.quantity}"></p>
-          </div>
-          <div class="flex flex-col absolute right-4">
-            <p class="mb-1.5">Total</p>
-            <p th:text="${orderItem.totalPrice + ' EUR'}"></p>
+            <div class="flex flex-col">
+              <p class="mb-1.5">Quantity</p>
+              <p th:text="${orderItem.quantity}"></p>
+            </div>
+            <div class="flex flex-col absolute right-4">
+              <p class="mb-1.5">Total</p>
+              <p th:text="${orderItem.totalPrice + ' EUR'}"></p>
+            </div>
           </div>
         </div>
       </div>
