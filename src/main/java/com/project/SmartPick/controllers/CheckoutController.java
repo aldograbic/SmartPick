@@ -2,6 +2,7 @@ package com.project.SmartPick.controllers;
 
 import com.project.SmartPick.classes.user.User;
 import com.project.SmartPick.classes.user.UserRepository;
+import com.project.SmartPick.classes.order.Order;
 import com.project.SmartPick.classes.order.OrderItem;
 import com.project.SmartPick.classes.order.OrderRepository;
 import com.project.SmartPick.classes.product.Product;
@@ -56,8 +57,37 @@ public class CheckoutController {
     }
 
     @PostMapping("/order")
-    public String order() {
+    public String order(HttpSession session, Model model) {
 
-        return "redirect:/";
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        int userId = userRepository.findByUsername(username).getUserId();
+
+        BigDecimal estimatedTotal = (BigDecimal) session.getAttribute("estimatedTotal");
+        @SuppressWarnings("unchecked")
+        List<OrderItem> orderItems = (List<OrderItem>) session.getAttribute("orderItems");
+
+        Order order = new Order(userId, estimatedTotal);
+
+        orderRepository.createOrder(order);
+
+        int orderId = orderRepository.getLastInsertedOrderId();
+
+        for (OrderItem orderItem : orderItems) {
+            orderItem.setOrderId(orderId);
+            orderRepository.createOrderItem(orderItem);
+        }
+
+        String userEmail = userRepository.findByUsername(username).getEmail();
+
+        model.addAttribute("userEmail", userEmail);
+        model.addAttribute("order", order);
+        
+        model.addAttribute("estimatedTotal", estimatedTotal);
+
+        session.removeAttribute("orderItems");
+        session.removeAttribute("estimatedTotal");
+
+        return "order-confirmation";
     }
 }

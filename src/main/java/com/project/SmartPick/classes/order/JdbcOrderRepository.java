@@ -17,8 +17,8 @@ public class JdbcOrderRepository implements OrderRepository {
 
     @Override
     public void createOrder(Order order) {
-        String sql = "INSERT INTO order (user_id, order_total, order_date) VALUES (?, ?, ?)";
-        jdbcTemplate.update(sql, order.getUserId(), order.getOrderTotal(), order.getOrderDate());
+        String sql = "INSERT INTO `order` (user_id, order_total) VALUES (?, ?)";
+        jdbcTemplate.update(sql, order.getUserId(), order.getOrderTotal());
     }
 
     @Override
