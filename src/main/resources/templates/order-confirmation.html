@@ -10,15 +10,22 @@
       <div class="container flex flex-col gap-8 mx-auto p-6">
         <h1>Thank you for your order</h1>
         <hr />
-        <img src="img/order-confirmation.svg" alt="" />
-        <p>
-          An email containing the specifics of your order has been sent to:
-          <span>aldo.grabic99@gmail.com</span>
-        </p>
-        <div>
-          <p>Order number:</p>
-          <p>Order total:</p>
-          <p>Order date:</p>
+        <div class="grid grid-cols-2">
+          <img src="img/order-confirmation.svg" alt="" class="w-96" />
+          <div class="text-xl space-y-16">
+            <div class="text-2xl">
+              <p>
+                An email containing the specifics of your order has been sent
+                to:
+              </p>
+              <p th:text="${userEmail}" class="mt-4 font-semibold"></p>
+            </div>
+            <div class="space-y-4">
+              <p th:text="${'Order ID: ' + order.orderId}"></p>
+              <p th:text="${'Order total: ' + estimatedTotal}"></p>
+              <p th:text="${'Order date: ' + order.orderDate}"></p>
+            </div>
+          </div>
         </div>
       </div>
     </main>
