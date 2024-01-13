@@ -45,6 +45,9 @@ public class CheckoutController {
         
         @SuppressWarnings("unchecked")
         List<OrderItem> orderItems = (List<OrderItem>) session.getAttribute("orderItems");
+        if(orderItems == null) {
+            return "redirect:/";
+        }
 
         for (OrderItem orderItem : orderItems) {
             int productId = orderItem.getProductId();

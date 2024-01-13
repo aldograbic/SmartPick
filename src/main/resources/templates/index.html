@@ -3,6 +3,15 @@
   <head>
     <th:block th:insert="~{fragments/head :: head}"></th:block>
     <title>SmartPick - E-Commerce Recommender</title>
+    <script th:src="@{/js/emblaCarousel.js}"></script>
+    <script
+      src="https://unpkg.com/embla-carousel/embla-carousel.umd.js"
+      defer
+    ></script>
+    <script
+      src="https://unpkg.com/embla-carousel-autoplay/embla-carousel-autoplay.umd.js"
+      defer
+    ></script>
   </head>
   <body>
     <th:block th:insert="~{fragments/header :: header}"></th:block>
@@ -11,7 +20,16 @@
     ></th:block>
     <th:block th:insert="~{fragments/errorMessage :: errorMessage}"></th:block>
     <main>
-      <img src="img/banner-1.webp" alt="" class="w-full md:h-[30rem]" />
+      <div class="embla">
+        <div class="embla__container">
+          <div class="embla__slide">
+            <img src="img/banner-1.webp" />
+          </div>
+          <div class="embla__slide">
+            <img src="img/banner-2.webp" />
+          </div>
+        </div>
+      </div>
 
       <div class="container flex flex-col gap-8 mx-auto p-6">
         <div class="flex justify-center gap-8 mx-auto p-6 text-xl">

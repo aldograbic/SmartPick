@@ -79,4 +79,21 @@
     height: 0;
     width: 0;
   }
+
+  .embla {
+    @apply overflow-hidden;
+  }
+
+  .embla__container {
+    @apply flex;
+  }
+
+  .embla__slide {
+    @apply w-full md:h-[30rem] min-w-0;
+    flex: 0 0 100%;
+  }
+
+  .embla__slide > img {
+    @apply w-full h-full;
+  }
 }
