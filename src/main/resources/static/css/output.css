@@ -753,6 +753,34 @@ input[type="search"]::-ms-reveal {
   width: 0;
 }
 
+.embla {
+  overflow: hidden;
+}
+
+.embla__container {
+  display: flex;
+}
+
+.embla__slide {
+  width: 100%;
+  min-width: 0px;
+}
+
+@media (min-width: 768px) {
+  .embla__slide {
+    height: 30rem;
+  }
+}
+
+.embla__slide {
+  flex: 0 0 100%;
+}
+
+.embla__slide > img {
+  height: 100%;
+  width: 100%;
+}
+
 .sr-only {
   position: absolute;
   width: 1px;
@@ -1607,10 +1635,6 @@ input[type="search"]::-ms-reveal {
 
   .md\:hidden {
     display: none;
-  }
-
-  .md\:h-\[30rem\] {
-    height: 30rem;
   }
 
   .md\:w-1\/2 {

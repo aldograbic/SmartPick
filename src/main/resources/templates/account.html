@@ -14,6 +14,77 @@
       <div class="container flex flex-col gap-8 mx-auto p-6">
         <h1>My account</h1>
         <hr />
+        <div class="grid grid-cols-2">
+          <form action="/updateUser" method="post" class="space-y-8">
+            <div class="relative">
+              <input
+                type="text"
+                id="firstName"
+                name="firstName"
+                class="peer"
+                placeholder=" "
+                th:value="${user.firstName}"
+              />
+              <label
+                for="firstName"
+                class="peer-focus:text-cyan-800 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto"
+                >First Name</label
+              >
+            </div>
+            <div class="relative">
+              <input
+                type="text"
+                id="lastName"
+                name="lastName"
+                class="peer"
+                placeholder=" "
+                th:value="${user.lastName}"
+              />
+              <label
+                for="lastName"
+                class="peer-focus:text-cyan-800 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto"
+                >Last Name</label
+              >
+            </div>
+            <div class="relative">
+              <input
+                type="text"
+                id="city"
+                name="city"
+                class="peer"
+                placeholder=" "
+                th:value="${user.city}"
+              />
+              <label
+                for="city"
+                class="peer-focus:text-cyan-800 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto"
+                >City</label
+              >
+            </div>
+            <div class="relative">
+              <input
+                type="text"
+                id="address"
+                name="address"
+                class="peer"
+                placeholder=" "
+                th:value="${user.address}"
+                autocomplete="street-address"
+              />
+              <label
+                for="address"
+                class="peer-focus:text-cyan-800 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto"
+                >Address</label
+              >
+            </div>
+            <input type="submit" value="Update information" class="w-96" />
+          </form>
+          <img src="img/account-illustration.svg" alt="" />
+        </div>
+
+        <form action="/deleteUser" method="post">
+          <input type="submit" value="Delete account" class="w-96" />
+        </form>
       </div>
     </main>
     <th:block th:insert="~{fragments/footer :: footer}"></th:block>
