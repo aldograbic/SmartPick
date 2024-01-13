@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
   const autoplayOptions = {
-    delay: 7000,
+    delay: 8000,
   };
 
   const emblaNode = document.querySelector(".embla");

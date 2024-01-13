@@ -22,8 +22,11 @@
     <main>
       <div class="embla">
         <div class="embla__container">
-          <div class="embla__slide">
-            <img src="img/banner-1.webp" />
+          <div class="embla__slide relative">
+            <img src="img/banner-3.webp" />
+            <a href="/products" class="button absolute bottom-32 left-[13.3rem]"
+              >Explore Now</a
+            >
           </div>
           <div class="embla__slide">
             <img src="img/banner-2.webp" />
@@ -32,28 +35,8 @@
       </div>
 
       <div class="container flex flex-col gap-8 mx-auto p-6">
-        <div class="flex justify-center gap-8 mx-auto p-6 text-xl">
-          <a
-            href="/products/men"
-            class="border rounded-lg shadow-lg px-5 py-2.5"
-          >
-            MEN
-          </a>
-          <a
-            href="/products/women"
-            class="border shadow-lg rounded-lg px-5 py-2.5"
-          >
-            WOMEN
-          </a>
-          <a
-            href="/products/children"
-            class="border shadow-lg rounded-lg px-5 py-2.5"
-          >
-            CHILDREN
-          </a>
-        </div>
         <div>
-          <h2 class="mb-8">FEATURED</h2>
+          <h1 class="mb-8">New Arrivals</h1>
           <div class="grid md:grid-cols-5 gap-8">
             <div class="border shadow-lg rounded-lg w-64 h-full">
               <div class="relative">
@@ -125,6 +108,41 @@
               </div>
             </div>
           </div>
+        </div>
+        <div class="md:flex justify-center gap-8 mx-auto py-6 text-xl w-full">
+          <a
+            href="/products/men"
+            class="border shadow-lg rounded-lg relative bg-gray-50"
+          >
+            <img src="img/man-button.png" alt="" class="h-full" />
+            <span
+              class="absolute top-1/2 left-6 text-4xl"
+              style="transform: translateY(-50%)"
+              >MEN</span
+            >
+          </a>
+          <a
+            href="/products/women"
+            class="border shadow-lg rounded-lg relative bg-gray-50"
+          >
+            <img src="img/woman-button.png" alt="" class="h-full" />
+            <span
+              class="absolute top-1/2 left-6 text-4xl"
+              style="transform: translateY(-50%)"
+              >WOMEN</span
+            >
+          </a>
+          <a
+            href="/products/children"
+            class="border shadow-lg rounded-lg relative bg-gray-50"
+          >
+            <img src="img/children-button.png" alt="" class="h-full" />
+            <span
+              class="absolute top-1/2 left-6 text-4xl"
+              style="transform: translateY(-50%)"
+              >CHILDREN</span
+            >
+          </a>
         </div>
       </div>
     </main>
