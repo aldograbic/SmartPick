@@ -31,7 +31,7 @@
         <div class="grid md:grid-cols-2 gap-36">
           <img th:src="@{/img/shirt-placeholder.webp}" alt="" />
           <div class="flex flex-col gap-8 text-xl">
-            <p th:text="${product.name}" class="text-3xl"></p>
+            <p th:text="${product.name}" class="text-3xl font-semibold"></p>
             <p th:text="${product.price + ' EUR'}"></p>
             <p th:text="${'Color: ' + product.color}"></p>
             <p th:text="${'Size: ' + product.size}"></p>
