@@ -8,4 +8,6 @@ public interface UserRepository {
     User findByConfirmationToken(String token);
     void updateEmailVerification(User user);
     void contactUs(String name, String email, String message);
+    void updateUser(User user);
+    void deleteUser(User user);
 }

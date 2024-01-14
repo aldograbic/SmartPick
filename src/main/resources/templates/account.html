@@ -14,77 +14,247 @@
       <div class="container flex flex-col gap-8 mx-auto p-6">
         <h1>My account</h1>
         <hr />
-        <div class="grid grid-cols-2">
-          <form action="/updateUser" method="post" class="space-y-8">
-            <div class="relative">
-              <input
-                type="text"
-                id="firstName"
-                name="firstName"
-                class="peer"
-                placeholder=" "
-                th:value="${user.firstName}"
-              />
-              <label
-                for="firstName"
-                class="peer-focus:text-cyan-800 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto"
-                >First Name</label
-              >
+        <div class="grid grid-cols-2 gap-32" x-data="{ deleteUser: false }">
+          <form
+            th:action="@{'/account/' + ${user.username} + '/update'}"
+            method="post"
+            class="flex flex-col gap-4"
+          >
+            <div class="flex gap-4">
+              <div class="relative">
+                <input
+                  type="text"
+                  id="firstName"
+                  name="firstName"
+                  class="peer"
+                  placeholder=" "
+                  th:value="${user.firstName}"
+                />
+                <label
+                  for="firstName"
+                  class="peer-focus:text-cyan-800 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto"
+                  >First Name</label
+                >
+              </div>
+              <div class="relative">
+                <input
+                  type="text"
+                  id="lastName"
+                  name="lastName"
+                  class="peer"
+                  placeholder=" "
+                  th:value="${user.lastName}"
+                />
+                <label
+                  for="lastName"
+                  class="peer-focus:text-cyan-800 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto"
+                  >Last Name</label
+                >
+              </div>
             </div>
-            <div class="relative">
-              <input
-                type="text"
-                id="lastName"
-                name="lastName"
-                class="peer"
-                placeholder=" "
-                th:value="${user.lastName}"
-              />
-              <label
-                for="lastName"
-                class="peer-focus:text-cyan-800 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto"
-                >Last Name</label
-              >
+            <div class="flex gap-4">
+              <div class="relative">
+                <input
+                  type="text"
+                  id="address"
+                  name="address"
+                  class="peer"
+                  placeholder=" "
+                  th:value="${user.address}"
+                  autocomplete="street-address"
+                />
+                <label
+                  for="address"
+                  class="peer-focus:text-cyan-800 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto"
+                  >Address</label
+                >
+              </div>
+              <div class="relative">
+                <input
+                  type="text"
+                  id="city"
+                  name="city"
+                  class="peer"
+                  placeholder=" "
+                  th:value="${user.city}"
+                />
+                <label
+                  for="city"
+                  class="peer-focus:text-cyan-800 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto"
+                  >City</label
+                >
+              </div>
             </div>
-            <div class="relative">
-              <input
-                type="text"
-                id="city"
-                name="city"
-                class="peer"
-                placeholder=" "
-                th:value="${user.city}"
-              />
-              <label
-                for="city"
-                class="peer-focus:text-cyan-800 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto"
-                >City</label
-              >
+            <div class="flex gap-4">
+              <div class="relative">
+                <input
+                  type="text"
+                  id="username"
+                  name="username"
+                  class="peer"
+                  placeholder=" "
+                  th:value="${user.username}"
+                />
+                <label
+                  for="username"
+                  class="peer-focus:text-cyan-800 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto"
+                  >Username</label
+                >
+              </div>
+              <div class="relative">
+                <input
+                  type="text"
+                  id="email"
+                  name="email"
+                  class="peer"
+                  placeholder=" "
+                  th:value="${user.email}"
+                />
+                <label
+                  for="email"
+                  class="peer-focus:text-cyan-800 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto"
+                  >E-mail address</label
+                >
+              </div>
             </div>
-            <div class="relative">
-              <input
-                type="text"
-                id="address"
-                name="address"
-                class="peer"
-                placeholder=" "
-                th:value="${user.address}"
-                autocomplete="street-address"
-              />
-              <label
-                for="address"
-                class="peer-focus:text-cyan-800 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto"
-                >Address</label
-              >
-            </div>
-            <input type="submit" value="Update information" class="w-96" />
+
+            <input type="submit" value="Update information" class="w-96 mt-6" />
+
+            <button
+              type="button"
+              class="button w-96"
+              style="background-color: #d11a2a"
+              @click="deleteUser =! deleteUser"
+            >
+              Delete account
+            </button>
           </form>
+          <div
+            x-show="deleteUser"
+            class="fixed inset-0 z-50 overflow-y-auto"
+            aria-labelledby="modal-title"
+            role="dialog"
+            aria-modal="true"
+            x-cloak
+          >
+            <div
+              class="flex items-end justify-center min-h-screen text-black px-4 text-center md:items-center sm:block sm:p-0"
+            >
+              <div
+                x-cloak
+                @click="deleteUser = false"
+                x-show="deleteUser"
+                x-transition:enter="transition ease-out duration-300 transform"
+                x-transition:enter-start="opacity-0"
+                x-transition:enter-end="opacity-100"
+                x-transition:leave="transition ease-in duration-200 transform"
+                x-transition:leave-start="opacity-100"
+                x-transition:leave-end="opacity-0"
+                class="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-40"
+                aria-hidden="true"
+              ></div>
+
+              <div
+                x-cloak
+                x-show="deleteUser"
+                x-transition:enter="transition ease-out duration-300 transform"
+                x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
+                x-transition:leave="transition ease-in duration-200 transform"
+                x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
+                x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                class="inline-block w-full max-w-xl p-8 my-20 overflow-hidden text-left transition-all transform bg-white rounded-lg shadow-xl 2xl:max-w-2xl"
+              >
+                <div class="flex items-center justify-between">
+                  <h2 class="text-xl font-semibold">
+                    Are you sure you want to delete your account?
+                  </h2>
+                  <a
+                    href="javascript:void(0)"
+                    @click="deleteUser = false"
+                    class="text-gray-600 focus:outline-none hover:text-gray-700 mb-4"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      class="w-6 h-6"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M6 18L18 6M6 6l12 12"
+                      />
+                    </svg>
+                  </a>
+                </div>
+
+                <div class="space-y-4">
+                  <p>
+                    Deleting your account will permanently remove all your
+                    associated information in our system.
+                  </p>
+                  <ul class="list-disc list-inside">
+                    <li>
+                      Your profile information will be permanently deleted.
+                    </li>
+                    <li>
+                      All data associated with your account, including saved
+                      products and shopping cart products, will be lost.
+                    </li>
+                    <li>
+                      You will no longer have access to your account or any
+                      associated services.
+                    </li>
+                  </ul>
+
+                  <p>This action cannot be undone.</p>
+                  <p>
+                    To confirm the deletion of your account, please enter your
+                    password:
+                  </p>
+                </div>
+                <div class="mt-8 space-y-4">
+                  <form action="/deleteUser" method="post">
+                    <input type="hidden" name="id" th:value="${user.userId}" />
+                    <div class="relative">
+                      <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        class="peer"
+                        placeholder=" "
+                        required
+                      />
+                      <label
+                        for="password"
+                        class="peer-focus:text-cyan-800 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto"
+                        >Password</label
+                      >
+                    </div>
+                    <button
+                      type="submit"
+                      class="button mt-8 w-full"
+                      style="background-color: #d11a2a"
+                    >
+                      Delete
+                    </button>
+                    <button
+                      @click="deleteUser = false"
+                      class="button mt-4 w-full"
+                      type="button"
+                    >
+                      Cancel
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
           <img src="img/account-illustration.svg" alt="" />
         </div>
-
-        <form action="/deleteUser" method="post">
-          <input type="submit" value="Delete account" class="w-96" />
-        </form>
       </div>
     </main>
     <th:block th:insert="~{fragments/footer :: footer}"></th:block>
