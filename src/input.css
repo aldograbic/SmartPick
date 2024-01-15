@@ -16,11 +16,11 @@
   }
 
   h1 {
-    @apply text-4xl font-bold;
+    @apply text-3xl md:text-4xl font-bold;
   }
 
   h2 {
-    @apply text-2xl font-semibold;
+    @apply text-xl md:text-2xl font-semibold;
   }
 
   input[type="text"],
@@ -44,6 +44,10 @@
   input[type="submit"],
   .button {
     @apply rounded-full font-semibold px-12 py-4 bg-black text-gray-100 cursor-pointer transition-colors hover:bg-cyan-900;
+  }
+
+  .secondaryButton {
+    @apply rounded-full font-semibold px-12 py-4 bg-white border-2 border-black cursor-pointer transition-colors hover:bg-cyan-900;
   }
 
   [x-cloak] {

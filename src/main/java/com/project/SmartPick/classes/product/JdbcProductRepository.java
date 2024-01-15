@@ -114,4 +114,18 @@ public class JdbcProductRepository implements ProductRepository {
         
         return jdbcTemplate.query(sql, new ProductRowMapper(productCategoryRepository), searchTerm, searchTerm);
     }
+
+    @Override
+    public List<Product> getAllProductsBySize(String size) {
+        String sql = "SELECT * FROM product WHERE size = ?";
+        
+        return jdbcTemplate.query(sql, new ProductRowMapper(productCategoryRepository), size);
+    }
+
+    @Override
+    public List<Product> getAllProductsByColor(String color) {
+        String sql = "SELECT * FROM product WHERE color = ?";
+        
+        return jdbcTemplate.query(sql, new ProductRowMapper(productCategoryRepository), color);
+    }
 }

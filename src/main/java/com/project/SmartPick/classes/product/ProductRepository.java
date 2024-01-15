@@ -31,4 +31,8 @@ public interface ProductRepository {
     Product getProductByProductId(int productId);
 
     List<Product> getAllProductsByPrompt(String prompt);
+
+    List<Product> getAllProductsBySize(String size);
+
+    public List<Product> getAllProductsByColor(String color);
 }
