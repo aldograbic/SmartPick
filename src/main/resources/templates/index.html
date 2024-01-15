@@ -23,52 +23,51 @@
       <div class="embla">
         <div class="embla__container">
           <div class="embla__slide relative">
-            <img src="img/banner-1.webp" />
-            <a href="/products" class="button absolute bottom-32 left-[13.3rem]"
+            <img src="img/banner-1.webp" class="hidden md:block" />
+            <img src="img/banner-1-mobile.png" class="md:hidden" />
+            <a
+              href="/products"
+              class="button absolute bottom-64 md:bottom-32 left-28 md:left-[13.3rem]"
               >Explore Now</a
             >
           </div>
           <div class="embla__slide relative">
-            <img src="img/banner-2.webp" />
-            <a href="/products" class="button absolute bottom-40 left-[13.3rem]"
+            <img src="img/banner-2.webp" class="hidden md:block" />
+            <img src="img/banner-2-mobile.png" class="md:hidden" />
+            <a
+              href="/products"
+              class="button absolute bottom-60 md:bottom-40 left-4 md:left-[13.3rem]"
               >Show Now</a
             >
           </div>
         </div>
       </div>
 
-      <div class="container flex flex-col gap-12 mx-auto p-6">
-        <h1 class="text-center pt-12">Discover More</h1>
-        <div class="md:flex justify-center gap-8 mx-auto py-6 text-xl w-full">
+      <div class="container flex flex-col md:gap-12 mx-auto p-6">
+        <h1 class="text-center pt-12">Discover more for</h1>
+        <div
+          class="grid md:grid-cols-3 justify-center gap-20 md:gap-8 mx-auto py-6 text-xl w-full"
+        >
           <a
             href="/products/men"
             class="border rounded-lg shadow-lg bg-blue-50"
           >
-            <img src="img/man.png" alt="" class="h-full" />
+            <img src="img/man.png" alt="" class="h-full mx-auto" />
             <p class="text-center mt-4 text-3xl font-semibold">MEN</p>
-            <p class="text-sm text-center text-gray-500">
-              Explore the Latest Trends for Him
-            </p>
           </a>
           <a
             href="/products/women"
             class="border shadow-lg rounded-lg bg-pink-50"
           >
-            <img src="img/woman.png" alt="" class="h-full" />
+            <img src="img/woman.png" alt="" class="h-full mx-auto" />
             <p class="text-center mt-4 text-3xl font-semibold">WOMEN</p>
-            <p class="text-sm text-center text-gray-500">
-              Find Trendsetting Looks for Her
-            </p>
           </a>
           <a
             href="/products/children"
             class="border shadow-lg rounded-lg bg-yellow-50"
           >
-            <img src="img/children.png" alt="" class="h-full" />
+            <img src="img/children.png" alt="" class="h-full mx-auto" />
             <p class="text-center mt-4 text-2xl font-semibold">CHILDREN</p>
-            <p class="text-sm text-center text-gray-500">
-              Adorable Styles for the Little Ones
-            </p>
           </a>
         </div>
         <div>
