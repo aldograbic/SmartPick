@@ -128,4 +128,10 @@ public class JdbcProductRepository implements ProductRepository {
         
         return jdbcTemplate.query(sql, new ProductRowMapper(productCategoryRepository), color);
     }
+
+    @Override
+    public List<Product> getLastAddedProducts() {
+        String sql = "SELECT * FROM product ORDER BY created_at DESC LIMIT 5";
+        return jdbcTemplate.query(sql, new ProductRowMapper(productCategoryRepository));
+    }
 }

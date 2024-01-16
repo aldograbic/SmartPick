@@ -72,7 +72,7 @@ public class JdbcUserRepository implements UserRepository{
 
     @Override
     public void deleteUser(User user) {
-        String sql = "DELETE FROM users WHERE id = ?";
+        String sql = "DELETE FROM user WHERE user_id = ?";
         jdbcTemplate.update(sql, user.getUserId());
     }
 }

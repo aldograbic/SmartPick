@@ -34,5 +34,7 @@ public interface ProductRepository {
 
     List<Product> getAllProductsBySize(String size);
 
-    public List<Product> getAllProductsByColor(String color);
+    List<Product> getAllProductsByColor(String color);
+
+    List<Product> getLastAddedProducts();
 }

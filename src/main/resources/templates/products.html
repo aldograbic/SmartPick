@@ -120,35 +120,50 @@
               class="absolute left-0 p-2 z-10 bg-white rounded-lg shadow-lg w-40 mt-2"
               x-cloak
             >
-              <a
-                href=""
-                class="block px-4 py-2 text-base hover:bg-gray-100 rounded-lg"
-              >
-                XS
-              </a>
-              <a
-                href=""
-                class="block px-4 py-2 text-base hover:bg-gray-100 rounded-lg"
-              >
-                S</a
-              ><a
-                href=""
-                class="block px-4 py-2 text-base hover:bg-gray-100 rounded-lg"
-              >
-                M
-              </a>
-              <a
-                href=""
-                class="block px-4 py-2 text-base hover:bg-gray-100 rounded-lg"
-              >
-                L
-              </a>
-              <a
-                href=""
-                class="block px-4 py-2 text-base hover:bg-gray-100 rounded-lg"
-              >
-                XL
-              </a>
+              <div class="relative">
+                <a
+                  href="#"
+                  onclick="filterBySize('XS')"
+                  class="block px-4 py-2 text-base hover:bg-gray-100 rounded-lg"
+                  >XS</a
+                >
+                <a
+                  href="#"
+                  onclick="filterBySize('S')"
+                  class="block px-4 py-2 text-base hover:bg-gray-100 rounded-lg"
+                  >S</a
+                >
+                <a
+                  href="#"
+                  onclick="filterBySize('M')"
+                  class="block px-4 py-2 text-base hover:bg-gray-100 rounded-lg"
+                  >M</a
+                >
+                <a
+                  href="#"
+                  onclick="filterBySize('L')"
+                  class="block px-4 py-2 text-base hover:bg-gray-100 rounded-lg"
+                  >L</a
+                >
+                <a
+                  href="#"
+                  onclick="filterBySize('XL')"
+                  class="block px-4 py-2 text-base hover:bg-gray-100 rounded-lg"
+                  >XL</a
+                >
+              </div>
+              <script>
+                function filterBySize(size) {
+                  const queryParams = new URLSearchParams(
+                    window.location.search
+                  );
+                  queryParams.set("size", size);
+
+                  const newUrl =
+                    window.location.pathname + "?" + queryParams.toString();
+                  window.location.href = newUrl;
+                }
+              </script>
             </div>
           </div>
           <div class="relative">

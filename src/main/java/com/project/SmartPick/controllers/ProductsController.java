@@ -38,8 +38,18 @@ public class ProductsController {
     }
 
     @GetMapping
-    public String getAllProducts(Model model) {
-        List<Product> products = productRepository.getAllProducts();
+    public String getAllProducts(@RequestParam(name = "size", required = false) String size, Model model) {
+
+        List<Product> products;
+        
+        if (size != null && !size.isEmpty()) {
+            // Filter by size if the size parameter is provided
+            products = productRepository.getAllProductsBySize(size);
+        } else {
+            // Otherwise, get all products
+            products = productRepository.getAllProducts();
+        }
+
         Map<Integer, Boolean> savedStatusMap = getSavedStatusMap(products);
 
         model.addAttribute("products", products);
@@ -158,5 +168,4 @@ public class ProductsController {
 
         return "products";
     }
-
 }

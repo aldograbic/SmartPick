@@ -78,7 +78,7 @@ public class RegistrationController {
         }
 
         if (user.isEmailVerified()) {
-            redirectAttributes.addFlashAttribute("success", "E-mail address is already confirmed.");
+            redirectAttributes.addFlashAttribute("infoMessage", "E-mail address is already confirmed.");
             return "redirect:/";
         }
 
