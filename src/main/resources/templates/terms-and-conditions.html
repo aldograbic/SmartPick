@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <th:block th:insert="~{fragments/head :: head}"></th:block>
+    <title>Terms & Conditions | SmartPick</title>
+  </head>
+  <body>
+    <th:block th:insert="~{fragments/header :: header}"></th:block>
+    <th:block
+      th:insert="~{fragments/successMessage :: successMessage}"
+    ></th:block>
+    <th:block th:insert="~{fragments/errorMessage :: errorMessage}"></th:block>
+    <main>
+      <div class="container flex flex-col gap-8 mx-auto p-6">
+        <h1>Terms & Conditions</h1>
+        <hr />
+        <p class="font-semibold">Last Modified: 16.01.2024.</p>
+        <p>
+          Welcome to the SmartPick e-commerce shopping platform. By using our
+          platform, you agree to the following terms and conditions. Please
+          carefully read these Terms & Conditions before accessing or using our
+          platform.
+        </p>
+        <h2>1. User Account and Security</h2>
+        <p>
+          1.1 During registration, certain personal information will be
+          required. It is your responsibility to maintain the confidentiality of
+          this information and be accountable for all activities associated with
+          your account.
+        </p>
+        <p>
+          1.2 You agree to promptly notify us of any unauthorized use of your
+          account or any security threats.
+        </p>
+        <h2>2. Orders and Payments</h2>
+        <p>
+          2.1 All orders are subject to product availability. In the event of
+          unavailability, you will be notified, and the paid amount will be
+          refunded.
+        </p>
+        <p>
+          2.2 Payment can be made using a credit card or other accepted methods
+          listed on our platform.
+        </p>
+        <h2>3. Code of Conduct</h2>
+        <p>
+          3.1 By using the platform, you agree to abide by our code of conduct.
+          Inappropriate behavior, including threats, abuse, or any form of
+          unlawful activity, is strictly prohibited.
+        </p>
+        <h2>4. Intellectual Property</h2>
+        <p>
+          4.1 All intellectual property associated with the platform, including
+          content, logos, and other materials, remains the property of
+          SmartPick.
+        </p>
+        <h2>5. Liability and Warranties</h2>
+        <p>
+          5.1 SmartPick is not responsible for any damages or losses arising
+          from the use of the platform.
+        </p>
+        <p>
+          5.2 We guarantee the quality of products as described on the platform
+          but do not assume responsibility for any discrepancies.
+        </p>
+        <h2>6. Changes to Terms</h2>
+        <p>
+          6.1 SmartPick reserves the right to modify these Terms & Conditions.
+          Any changes will be communicated in advance on our platform.
+        </p>
+        <h2>7. Dispute Resolution</h2>
+        <p>
+          7.1 Disputes will be resolved through negotiation, and if necessary,
+          through appropriate legal channels.
+        </p>
+        <h2>8. Final Provisions</h2>
+        <p>
+          8.1 These Terms & Conditions constitute the entire agreement between
+          you and SmartPick, replacing all previous agreements.
+        </p>
+      </div>
+    </main>
+    <th:block th:insert="~{fragments/footer :: footer}"></th:block>
+  </body>
+</html>
