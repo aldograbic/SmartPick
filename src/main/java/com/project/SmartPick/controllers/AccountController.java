@@ -115,7 +115,7 @@ public class AccountController {
     public String deleteUser(@ModelAttribute User user, @RequestParam("password") String password, RedirectAttributes redirectAttributes) {
 
         String encryptedPassword = passwordEncoder.encode(password);
-        if(encryptedPassword == user.getPassword()) {
+        if(encryptedPassword.equals(user.getPassword())) {
             try {
                 userRepository.deleteUser(user);
                 redirectAttributes.addFlashAttribute("successMessage", "Account successfully deleted.");
