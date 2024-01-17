@@ -1,5 +1,7 @@
 package com.project.SmartPick.controllers;
 
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,10 +45,8 @@ public class ProductsController {
         List<Product> products;
         
         if (size != null && !size.isEmpty()) {
-            // Filter by size if the size parameter is provided
             products = productRepository.getAllProductsBySize(size);
         } else {
-            // Otherwise, get all products
             products = productRepository.getAllProducts();
         }
 
@@ -55,6 +55,7 @@ public class ProductsController {
         model.addAttribute("products", products);
         model.addAttribute("categories", productCategoryRepository.getAllProductCategories());
         model.addAttribute("savedStatusMap", savedStatusMap);
+        model.addAttribute("productsController", this);
 
         return "products";
     }
@@ -67,6 +68,7 @@ public class ProductsController {
         model.addAttribute("products", products);
         model.addAttribute("categories", productCategoryRepository.getAllProductCategories());
         model.addAttribute("savedStatusMap", savedStatusMap);
+        model.addAttribute("productsController", this);
 
         return "products";
     }
@@ -90,6 +92,7 @@ public class ProductsController {
         model.addAttribute("products", products);
         model.addAttribute("categories", productCategoryRepository.getAllProductCategories());
         model.addAttribute("savedStatusMap", savedStatusMap);
+        model.addAttribute("productsController", this);
 
         return "products";
     }
@@ -142,6 +145,12 @@ public class ProductsController {
         return savedStatusMap;
     }
 
+    public static boolean isWithinLastWeek(LocalDateTime createdAt) {
+        LocalDateTime now = LocalDateTime.now();
+        long daysDifference = ChronoUnit.DAYS.between(createdAt, now);
+        return daysDifference < 7;
+    }
+
     @ModelAttribute("highlightedCategory")
     public String getHighlightedCategory(HttpServletRequest request) {
         String requestURI = request.getRequestURI();
@@ -165,6 +174,7 @@ public class ProductsController {
         model.addAttribute("products", searchResults);
         model.addAttribute("categories", productCategoryRepository.getAllProductCategories());
         model.addAttribute("savedStatusMap", savedStatusMap);
+        model.addAttribute("productsController", this);
 
         return "products";
     }

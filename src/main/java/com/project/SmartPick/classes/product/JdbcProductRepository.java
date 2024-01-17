@@ -134,4 +134,10 @@ public class JdbcProductRepository implements ProductRepository {
         String sql = "SELECT * FROM product ORDER BY created_at DESC LIMIT 5";
         return jdbcTemplate.query(sql, new ProductRowMapper(productCategoryRepository));
     }
+
+    @Override
+    public void removeAllProductsFromShoppingCartForUser(int userId) {
+        String sql = "DELETE FROM user_shopping_cart WHERE user_id = ?";
+        jdbcTemplate.update(sql, userId);
+    }
 }

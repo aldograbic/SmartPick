@@ -1,4 +1,6 @@
 package com.project.SmartPick.controllers;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,6 +39,7 @@ public class IndexController {
         model.addAttribute("categories", productCategoryRepository.getAllProductCategories());
         model.addAttribute("savedStatusMap", savedStatusMap);
 
+        model.addAttribute("indexController", this);
         return "index";
     }
 
@@ -59,5 +62,11 @@ public class IndexController {
         }
     
         return savedStatusMap;
+    }
+
+    public static boolean isWithinLastWeek(LocalDateTime createdAt) {
+        LocalDateTime now = LocalDateTime.now();
+        long daysDifference = ChronoUnit.DAYS.between(createdAt, now);
+        return daysDifference < 7;
     }
 }
