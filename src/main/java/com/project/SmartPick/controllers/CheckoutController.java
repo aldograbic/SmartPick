@@ -2,6 +2,7 @@ package com.project.SmartPick.controllers;
 
 import com.project.SmartPick.classes.user.User;
 import com.project.SmartPick.classes.user.UserRepository;
+import com.project.SmartPick.config.EmailService;
 import com.project.SmartPick.classes.order.Order;
 import com.project.SmartPick.classes.order.OrderItem;
 import com.project.SmartPick.classes.order.OrderRepository;
@@ -31,6 +32,9 @@ public class CheckoutController {
 
     @Autowired
     private OrderRepository orderRepository;
+
+    @Autowired
+    private EmailService emailService;
 
     @GetMapping("/checkout")
     public String getCheckoutPage(HttpSession session, Model model) {
@@ -64,29 +68,41 @@ public class CheckoutController {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
-        int userId = userRepository.findByUsername(username).getUserId();
+        User user = userRepository.findByUsername(username);
 
         BigDecimal estimatedTotal = (BigDecimal) session.getAttribute("estimatedTotal");
         @SuppressWarnings("unchecked")
         List<OrderItem> orderItems = (List<OrderItem>) session.getAttribute("orderItems");
 
-        Order order = new Order(userId, estimatedTotal);
+        Order order = new Order(user.getUserId(), estimatedTotal);
 
         orderRepository.createOrder(order);
 
         int orderId = orderRepository.getLastInsertedOrderId();
+
+        Order savedOrder = orderRepository.findById(orderId);
 
         for (OrderItem orderItem : orderItems) {
             orderItem.setOrderId(orderId);
             orderRepository.createOrderItem(orderItem);
         }
 
-        String userEmail = userRepository.findByUsername(username).getEmail();
+        model.addAttribute("userEmail", user.getEmail());
+        model.addAttribute("order", savedOrder);
 
-        model.addAttribute("userEmail", userEmail);
-        model.addAttribute("order", order);
-        
-        model.addAttribute("estimatedTotal", estimatedTotal);
+        String message = "Dear " + user.getUsername() + ",\n\n"
+        + "Thank you for your order with SmartPick! We are delighted to confirm that your order has been successfully placed.\n\n"
+        + "Order Details:\n"
+        + "Order ID: " + savedOrder.getOrderId() + "\n"
+        + "Order Date: " + savedOrder.getOrderDate() + "\n"
+        + "Order Total: " + savedOrder.getOrderTotal() + " EUR\n\n"
+        + "If you have any questions or concerns regarding your order, please feel free to contact our customer support.\n\n"
+        + "Best Regards,\n"
+        + "SmartPick Team";
+
+        emailService.sendMessage(user.getEmail(), "Successfull order - SmartPick", message);
+
+        productRepository.removeAllProductsFromShoppingCartForUser(user.getUserId());
 
         session.removeAttribute("orderItems");
         session.removeAttribute("estimatedTotal");

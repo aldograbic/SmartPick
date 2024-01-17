@@ -218,7 +218,11 @@
                 </div>
                 <div class="mt-8 space-y-4">
                   <form action="/deleteUser" method="post">
-                    <input type="hidden" name="id" th:value="${user.userId}" />
+                    <input
+                      type="hidden"
+                      name="userId"
+                      th:value="${user.userId}"
+                    />
                     <div class="relative">
                       <input
                         type="password"

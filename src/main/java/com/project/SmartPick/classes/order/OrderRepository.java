@@ -11,4 +11,6 @@ public interface OrderRepository {
     void createOrderItem(OrderItem orderItem);
 
     List<OrderItem> getOrderItemsByOrderId(int orderId);
+
+    Order findById(int orderId);
 }

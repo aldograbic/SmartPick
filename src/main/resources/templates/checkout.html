@@ -11,8 +11,8 @@
     ></th:block>
     <th:block th:insert="~{fragments/errorMessage :: errorMessage}"></th:block>
     <main>
-      <div class="container flex flex-col gap-8 mx-auto p-6">
-        <form action="/order" method="post">
+      <div class="container mx-auto p-6">
+        <form action="/order" method="post" class="flex flex-col gap-8">
           <div class="flex justify-between">
             <h1>Checkout</h1>
             <div class="flex items-center gap-8">

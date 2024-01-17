@@ -37,4 +37,6 @@ public interface ProductRepository {
     List<Product> getAllProductsByColor(String color);
 
     List<Product> getLastAddedProducts();
+
+    void removeAllProductsFromShoppingCartForUser(int userId);
 }
