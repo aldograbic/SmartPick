@@ -12,10 +12,14 @@
     <th:block th:insert="~{fragments/errorMessage :: errorMessage}"></th:block>
     <main>
       <div class="container mx-auto p-6">
-        <form action="/order" method="post" class="flex flex-col gap-8">
-          <div class="flex justify-between">
+        <form
+          action="/order-confirmation"
+          method="post"
+          class="flex flex-col gap-8"
+        >
+          <div class="md:flex justify-between">
             <h1>Checkout</h1>
-            <div class="flex items-center gap-8">
+            <div class="flex items-center gap-8 mt-8 md:mt-0">
               <p class="text-sm text-gray-600">
                 Order Total:
                 <span
@@ -27,8 +31,12 @@
             </div>
           </div>
           <hr />
-          <div class="grid grid-cols-2">
-            <img src="img/checkout-illustration.svg" alt="" class="w-3/4" />
+          <div class="grid md:grid-cols-2">
+            <img
+              src="img/checkout-illustration.svg"
+              alt=""
+              class="w-3/4 hidden md:block"
+            />
             <div class="flex flex-col gap-8">
               <div>
                 <h2>Your information</h2>
@@ -64,10 +72,10 @@
             </div>
           </div>
           <h2>Your items</h2>
-          <div class="grid grid-cols-2 gap-8">
+          <div class="grid md:grid-cols-2 gap-8">
             <div
               th:each="orderItem : ${orderItems}"
-              class="flex border relative shadow-lg rounded-lg h-full p-4 gap-8"
+              class="md:flex border relative shadow-lg rounded-lg h-full p-4 gap-8"
             >
               <div>
                 <a
@@ -76,7 +84,7 @@
                   <img
                     src="img/shirt-placeholder.webp"
                     alt=""
-                    class="rounded-lg w-36 h-48"
+                    class="rounded-lg md:w-36 md:h-48"
                   />
                 </a>
               </div>

@@ -13,4 +13,6 @@ public interface OrderRepository {
     List<OrderItem> getOrderItemsByOrderId(int orderId);
 
     Order findById(int orderId);
+
+    List<Order> getAllOrdersByUserId(int userId);
 }

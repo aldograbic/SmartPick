@@ -8,7 +8,7 @@
     <th:block th:insert="~{fragments/header :: header}"></th:block>
     <main>
       <div
-        class="container flex justify-center items-center gap-24 mx-auto p-6 mt-24"
+        class="container md:flex justify-center items-center gap-24 mx-auto p-6 mt-24"
       >
         <img
           th:src="@{/img/error-500-illustration.svg}"
@@ -23,10 +23,10 @@
             out!<br />If the issue persists, please contact us.
           </p>
           <div class="flex items-center gap-4">
-            <a href="/user-dashboard" class="button w-fit"
-              >Return to Dashboard</a
+            <a href="/user-dashboard" class="button">Return to Dashboard</a>
+            <a href="/contact" class="link secondaryButton"
+              >Contact support &rarr;</a
             >
-            <a href="/contact" class="w-fit link">Contact support &rarr;</a>
           </div>
         </div>
       </div>

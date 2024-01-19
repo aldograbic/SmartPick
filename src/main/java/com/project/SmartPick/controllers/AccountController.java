@@ -5,20 +5,21 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.SmartPick.classes.user.User;
 import com.project.SmartPick.classes.user.UserRepository;
 import com.project.SmartPick.config.EmailService;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -26,9 +27,6 @@ public class AccountController {
 
     @Autowired
     private UserRepository userRepository;
-
-    @Autowired
-    private BCryptPasswordEncoder passwordEncoder;
 
     @Autowired
     private EmailService emailService;
@@ -112,23 +110,19 @@ public class AccountController {
     }
 
     @PostMapping("/deleteUser")
-    public String deleteUser(@ModelAttribute User user, @RequestParam("password") String password, RedirectAttributes redirectAttributes) {
+    public String deleteUser(@ModelAttribute User user, HttpServletRequest request, HttpServletResponse response, RedirectAttributes redirectAttributes) {
 
-        String encryptedPassword = passwordEncoder.encode(password);
-        if(encryptedPassword.equals(user.getPassword())) {
-            try {
-                userRepository.deleteUser(user);
-                redirectAttributes.addFlashAttribute("successMessage", "Account successfully deleted.");
+        try {
+            userRepository.deleteUser(user);
+            SecurityContextLogoutHandler logoutHandler = new SecurityContextLogoutHandler();
+            logoutHandler.logout(request, response, SecurityContextHolder.getContext().getAuthentication());
+            redirectAttributes.addFlashAttribute("successMessage", "Account successfully deleted.");
 
-            } catch (Exception e) {
-                redirectAttributes.addFlashAttribute("errorMessage", "There was an issue with deleting your account. Please try again.");
-                return "redirect:/account";
-            }
-        } else {
+        } catch (Exception e) {
             redirectAttributes.addFlashAttribute("errorMessage", "There was an issue with deleting your account. Please try again.");
             return "redirect:/account";
         }
-
+       
         return "redirect:/";
     }
 }

@@ -13,14 +13,29 @@
     <th:block th:insert="~{fragments/infoMessage :: infoMessage}"></th:block>
     <main>
       <div class="container flex flex-col gap-8 mx-auto p-6">
-        <div class="flex gap-24">
+        <div class="md:flex gap-24">
+          <nav class="text-gray-600 text-base block md:hidden mb-4">
+            <a href="/">Home</a>
+            &rsaquo;
+            <a href="/products">Products</a>
+            &rsaquo;
+            <a
+              th:href="'/products/' + ${product.gender.toLowerCase()}"
+              th:text="${product.gender}"
+            ></a>
+            &rsaquo;
+            <a
+              th:href="'/products/' + ${product.gender.toLowerCase()} + '/' + ${product.category.categoryName.toLowerCase()}"
+              th:text="${product.category.categoryName}"
+            ></a>
+          </nav>
           <img
             th:src="@{/img/shirt-placeholder.webp}"
             alt=""
-            class="rounded-xl w-1/4"
+            class="rounded-xl md:w-1/4"
           />
-          <div class="flex flex-col gap-8 text-lg w-3/4">
-            <nav class="text-gray-600 text-base">
+          <div class="flex flex-col gap-8 text-lg md:w-3/4 mt-4 md:mt-0">
+            <nav class="text-gray-600 text-base hidden md:block">
               <a href="/">Home</a>
               &rsaquo;
               <a href="/products">Products</a>
@@ -43,7 +58,7 @@
             <p th:text="${'Color: ' + product.color}"></p>
             <p th:text="${'Size: ' + product.size}"></p>
             <p th:text="${'Description: ' + product.description}"></p>
-            <div class="flex items-center gap-4">
+            <div class="md:flex items-center gap-4 space-y-4 md:space-y-0">
               <form action="/putProductInShoppingCartForUser" method="post">
                 <input
                   type="hidden"
@@ -71,7 +86,9 @@
                   Add to cart
                 </button>
               </form>
-              <button class="secondaryButton flex items-center gap-2">
+              <button
+                class="secondaryButton flex items-center gap-2 w-full md:w-fit justify-center"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"

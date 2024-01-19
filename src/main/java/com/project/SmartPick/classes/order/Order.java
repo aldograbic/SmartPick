@@ -2,12 +2,15 @@ package com.project.SmartPick.classes.order;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.util.List;
 
 public class Order {
     private int orderId;
     private int userId;
     private BigDecimal orderTotal;
     private Timestamp orderDate;
+
+    private List<OrderItem> orderItems;
 
     public Order() {}
 
@@ -48,6 +51,12 @@ public class Order {
         this.orderDate = orderDate;
     }
 
-    
+    public List<OrderItem> getOrderItems() {
+        return orderItems;
+    }
+
+    public void setOrderItems(List<OrderItem> orderItems) {
+        this.orderItems = orderItems;
+    }
 }
 

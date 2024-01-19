@@ -2,7 +2,7 @@ package com.project.SmartPick.controllers.auth;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -21,7 +21,7 @@ public class RegistrationController {
     private UserRepository userRepository;
 
     @Autowired
-    private BCryptPasswordEncoder passwordEncoder;
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     private EmailService emailService;
@@ -32,7 +32,15 @@ public class RegistrationController {
     }
 
     @PostMapping("/registration")
-    public String registration(@ModelAttribute User user, @RequestParam("confirmPassword") String confirmPassword ,RedirectAttributes redirectAttributes) {
+    public String registration(@ModelAttribute User user,
+                            @RequestParam("confirmPassword") String confirmPassword,
+                            @RequestParam(name = "acceptTerms", required = false) String acceptTerms,
+                            RedirectAttributes redirectAttributes) {
+
+        if (acceptTerms == null) {
+            redirectAttributes.addFlashAttribute("errorMessage", "Please accept the terms and conditions to register.");
+            return "redirect:/registration";
+        }
 
         User existingUserEmail = userRepository.findByEmail(user.getEmail());
         if (existingUserEmail != null) {
