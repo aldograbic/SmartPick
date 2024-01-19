@@ -63,7 +63,7 @@ public class CheckoutController {
         return "checkout";
     }
 
-    @PostMapping("/order")
+    @PostMapping("/order-confirmation")
     public String order(HttpSession session, Model model) {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

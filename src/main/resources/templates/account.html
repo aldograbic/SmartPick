@@ -14,13 +14,13 @@
       <div class="container flex flex-col gap-8 mx-auto p-6">
         <h1>My account</h1>
         <hr />
-        <div class="grid grid-cols-2 gap-32" x-data="{ deleteUser: false }">
+        <div class="grid md:grid-cols-2 gap-32" x-data="{ deleteUser: false }">
           <form
             th:action="@{'/account/' + ${user.username} + '/update'}"
             method="post"
             class="flex flex-col gap-4"
           >
-            <div class="flex gap-4">
+            <div class="md:flex gap-4 space-y-4 md:space-y-0">
               <div class="relative">
                 <input
                   type="text"
@@ -52,7 +52,7 @@
                 >
               </div>
             </div>
-            <div class="flex gap-4">
+            <div class="md:flex gap-4 space-y-4 md:space-y-0">
               <div class="relative">
                 <input
                   type="text"
@@ -85,7 +85,7 @@
                 >
               </div>
             </div>
-            <div class="flex gap-4">
+            <div class="md:flex gap-4 space-y-4 md:space-y-0">
               <div class="relative">
                 <input
                   type="text"
@@ -211,33 +211,15 @@
                   </ul>
 
                   <p>This action cannot be undone.</p>
-                  <p>
-                    To confirm the deletion of your account, please enter your
-                    password:
-                  </p>
                 </div>
-                <div class="mt-8 space-y-4">
+                <div class="space-y-4">
                   <form action="/deleteUser" method="post">
                     <input
                       type="hidden"
                       name="userId"
                       th:value="${user.userId}"
                     />
-                    <div class="relative">
-                      <input
-                        type="password"
-                        id="password"
-                        name="password"
-                        class="peer"
-                        placeholder=" "
-                        required
-                      />
-                      <label
-                        for="password"
-                        class="peer-focus:text-cyan-800 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto"
-                        >Password</label
-                      >
-                    </div>
+
                     <button
                       type="submit"
                       class="button mt-8 w-full"
@@ -257,7 +239,7 @@
               </div>
             </div>
           </div>
-          <img src="img/account-illustration.svg" alt="" />
+          <img src="img/account-illustration.svg" alt="Account illustration" />
         </div>
       </div>
     </main>

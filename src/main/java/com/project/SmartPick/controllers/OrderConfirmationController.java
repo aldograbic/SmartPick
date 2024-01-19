@@ -8,7 +8,6 @@ public class OrderConfirmationController {
     
     @GetMapping("/order-confirmation")
     public String getOrderConfirmationPage() {
-
-        return "order-confirmation";
+        return "redirect:/";
     }
 }

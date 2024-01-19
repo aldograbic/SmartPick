@@ -43,4 +43,10 @@ public class JdbcOrderRepository implements OrderRepository {
         String sql = "SELECT * FROM `order` WHERE order_id = ?";
         return jdbcTemplate.queryForObject(sql, new OrderRowMapper(), orderId);
     }
+
+    @Override
+    public List<Order> getAllOrdersByUserId(int userId) {
+        String sql = "SELECT * FROM `order` WHERE user_id = ?";
+        return jdbcTemplate.query(sql, new OrderRowMapper(), userId);
+    }
 }

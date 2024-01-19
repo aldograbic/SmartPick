@@ -84,6 +84,10 @@
     width: 0;
   }
 
+  input[type="checkbox"] {
+    @apply w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-lg focus:outline-none;
+  }
+
   .embla {
     @apply overflow-hidden;
   }

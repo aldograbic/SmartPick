@@ -25,8 +25,12 @@ function updateEstimatedTotal() {
 
   var estimatedTotal = (sum + shippingCost + tax).toFixed(2);
 
-  document.getElementById("estimatedTotal").innerText = estimatedTotal + " EUR";
-  document.querySelector('input[name="estimatedTotal"]').value = estimatedTotal;
+  var estimatedTotalElement = document.getElementById("estimatedTotal");
+  if (estimatedTotalElement) {
+    estimatedTotalElement.innerText = estimatedTotal + " EUR";
+    document.querySelector('input[name="estimatedTotal"]').value =
+      estimatedTotal;
+  }
 }
 
 window.addEventListener("DOMContentLoaded", function () {
