@@ -82,7 +82,7 @@
                   th:href="'/products/' + ${orderItem.product.gender.toLowerCase()} + '/' + ${orderItem.product.category.categoryName.toLowerCase()} + '/' + ${orderItem.product.productId}"
                 >
                   <img
-                    src="img/shirt-placeholder.webp"
+                    th:src="${orderItem.product.image}"
                     alt=""
                     class="rounded-lg md:w-36 md:h-48"
                   />

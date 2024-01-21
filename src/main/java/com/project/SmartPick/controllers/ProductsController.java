@@ -102,7 +102,7 @@ public class ProductsController {
         List<Product> products;
 
         if ("all".equalsIgnoreCase(gender)) {
-            products = productRepository.findByCategoryName(category);
+            products = productRepository.getAllFilteredProductsWithCategory(category, size, color, minPrice, maxPrice);
         } else if (size != null || color != null || minPrice != null || maxPrice != null) {
             products = productRepository.getAllFilteredProductsWithGenderAndCategory(gender, category, size, color, minPrice, maxPrice);
         } else {
@@ -188,9 +188,21 @@ public class ProductsController {
     }
     
     @GetMapping("/search")
-    public String searchProducts(@RequestParam("search") String search, Model model) {
+    public String searchProducts(@RequestParam("search") String search,
+                                @RequestParam(name = "size", required = false) String size,
+                                @RequestParam(name = "color", required = false) String color,
+                                @RequestParam(name = "minPrice", required = false) Integer minPrice,
+                                @RequestParam(name = "maxPrice", required = false) Integer maxPrice,
+                                Model model) {
         
-        List<Product> searchResults = productRepository.getAllProductsByPrompt(search);
+        List<Product> searchResults;
+
+        if (size != null || color != null || minPrice != null || maxPrice != null) {
+            searchResults = productRepository.getAllFilteredProducts(size, color, minPrice, maxPrice);
+        } else {
+            searchResults = productRepository.getAllProductsByPrompt(search);
+        }
+
         Map<Integer, Boolean> savedStatusMap = getSavedStatusMap(searchResults);
 
         model.addAttribute("products", searchResults);
