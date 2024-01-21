@@ -36,6 +36,12 @@ public interface ProductRepository {
 
     List<Product> getAllProductsByColor(String color);
 
+    List<Product> getAllFilteredProducts(String size, String color, Integer minPrice, Integer maxPrice);
+
+    List<Product> getAllFilteredProductsWithGender(String gender, String size, String color, Integer minPrice, Integer maxPrice);
+
+    List<Product> getAllFilteredProductsWithGenderAndCategory(String gender, String category, String size, String color, Integer minPrice, Integer maxPrice);
+
     List<Product> getLastAddedProducts();
 
     void removeAllProductsFromShoppingCartForUser(int userId);
