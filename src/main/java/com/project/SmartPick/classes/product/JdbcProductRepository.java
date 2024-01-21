@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import com.project.SmartPick.classes.productCategory.ProductCategoryRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -127,6 +128,96 @@ public class JdbcProductRepository implements ProductRepository {
         String sql = "SELECT * FROM product WHERE color = ?";
         
         return jdbcTemplate.query(sql, new ProductRowMapper(productCategoryRepository), color);
+    }
+
+    @Override
+    public List<Product> getAllFilteredProducts(String size, String color, Integer minPrice, Integer maxPrice) {
+        String sql = "SELECT * FROM product WHERE 1=1 ";
+
+        List<Object> params = new ArrayList<>();
+
+        if (size != null && !size.isEmpty()) {
+            sql += "AND size = ? ";
+            params.add(size);
+        }
+
+        if (color != null && !color.isEmpty()) {
+            sql += "AND color LIKE ? ";
+            params.add("%" + color + "%");
+        }
+
+        if (minPrice != null) {
+            sql += "AND price >= ? ";
+            params.add(minPrice);
+        }
+
+        if (maxPrice != null) {
+            sql += "AND price <= ? ";
+            params.add(maxPrice);
+        }
+
+        return jdbcTemplate.query(sql, new ProductRowMapper(productCategoryRepository), params.toArray());
+    }
+
+    @Override
+    public List<Product> getAllFilteredProductsWithGender(String gender, String size, String color, Integer minPrice, Integer maxPrice) {
+        String sql = "SELECT * FROM product WHERE gender = ?";
+
+        List<Object> params = new ArrayList<>();
+        params.add(gender);
+
+        if (size != null && !size.isEmpty()) {
+            sql += " AND size = ? ";
+            params.add(size);
+        }
+
+        if (color != null && !color.isEmpty()) {
+            sql += " AND color LIKE ? ";
+            params.add("%" + color + "%");
+        }
+
+        if (minPrice != null) {
+            sql += " AND price >= ? ";
+            params.add(minPrice);
+        }
+
+        if (maxPrice != null) {
+            sql += " AND price <= ? ";
+            params.add(maxPrice);
+        }
+
+        return jdbcTemplate.query(sql, new ProductRowMapper(productCategoryRepository), params.toArray());
+    }
+
+    @Override
+    public List<Product> getAllFilteredProductsWithGenderAndCategory(String gender, String category, String size, String color, Integer minPrice, Integer maxPrice) {
+        String sql = "SELECT * FROM product WHERE gender = ? AND category_id = (SELECT category_id FROM product_category WHERE name = ?)";
+
+        List<Object> params = new ArrayList<>();
+        params.add(gender);
+        params.add(category);
+
+        if (size != null && !size.isEmpty()) {
+            sql += " AND size = ? ";
+            params.add(size);
+        }
+
+        if (color != null && !color.isEmpty()) {
+            sql += " AND color LIKE ? ";
+            params.add("%" + color + "%");
+        }
+
+        if (minPrice != null) {
+            sql += " AND price >= ? ";
+            params.add(minPrice);
+        }
+
+        if (maxPrice != null) {
+            sql += " AND price <= ? ";
+            params.add(maxPrice);
+        }
+
+        return jdbcTemplate.query(sql, new ProductRowMapper(productCategoryRepository), params.toArray());
     }
 
     @Override

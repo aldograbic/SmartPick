@@ -40,12 +40,16 @@ public class ProductsController {
     }
 
     @GetMapping
-    public String getAllProducts(@RequestParam(name = "size", required = false) String size, Model model) {
+    public String getAllProducts(@RequestParam(name = "size", required = false) String size,
+                                @RequestParam(name = "color", required = false) String color,
+                                @RequestParam(name = "minPrice", required = false) Integer minPrice,
+                                @RequestParam(name = "maxPrice", required = false) Integer maxPrice,
+                                Model model) {
 
         List<Product> products;
-        
-        if (size != null && !size.isEmpty()) {
-            products = productRepository.getAllProductsBySize(size);
+
+        if (size != null || color != null || minPrice != null || maxPrice != null) {
+            products = productRepository.getAllFilteredProducts(size, color, minPrice, maxPrice);
         } else {
             products = productRepository.getAllProducts();
         }
@@ -61,8 +65,21 @@ public class ProductsController {
     }
 
     @GetMapping("/{gender}")
-    public String getProductsByGender(@PathVariable String gender, Model model) {
-        List<Product> products = productRepository.findByGender(gender);
+    public String getProductsByGender(@PathVariable String gender,
+                                    @RequestParam(name = "size", required = false) String size,
+                                    @RequestParam(name = "color", required = false) String color,
+                                    @RequestParam(name = "minPrice", required = false) Integer minPrice,
+                                    @RequestParam(name = "maxPrice", required = false) Integer maxPrice,
+                                    Model model) {
+
+        List<Product> products;
+
+        if (size != null || color != null || minPrice != null || maxPrice != null) {
+            products = productRepository.getAllFilteredProductsWithGender(gender, size, color, minPrice, maxPrice);
+        } else {
+            products = productRepository.findByGender(gender);
+        }
+        
         Map<Integer, Boolean> savedStatusMap = getSavedStatusMap(products);
 
         model.addAttribute("products", products);
@@ -74,15 +91,20 @@ public class ProductsController {
     }
 
     @GetMapping("/{gender}/{category}")
-    public String getProductsByGenderAndCategory(
-            @PathVariable String gender,
-            @PathVariable String category,
-            Model model) {
+    public String getProductsByGenderAndCategory(@PathVariable String gender,
+                                                @PathVariable String category,
+                                                @RequestParam(name = "size", required = false) String size,
+                                                @RequestParam(name = "color", required = false) String color,
+                                                @RequestParam(name = "minPrice", required = false) Integer minPrice,
+                                                @RequestParam(name = "maxPrice", required = false) Integer maxPrice,
+                                                Model model) {
         
         List<Product> products;
 
         if ("all".equalsIgnoreCase(gender)) {
             products = productRepository.findByCategoryName(category);
+        } else if (size != null || color != null || minPrice != null || maxPrice != null) {
+            products = productRepository.getAllFilteredProductsWithGenderAndCategory(gender, category, size, color, minPrice, maxPrice);
         } else {
             products = productRepository.findByGenderAndCategoryName(gender, category);
         }

@@ -3,6 +3,7 @@
   <head>
     <th:block th:insert="~{fragments/head :: head}"></th:block>
     <title>Products | SmartPick</title>
+    <script th:src="@{/js/products.js}" defer="defer"></script>
   </head>
   <body>
     <th:block th:insert="~{fragments/header :: header}"></th:block>
@@ -154,47 +155,35 @@
               <div class="relative">
                 <a
                   href="#"
-                  onclick="filterBySize('XS')"
+                  onclick="filterByParams({ size: 'XS' })"
                   class="block px-4 py-2 text-base hover:bg-gray-100 rounded-lg"
                   >XS</a
                 >
                 <a
                   href="#"
-                  onclick="filterBySize('S')"
+                  onclick="filterByParams({ size: 'S' })"
                   class="block px-4 py-2 text-base hover:bg-gray-100 rounded-lg"
                   >S</a
                 >
                 <a
                   href="#"
-                  onclick="filterBySize('M')"
+                  onclick="filterByParams({ size: 'M' })"
                   class="block px-4 py-2 text-base hover:bg-gray-100 rounded-lg"
                   >M</a
                 >
                 <a
                   href="#"
-                  onclick="filterBySize('L')"
+                  onclick="filterByParams({ size: 'L' })"
                   class="block px-4 py-2 text-base hover:bg-gray-100 rounded-lg"
                   >L</a
                 >
                 <a
                   href="#"
-                  onclick="filterBySize('XL')"
+                  onclick="filterByParams({ size: 'XL' })"
                   class="block px-4 py-2 text-base hover:bg-gray-100 rounded-lg"
                   >XL</a
                 >
               </div>
-              <script>
-                function filterBySize(size) {
-                  const queryParams = new URLSearchParams(
-                    window.location.search
-                  );
-                  queryParams.set("size", size);
-
-                  const newUrl =
-                    window.location.pathname + "?" + queryParams.toString();
-                  window.location.href = newUrl;
-                }
-              </script>
             </div>
           </div>
           <div class="relative">
@@ -224,49 +213,56 @@
               x-cloak
             >
               <a
-                href=""
+                href="#"
+                onclick="filterByParams({ color: 'Black' })"
                 class="px-4 py-2 text-base hover:bg-gray-100 rounded-lg flex items-center gap-2"
               >
                 <div class="w-4 h-4 rounded-full bg-black"></div>
                 Black
               </a>
               <a
-                href=""
+                href="#"
+                onclick="filterByParams({ color: 'Blue' })"
                 class="px-4 py-2 text-base hover:bg-gray-100 rounded-lg flex items-center gap-2"
               >
                 <div class="w-4 h-4 rounded-full bg-blue-400"></div>
                 Blue
               </a>
               <a
-                href=""
+                href="#"
+                onclick="filterByParams({ color: 'Brown' })"
                 class="px-4 py-2 text-base hover:bg-gray-100 rounded-lg flex items-center gap-2"
               >
                 <div class="w-4 h-4 rounded-full bg-amber-700"></div>
                 Brown
               </a>
               <a
-                href=""
+                href="#"
+                onclick="filterByParams({ color: 'Gray' })"
                 class="px-4 py-2 text-base hover:bg-gray-100 rounded-lg flex items-center gap-2"
               >
                 <div class="w-4 h-4 rounded-full bg-gray-400"></div>
                 Gray
               </a>
               <a
-                href=""
+                href="#"
+                onclick="filterByParams({ color: 'Green' })"
                 class="px-4 py-2 text-base hover:bg-gray-100 rounded-lg flex items-center gap-2"
               >
                 <div class="w-4 h-4 rounded-full bg-green-400"></div>
                 Green
               </a>
               <a
-                href=""
+                href="#"
+                onclick="filterByParams({ color: 'Red' })"
                 class="px-4 py-2 text-base hover:bg-gray-100 rounded-lg flex items-center gap-2"
               >
                 <div class="w-4 h-4 rounded-full bg-red-500"></div>
                 Red
               </a>
               <a
-                href=""
+                href="#"
+                onclick="filterByParams({ color: 'White' })"
                 class="px-4 py-2 text-base hover:bg-gray-100 rounded-lg flex items-center gap-2"
               >
                 <div class="w-4 h-4 rounded-full bg-white border"></div>
@@ -301,24 +297,28 @@
               x-cloak
             >
               <a
-                href=""
+                onclick="filterByParams({minPrice: null, maxPrice: 10 })"
+                href="#"
                 class="block px-4 py-2 text-base hover:bg-gray-100 rounded-lg"
               >
                 &lsaquo; 10 EUR
               </a>
               <a
-                href=""
+                href="#"
+                onclick="filterByParams({ minPrice: 10, maxPrice: 30 })"
                 class="block px-4 py-2 text-base hover:bg-gray-100 rounded-lg"
                 >10 - 30 EUR
               </a>
               <a
-                href=""
+                href="#"
+                onclick="filterByParams({ minPrice: 30, maxPrice: 100 })"
                 class="block px-4 py-2 text-base hover:bg-gray-100 rounded-lg"
               >
                 30 - 100 EUR
               </a>
               <a
-                href=""
+                href="#"
+                onclick="filterByParams({ minPrice: 100, maxPrice: null})"
                 class="block px-4 py-2 text-base hover:bg-gray-100 rounded-lg"
               >
                 100 EUR &rsaquo;
