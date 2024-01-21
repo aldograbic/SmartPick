@@ -29,11 +29,7 @@
               th:text="${product.category.categoryName}"
             ></a>
           </nav>
-          <img
-            th:src="@{/img/shirt-placeholder.webp}"
-            alt=""
-            class="rounded-xl md:w-1/4"
-          />
+          <img th:src="${product.image}" alt="" class="rounded-xl md:w-1/4" />
           <div class="flex flex-col gap-8 text-lg md:w-3/4 mt-4 md:mt-0">
             <nav class="text-gray-600 text-base hidden md:block">
               <a href="/">Home</a>
@@ -51,10 +47,16 @@
               ></a>
             </nav>
             <p th:text="${product.name}" class="text-4xl font-semibold"></p>
-            <p
-              th:text="${product.price + ' EUR'}"
-              class="text-2xl font-semibold"
-            ></p>
+            <div class="flex gap-2">
+              <p
+                th:text="${product.price + ' EUR'}"
+                class="text-[#d11a2a] text-2xl"
+              ></p>
+              <p
+                th:text="${product.price * 1.5 + ' EUR'}"
+                class="self-end line-through text-base"
+              ></p>
+            </div>
             <p th:text="${'Color: ' + product.color}"></p>
             <p th:text="${'Size: ' + product.size}"></p>
             <p th:text="${'Description: ' + product.description}"></p>

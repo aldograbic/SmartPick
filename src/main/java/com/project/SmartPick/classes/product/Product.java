@@ -13,6 +13,7 @@ public class Product {
     private String color;
     private String gender;
     private BigDecimal price;
+    private String image;
     private Timestamp createdAt;
     private int categoryId;
 
@@ -83,6 +84,14 @@ public class Product {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public Timestamp getCreatedAt() {

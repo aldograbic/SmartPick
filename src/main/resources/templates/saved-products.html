@@ -45,7 +45,7 @@
               <div class="relative">
                 <div class="p-2">
                   <img
-                    th:src="@{/img/shirt-placeholder.webp}"
+                    th:src="${product.image}"
                     th:alt="${product.name}"
                     class="rounded-lg"
                   />
@@ -81,7 +81,16 @@
                   class="text-xl font-semibold pb-2"
                   th:text="${product.name}"
                 ></p>
-                <p th:text="${product.price + ' EUR'}"></p>
+                <div class="flex gap-2">
+                  <p
+                    th:text="${product.price + ' EUR'}"
+                    class="text-[#d11a2a] text-lg"
+                  ></p>
+                  <p
+                    th:text="${product.price * 1.5 + ' EUR'}"
+                    class="self-end line-through text-sm"
+                  ></p>
+                </div>
               </div>
             </a>
           </div>

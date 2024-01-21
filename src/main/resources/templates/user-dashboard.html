@@ -52,7 +52,7 @@
                   <a
                     th:href="'/products/' + ${orderItem.product.gender.toLowerCase()} + '/' + ${orderItem.product.category.categoryName.toLowerCase()} + '/' + ${orderItem.product.productId}"
                   >
-                    <img src="img/shirt-placeholder.webp" alt="" />
+                    <img th:src="${orderItem.product.image}" alt="" />
                   </a>
                 </div>
               </div>

@@ -49,7 +49,7 @@
                     th:href="'/products/' + ${product.gender.toLowerCase()} + '/' + ${product.category.categoryName.toLowerCase()} + '/' + ${product.productId}"
                   >
                     <img
-                      src="img/shirt-placeholder.webp"
+                      th:src="${product.image}"
                       alt=""
                       class="rounded-t-lg w-36 h-48"
                     />

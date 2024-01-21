@@ -1356,6 +1356,10 @@ input[type="checkbox"]:focus {
   margin-bottom: calc(2rem * var(--tw-space-y-reverse));
 }
 
+.self-end {
+  align-self: flex-end;
+}
+
 .overflow-hidden {
   overflow: hidden;
 }
@@ -1618,6 +1622,11 @@ input[type="checkbox"]:focus {
   line-height: 2;
 }
 
+.text-\[\#d11a2a\] {
+  --tw-text-opacity: 1;
+  color: rgb(209 26 42 / var(--tw-text-opacity));
+}
+
 .text-black {
   --tw-text-opacity: 1;
   color: rgb(0 0 0 / var(--tw-text-opacity));
@@ -1666,6 +1675,10 @@ input[type="checkbox"]:focus {
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.line-through {
+  text-decoration-line: line-through;
 }
 
 .opacity-0 {

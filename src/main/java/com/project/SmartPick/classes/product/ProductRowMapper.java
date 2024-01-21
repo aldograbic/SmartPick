@@ -26,6 +26,7 @@ public class ProductRowMapper implements RowMapper<Product> {
         product.setColor(rs.getString("color"));
         product.setGender(rs.getString("gender"));
         product.setPrice(rs.getBigDecimal("price"));
+        product.setImage(rs.getString("image"));
         product.setCreatedAt(rs.getTimestamp("created_at"));
         product.setCategoryId(rs.getInt("category_id"));
         

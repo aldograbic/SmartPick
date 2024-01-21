@@ -37,3 +37,23 @@ INSERT INTO product (name, description, size, color, gender, price, category_id)
   ('Classic Watch', 'Timeless wristwatch for a polished appearance', '', 'Silver', 'Children', 79.99, 6),
   ('Statement Necklace', 'Bold statement necklace for a fashionable look', '', 'Gold', 'Women', 29.99, 6),
   ('Leather Belt', 'Stylish leather belt to complete your outfit', '36', 'Brown', 'Men', 19.99, 6);
+
+
+update product set image = "https://i.ibb.co/QP29Svp/1.webp" WHERE product_id = 1;
+update product set image = "https://i.ibb.co/k3K2ZSh/2.webp" WHERE product_id = 2;
+update product set image = "https://i.ibb.co/q0qXhTY/3.webp" WHERE product_id = 3;
+update product set image = "https://i.ibb.co/t4Mp81g/4.webp" WHERE product_id = 4;
+update product set image = "https://i.ibb.co/hyVj4WJ/5.webp" WHERE product_id = 5;
+update product set image = "https://i.ibb.co/RgDWmp5/6.webp" WHERE product_id = 6;
+update product set image = "https://i.ibb.co/BsL5sFB/7.webp" WHERE product_id = 7;
+update product set image = "https://i.ibb.co/Br74zfP/8.webp" WHERE product_id = 8;
+update product set image = "https://i.ibb.co/y4jpXXD/9.webp" WHERE product_id = 9;
+update product set image = "https://i.ibb.co/fGSnDkc/10.webp" WHERE product_id = 10;
+update product set image = "https://i.ibb.co/BgV2sHh/11.webp" WHERE product_id = 11;
+update product set image = "https://i.ibb.co/Z8cTH9K/12.webp" WHERE product_id = 12;
+update product set image = "https://i.ibb.co/C19NWcq/13.webp" WHERE product_id = 13;
+update product set image = "https://i.ibb.co/Hxqs0tV/14.webp" WHERE product_id = 14;
+update product set image = "https://i.ibb.co/1LZtNVj/15.webp" WHERE product_id = 15;
+update product set image = "https://i.ibb.co/Vm9zwg8/16.webp" WHERE product_id = 16;
+update product set image = "https://i.ibb.co/bPw8GPb/17.webp" WHERE product_id = 17;
+update product set image = "https://i.ibb.co/Nt53mk5/18.webp" WHERE product_id = 18;

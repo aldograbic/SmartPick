@@ -117,20 +117,6 @@ public class JdbcProductRepository implements ProductRepository {
     }
 
     @Override
-    public List<Product> getAllProductsBySize(String size) {
-        String sql = "SELECT * FROM product WHERE size = ?";
-        
-        return jdbcTemplate.query(sql, new ProductRowMapper(productCategoryRepository), size);
-    }
-
-    @Override
-    public List<Product> getAllProductsByColor(String color) {
-        String sql = "SELECT * FROM product WHERE color = ?";
-        
-        return jdbcTemplate.query(sql, new ProductRowMapper(productCategoryRepository), color);
-    }
-
-    @Override
     public List<Product> getAllFilteredProducts(String size, String color, Integer minPrice, Integer maxPrice) {
         String sql = "SELECT * FROM product WHERE 1=1 ";
 
@@ -165,6 +151,36 @@ public class JdbcProductRepository implements ProductRepository {
 
         List<Object> params = new ArrayList<>();
         params.add(gender);
+
+        if (size != null && !size.isEmpty()) {
+            sql += " AND size = ? ";
+            params.add(size);
+        }
+
+        if (color != null && !color.isEmpty()) {
+            sql += " AND color LIKE ? ";
+            params.add("%" + color + "%");
+        }
+
+        if (minPrice != null) {
+            sql += " AND price >= ? ";
+            params.add(minPrice);
+        }
+
+        if (maxPrice != null) {
+            sql += " AND price <= ? ";
+            params.add(maxPrice);
+        }
+
+        return jdbcTemplate.query(sql, new ProductRowMapper(productCategoryRepository), params.toArray());
+    }
+
+    @Override
+    public List<Product> getAllFilteredProductsWithCategory(String category, String size, String color, Integer minPrice, Integer maxPrice) {
+        String sql = "SELECT * FROM product WHERE category_id = (SELECT category_id FROM product_category WHERE name = ?)";
+
+        List<Object> params = new ArrayList<>();
+        params.add(category);
 
         if (size != null && !size.isEmpty()) {
             sql += " AND size = ? ";

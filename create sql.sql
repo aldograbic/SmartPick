@@ -50,12 +50,14 @@ CREATE TABLE `product` (
   `color` varchar(255) NOT NULL,
   `gender` varchar(10) NOT NULL,
   `price` decimal(10,2) NOT NULL,
+  `image` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `category_id` int NOT NULL,
   PRIMARY KEY (`product_id`),
   KEY `category_id` (`category_id`),
   CONSTRAINT `product_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `product_category` (`category_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
 
 -- Order table to store user orders
 CREATE TABLE `order` (
