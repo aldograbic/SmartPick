@@ -402,7 +402,7 @@
                     class="text-[#d11a2a] text-lg"
                   ></p>
                   <p
-                    th:text="${product.price * 1.5 + ' EUR'}"
+                    th:text="${#numbers.formatDecimal(product.price * 1.5, 1, 2) + ' EUR'}"
                     class="self-end line-through text-sm"
                   ></p>
                 </div>

@@ -75,7 +75,7 @@
           <div class="grid md:grid-cols-2 gap-8">
             <div
               th:each="orderItem : ${orderItems}"
-              class="md:flex border relative shadow-lg rounded-lg h-full p-4 gap-8"
+              class="flex border relative shadow-lg rounded-lg h-full p-4 gap-8"
             >
               <div>
                 <a
@@ -88,22 +88,26 @@
                   />
                 </a>
               </div>
-              <div class="relative w-48">
-                <p th:text="${orderItem.product.name}" class="text-lg"></p>
-                <div class="text-gray-600">
-                  <p th:text="${'Color: ' + orderItem.product.color}"></p>
-                  <p th:text="${'Size: ' + orderItem.product.size}"></p>
-                  <p>In Stock</p>
+              <div class="md:flex">
+                <div class="md:relative w-48">
+                  <p th:text="${orderItem.product.name}" class="text-lg"></p>
+                  <div class="text-gray-600">
+                    <p th:text="${'Color: ' + orderItem.product.color}"></p>
+                    <p th:text="${'Size: ' + orderItem.product.size}"></p>
+                    <p>In Stock</p>
+                  </div>
                 </div>
-              </div>
 
-              <div class="flex flex-col">
-                <p class="mb-1.5">Quantity</p>
-                <p th:text="${orderItem.quantity}"></p>
-              </div>
-              <div class="flex flex-col absolute right-4">
-                <p class="mb-1.5">Total</p>
-                <p th:text="${orderItem.totalPrice + ' EUR'}"></p>
+                <div class="flex gap-8 mt-8 md:mt-0">
+                  <div class="flex flex-col">
+                    <p class="mb-1.5">Quantity</p>
+                    <p th:text="${orderItem.quantity}"></p>
+                  </div>
+                  <div class="flex flex-col md:absolute right-4">
+                    <p class="mb-1.5">Total</p>
+                    <p th:text="${orderItem.totalPrice + ' EUR'}"></p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
