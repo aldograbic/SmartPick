@@ -42,7 +42,7 @@
 
               <div
                 th:each="product : ${productsInShoppingCart}"
-                class="flex border shadow-lg rounded-lg h-64 p-4 gap-8"
+                class="flex border relative shadow-lg rounded-lg h-64 p-4 gap-8"
               >
                 <div>
                   <a
@@ -51,67 +51,74 @@
                     <img
                       th:src="${product.image}"
                       alt=""
-                      class="rounded-t-lg w-36 h-48"
+                      class="rounded-t-lg md:w-36 md:h-48"
                     />
                   </a>
                 </div>
-                <div class="relative w-48">
-                  <p th:text="${product.name}" class="text-lg"></p>
-                  <div class="text-gray-600">
-                    <p th:text="${'Color: ' + product.color}"></p>
-                    <p th:text="${'Size: ' + product.size}"></p>
-                    <p>In Stock</p>
-                  </div>
-                  <div class="flex gap-4 absolute -bottom-1 text-gray-600">
-                    <form action="/toggleSaveProductForUser" method="post">
-                      <input
-                        type="hidden"
-                        name="productId"
-                        th:value="${product.productId}"
-                      />
-                      <button
-                        type="submit"
-                        th:text="${savedStatusMap[product.productId] ? 'Unsave' : 'Save'}"
-                      ></button>
-                    </form>
-                    <form
-                      action="/removeProductFromShoppingCartForUser"
-                      method="post"
+                <div class="md:flex">
+                  <div class="md:relative w-48">
+                    <p th:text="${product.name}" class="text-lg"></p>
+                    <div class="text-gray-600">
+                      <p th:text="${'Color: ' + product.color}"></p>
+                      <p th:text="${'Size: ' + product.size}"></p>
+                      <p>In Stock</p>
+                    </div>
+                    <div
+                      class="flex gap-4 absolute bottom-2 md:-bottom-1 left-4 md:left-0 text-gray-600"
                     >
-                      <input
-                        type="hidden"
-                        name="productId"
-                        th:value="${product.productId}"
-                      />
-                      <button type="submit">Remove</button>
-                    </form>
+                      <form action="/toggleSaveProductForUser" method="post">
+                        <input
+                          type="hidden"
+                          name="productId"
+                          th:value="${product.productId}"
+                        />
+                        <button
+                          type="submit"
+                          th:text="${savedStatusMap[product.productId] ? 'Unsave' : 'Save'}"
+                        ></button>
+                      </form>
+                      <form
+                        action="/removeProductFromShoppingCartForUser"
+                        method="post"
+                      >
+                        <input
+                          type="hidden"
+                          name="productId"
+                          th:value="${product.productId}"
+                        />
+                        <button type="submit">Remove</button>
+                      </form>
+                    </div>
                   </div>
-                </div>
-                <div class="flex flex-col mr-24">
-                  <p class="mb-1.5">Price</p>
-                  <p
-                    class="productPrice"
-                    th:data-price="${product.price}"
-                    th:text="${product.price + ' EUR'}"
-                  ></p>
-                </div>
-                <div class="flex flex-col">
-                  <p class="mb-1.5">Quantity</p>
-                  <select
-                    th:name="'quantity_' + ${product.productId}"
-                    class="w-24 quantity"
-                    onchange="calculateTotal(this)"
-                  >
-                    <option
-                      th:each="number : ${#numbers.sequence(1, 10)}"
-                      th:text="${number}"
-                      th:value="${number}"
-                    ></option>
-                  </select>
-                </div>
-                <div class="flex flex-col absolute right-4">
-                  <p class="mb-1.5">Total</p>
-                  <p class="totalPrice" th:text="${product.price + ' EUR'}"></p>
+                  <div class="hidden md:flex flex-col mr-24">
+                    <p class="mb-1.5">Price</p>
+                    <p
+                      class="productPrice"
+                      th:data-price="${product.price}"
+                      th:text="${product.price + ' EUR'}"
+                    ></p>
+                  </div>
+                  <div class="flex flex-col mt-2 md:mt-0">
+                    <p class="mb-1.5">Quantity</p>
+                    <select
+                      th:name="'quantity_' + ${product.productId}"
+                      class="w-24 quantity"
+                      onchange="calculateTotal(this)"
+                    >
+                      <option
+                        th:each="number : ${#numbers.sequence(1, 10)}"
+                        th:text="${number}"
+                        th:value="${number}"
+                      ></option>
+                    </select>
+                  </div>
+                  <div class="flex flex-col absolute right-4">
+                    <p class="mb-1.5">Total</p>
+                    <p
+                      class="totalPrice"
+                      th:text="${product.price + ' EUR'}"
+                    ></p>
+                  </div>
                 </div>
               </div>
             </div>

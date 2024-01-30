@@ -57,3 +57,42 @@ update product set image = "https://i.ibb.co/1LZtNVj/15.webp" WHERE product_id =
 update product set image = "https://i.ibb.co/Vm9zwg8/16.webp" WHERE product_id = 16;
 update product set image = "https://i.ibb.co/bPw8GPb/17.webp" WHERE product_id = 17;
 update product set image = "https://i.ibb.co/Nt53mk5/18.webp" WHERE product_id = 18;
+
+
+-- UBACITI NOVE PROIZVODE
+
+-- Shirts
+INSERT INTO product (name, description, size, color, gender, price, category_id) VALUES
+('Floral Print Shirt', 'Vibrant floral print shirt for a trendy style', 'L', 'Multicolor', 'Women', 34.99, 1),
+('Checked Button-down', 'Casual checked button-down shirt for a versatile look', 'XL', 'Green/Blue', 'Men', 27.99, 1),
+('Kids Graphic Tee', 'Fun graphic tee for kids with playful design', 'S', 'Yellow', 'Children', 19.99, 1);
+
+-- Jackets
+INSERT INTO product (name, description, size, color, gender, price, category_id) VALUES
+('Quilted Bomber Jacket', 'Quilted bomber jacket for a sporty yet stylish appearance', 'M', 'Navy', 'Men', 89.99, 2),
+('Faux Fur Coat', 'Chic faux fur coat to stay warm in winter', 'S', 'Pink', 'Women', 129.99, 2),
+('Kids Hooded Jacket', 'Hooded jacket for kids to stay cozy in colder weather', 'L', 'Purple', 'Children', 44.99, 2);
+
+-- Pants
+INSERT INTO product (name, description, size, color, gender, price, category_id) VALUES
+('Chino Trousers', 'Classic chino trousers for a polished look', '34x32', 'Beige', 'Men', 54.99, 3),
+('Wide-Leg Palazzo Pants', 'Elegant wide-leg palazzo pants for women', '30x34', 'Black', 'Women', 49.99, 3),
+('Kids Sweatpants', 'Cozy sweatpants for active kids', 'M', 'Blue', 'Children', 24.99, 3);
+
+-- Shoes
+INSERT INTO product (name, description, size, color, gender, price, category_id) VALUES
+('Hiking Boots', 'Sturdy hiking boots for outdoor adventures', '8', 'Brown', 'Men', 79.99, 4),
+('Ankle Strap Sandals', 'Trendy ankle strap sandals for warm days', '6', 'Tan', 'Women', 39.99, 4),
+('Kids Velcro Sneakers', 'Easy-to-wear velcro sneakers for kids', '11', 'Pink/Blue', 'Children', 29.99, 4);
+
+-- Handbags
+INSERT INTO product (name, description, size, color, gender, price, category_id) VALUES
+('Satchel Bag', 'Chic satchel bag for a sophisticated look', '', 'Burgundy', 'Women', 89.99, 5),
+('Messenger Bag', 'Stylish messenger bag for a modern and casual vibe', '', 'Olive Green', 'Men', 59.99, 5),
+('Kids Mini Backpack', 'Adorable mini backpack for little ones', '', 'Purple/Pink', 'Children', 29.99, 5);
+
+-- Accessories
+INSERT INTO product (name, description, size, color, gender, price, category_id) VALUES
+('Smartwatch', 'Modern smartwatch with advanced features', '', 'Black', 'Men', 129.99, 6),
+('Boho Earrings', 'Bohemian-inspired earrings for a free-spirited style', '', 'Turquoise', 'Women', 24.99, 6),
+('Kids Sunglasses', 'Cute sunglasses for kids with UV protection', '', 'Blue/Yellow', 'Children', 14.99, 6);
