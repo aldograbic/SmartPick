@@ -47,7 +47,7 @@
   }
 
   .secondaryButton {
-    @apply rounded-full font-semibold px-12 py-4 bg-white border-2 border-black cursor-pointer transition-colors hover:bg-cyan-900;
+    @apply rounded-full font-semibold px-12 py-4 bg-white border-2 border-black cursor-pointer transition-colors hover:bg-gray-100;
   }
 
   [x-cloak] {
