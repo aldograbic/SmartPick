@@ -29,7 +29,21 @@
               th:text="${product.category.categoryName}"
             ></a>
           </nav>
-          <img th:src="${product.image}" alt="" class="rounded-xl md:w-1/4" />
+          <div
+            x-data="zoomFeature()"
+            class="relative overflow-hidden rounded-xl md:w-1/4"
+          >
+            <img
+              th:src="${product.image}"
+              alt=""
+              class="rounded-xl w-full transition-transform duration-300 ease-linear"
+              :class="{'cursor-zoom-in': !zoomed, 'cursor-zoom-out': zoomed}"
+              @mousemove="zoomIn($event)"
+              @mouseleave="zoomOut()"
+              x-ref="zoomableImage"
+            />
+          </div>
+
           <div class="flex flex-col gap-8 text-lg md:w-3/4 mt-4 md:mt-0">
             <nav class="text-gray-600 text-base hidden md:block">
               <a href="/">Home</a>
@@ -187,5 +201,26 @@
       </div>
     </main>
     <th:block th:insert="~{fragments/footer :: footer}"></th:block>
+    <script>
+      function zoomFeature() {
+        return {
+          zoomed: false,
+          zoomIn(event) {
+            this.zoomed = true;
+            const imgElement = this.$refs.zoomableImage;
+            imgElement.style.transform = "scale(1.5)";
+            imgElement.style.transition = "transform 0.3s ease-out";
+            imgElement.style.objectFit = "cover";
+          },
+          zoomOut() {
+            this.zoomed = false;
+            const imgElement = this.$refs.zoomableImage;
+            imgElement.style.transform = "scale(1)";
+            imgElement.style.transition = "transform 0.3s ease-out";
+            imgElement.style.objectFit = "cover";
+          },
+        };
+      }
+    </script>
   </body>
 </html>
