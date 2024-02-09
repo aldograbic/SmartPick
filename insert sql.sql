@@ -58,41 +58,45 @@ update product set image = "https://i.ibb.co/Vm9zwg8/16.webp" WHERE product_id =
 update product set image = "https://i.ibb.co/bPw8GPb/17.webp" WHERE product_id = 17;
 update product set image = "https://i.ibb.co/Nt53mk5/18.webp" WHERE product_id = 18;
 
-
--- UBACITI NOVE PROIZVODE
-
 -- Shirts
-INSERT INTO product (name, description, size, color, gender, price, category_id) VALUES
-('Floral Print Shirt', 'Vibrant floral print shirt for a trendy style', 'L', 'Multicolor', 'Women', 34.99, 1),
-('Checked Button-down', 'Casual checked button-down shirt for a versatile look', 'XL', 'Green/Blue', 'Men', 27.99, 1),
-('Kids Graphic Tee', 'Fun graphic tee for kids with playful design', 'S', 'Yellow', 'Children', 19.99, 1);
+INSERT INTO product (name, description, size, color, gender, price, category_id, image) VALUES
+('Checked Button-down', 'Casual checked button-down shirt for a versatile look', 'XL', 'Green/Blue', 'Men', 27.99, 1, "https://i.ibb.co/SPvCYSb/19.webp"),
+('Kids Graphic Tee', 'Fun graphic tee for kids with playful design', 'S', 'Green', 'Children', 19.99, 1, "https://i.ibb.co/GCQwtWc/20.webp"),
+('Graphic Tee', 'Stylish graphic t-shirt for casual wear', 'L', 'Black', 'Men', 19.99, 1, "https://i.ibb.co/SVdsWZC/21.webp"),
+('Silk Top', 'Chic silk top for an elegant look', 'M', 'Beige', 'Women', 49.99, 1, "https://i.ibb.co/5smg48K/22.webp");
 
 -- Jackets
-INSERT INTO product (name, description, size, color, gender, price, category_id) VALUES
-('Quilted Bomber Jacket', 'Quilted bomber jacket for a sporty yet stylish appearance', 'M', 'Navy', 'Men', 89.99, 2),
-('Faux Fur Coat', 'Chic faux fur coat to stay warm in winter', 'S', 'Pink', 'Women', 129.99, 2),
-('Kids Hooded Jacket', 'Hooded jacket for kids to stay cozy in colder weather', 'L', 'Purple', 'Children', 44.99, 2);
+INSERT INTO product (name, description, size, color, gender, price, category_id, image) VALUES
+('Quilted Bomber Jacket', 'Quilted bomber jacket for a sporty yet stylish appearance', 'M', 'Blue', 'Men', 89.99, 2, "https://i.ibb.co/p2g6cxW/23.webp"),
+('Faux Fur Coat', 'Chic faux fur coat to stay warm in winter', 'S', 'Pink', 'Women', 129.99, 2, "https://i.ibb.co/CBV6xkZ/24.webp"),
+('Kids Hooded Jacket', 'Hooded jacket for kids to stay cozy in colder weather', 'L', 'Purple', 'Children', 44.99, 2, "https://i.ibb.co/cYm5GZV/25.webp");
 
 -- Pants
-INSERT INTO product (name, description, size, color, gender, price, category_id) VALUES
-('Chino Trousers', 'Classic chino trousers for a polished look', '34x32', 'Beige', 'Men', 54.99, 3),
-('Wide-Leg Palazzo Pants', 'Elegant wide-leg palazzo pants for women', '30x34', 'Black', 'Women', 49.99, 3),
-('Kids Sweatpants', 'Cozy sweatpants for active kids', 'M', 'Blue', 'Children', 24.99, 3);
+INSERT INTO product (name, description, size, color, gender, price, category_id, image) VALUES
+('Chino Trousers', 'Classic chino trousers for a polished look', '34x32', 'Beige', 'Men', 54.99, 3, "https://i.ibb.co/89hrvq8/26.webp"),
+('Kids Sweatpants', 'Cozy sweatpants for active kids', 'M', 'Blue', 'Children', 24.99, 3, "https://i.ibb.co/yQGBptd/27.webp"),
+('Wide Leg Pants', 'Fashionable wide leg pants for comfort and style', 'M', 'Black', 'Women', 59.99, 3, "https://i.ibb.co/0CtRHBz/28.webp");
 
 -- Shoes
-INSERT INTO product (name, description, size, color, gender, price, category_id) VALUES
-('Hiking Boots', 'Sturdy hiking boots for outdoor adventures', '8', 'Brown', 'Men', 79.99, 4),
-('Ankle Strap Sandals', 'Trendy ankle strap sandals for warm days', '6', 'Tan', 'Women', 39.99, 4),
-('Kids Velcro Sneakers', 'Easy-to-wear velcro sneakers for kids', '11', 'Pink/Blue', 'Children', 29.99, 4);
+INSERT INTO product (name, description, size, color, gender, price, category_id, image) VALUES
+('Hiking Boots', 'Sturdy hiking boots for outdoor adventures', '8', 'Brown', 'Men', 79.99, 4, "https://i.ibb.co/ZVzLTNZ/29.webp"),
+('Ankle Strap Sandals', 'Trendy ankle strap sandals for warm days', '6', 'Brown', 'Women', 39.99, 4, "https://i.ibb.co/jyHcwZF/30.webp"),
+('Kids Velcro Sneakers', 'Easy-to-wear velcro sneakers for kids', '11', 'Pink/Blue', 'Children', 29.99, 4, "https://i.ibb.co/KLW7Yxm/31.webp"),
+('Leather Boots', 'Durable leather boots for rugged style', '11', 'Black', 'Men', 119.99, 4, "https://i.ibb.co/YWFNS7Y/32.webp"),
+('Ballet Flats', 'Comfortable and stylish ballet flats', '8', 'Pink', 'Women', 49.99, 4, "https://i.ibb.co/gmFLRrR/33.webp");
 
 -- Handbags
-INSERT INTO product (name, description, size, color, gender, price, category_id) VALUES
-('Satchel Bag', 'Chic satchel bag for a sophisticated look', '', 'Burgundy', 'Women', 89.99, 5),
-('Messenger Bag', 'Stylish messenger bag for a modern and casual vibe', '', 'Olive Green', 'Men', 59.99, 5),
-('Kids Mini Backpack', 'Adorable mini backpack for little ones', '', 'Purple/Pink', 'Children', 29.99, 5);
+INSERT INTO product (name, description, size, color, gender, price, category_id, image) VALUES
+('Satchel Bag', 'Chic satchel bag for a sophisticated look', '', 'Brown', 'Women', 89.99, 5, "https://i.ibb.co/LYPGQDs/34.webp"),
+('Messenger Bag', 'Stylish messenger bag for a modern and casual vibe', '', 'Olive Green', 'Men', 59.99, 5, "https://i.ibb.co/F4GKxr2/35.webp"),
+('Kids Mini Backpack', 'Adorable mini backpack for little ones', '', 'Purple/Pink', 'Children', 29.99, 5, "https://i.ibb.co/cXLKqLQ/36.webp"),
+('Weekender Bag', 'Large weekender bag for short trips', '', 'Navy Blue', 'Women', 89.99, 5, "https://i.ibb.co/WcpbH0B/37.webp"),
+('Sports Backpack', 'Durable backpack for sports or school', '', 'Blue', 'Children', 49.99, 5, "https://i.ibb.co/VH9MCk3/38.webp");
 
 -- Accessories
-INSERT INTO product (name, description, size, color, gender, price, category_id) VALUES
-('Smartwatch', 'Modern smartwatch with advanced features', '', 'Black', 'Men', 129.99, 6),
-('Boho Earrings', 'Bohemian-inspired earrings for a free-spirited style', '', 'Turquoise', 'Women', 24.99, 6),
-('Kids Sunglasses', 'Cute sunglasses for kids with UV protection', '', 'Blue/Yellow', 'Children', 14.99, 6);
+INSERT INTO product (name, description, size, color, gender, price, category_id, image) VALUES
+('Smartwatch', 'Modern smartwatch with advanced features', '', 'Black', 'Men', 129.99, 6, "https://i.ibb.co/RTG4CkJ/39.webp"),
+('Boho Earrings', 'Bohemian-inspired earrings for a free-spirited style', '', 'Turquoise', 'Women', 24.99, 6, "https://i.ibb.co/dGhtzRF/40.webp"),
+('Kids Sunglasses', 'Cute sunglasses for kids with UV protection', '', 'Blue/Yellow', 'Children', 14.99, 6, "https://i.ibb.co/nR4V3qZ/41.webp"),
+('Sunglasses', 'Modern sunglasses for stylish sun protection', '', 'Black', 'Men', 49.99, 6, "https://i.ibb.co/fpX2n1r/42.webp"),
+('Silk Scarf', 'Elegant silk scarf for a touch of luxury', '', 'White/Blue', 'Women', 39.99, 6, "https://i.ibb.co/QYWTrkf/43.webp");

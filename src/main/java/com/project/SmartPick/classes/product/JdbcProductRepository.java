@@ -21,13 +21,13 @@ public class JdbcProductRepository implements ProductRepository {
 
     @Override
     public List<Product> getAllProducts() {
-        String sql = "SELECT * FROM product";
+        String sql = "SELECT * FROM product ORDER BY created_at DESC";
         return jdbcTemplate.query(sql, new ProductRowMapper(productCategoryRepository));
     }
 
     @Override
     public List<Product> findByGender(String gender) {
-        String sql = "SELECT * FROM product WHERE gender = ?";
+        String sql = "SELECT * FROM product WHERE gender = ? ORDER BY created_at DESC";
         return jdbcTemplate.query(sql, new ProductRowMapper(productCategoryRepository), gender);
     }
 
@@ -35,7 +35,7 @@ public class JdbcProductRepository implements ProductRepository {
     public List<Product> findByGenderAndCategoryName(String gender, String categoryName) {
         String sql = "SELECT p.*, c.name AS category_name FROM product p " +
                      "JOIN product_category c ON p.category_id = c.category_id " +
-                     "WHERE p.gender = ? AND c.name = ?";
+                     "WHERE p.gender = ? AND c.name = ? ORDER BY created_at DESC";
         return jdbcTemplate.query(sql, new ProductRowMapper(productCategoryRepository), gender, categoryName);
     }
 
@@ -43,7 +43,7 @@ public class JdbcProductRepository implements ProductRepository {
     public List<Product> findByCategoryName(String categoryName) {
         String sql = "SELECT p.*, c.name AS category_name FROM product p " +
                      "JOIN product_category c ON p.category_id = c.category_id " +
-                     "WHERE c.name = ?";
+                     "WHERE c.name = ? ORDER BY created_at DESC";
         return jdbcTemplate.query(sql, new ProductRowMapper(productCategoryRepository), categoryName);
     }
 
