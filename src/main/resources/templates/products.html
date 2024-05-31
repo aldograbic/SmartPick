@@ -40,6 +40,7 @@
               <a
                 th:href="@{'/products/' + (${gender} ?: 'all') + '/' + ${category.categoryName.toLowerCase()}}"
                 th:text="${category.categoryName}"
+                class="hover:text-cyan-800"
               ></a>
             </th:block>
           </div>

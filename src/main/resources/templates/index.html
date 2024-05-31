@@ -135,28 +135,6 @@
     <th:block th:insert="~{fragments/errorMessage :: errorMessage}"></th:block>
     <th:block th:insert="~{fragments/infoMessage :: infoMessage}"></th:block>
     <main>
-      <!-- <div class="embla">
-        <div class="embla__container">
-          <div class="embla__slide relative">
-            <img src="img/banner-1.webp" class="hidden md:block" />
-            <img src="img/banner-1-mobile.png" class="md:hidden" />
-            <a
-              href="/products"
-              class="button absolute bottom-64 md:bottom-32 left-28 md:left-[13.3rem]"
-              >Explore Now</a
-            >
-          </div>
-          <div class="embla__slide relative">
-            <img src="img/banner-2.webp" class="hidden md:block" />
-            <img src="img/banner-2-mobile.png" class="md:hidden" />
-            <a
-              href="/products"
-              class="button absolute bottom-60 md:bottom-40 left-4 md:left-[13.3rem]"
-              >Show Now</a
-            >
-          </div>
-        </div>
-      </div> -->
       <div class="relative w-full h-[70dvh] overflow-hidden hero-video">
         <video
           class="absolute top-0 left-0 w-full h-full object-cover"
@@ -182,49 +160,342 @@
       </div>
 
       <div class="container flex flex-col md:gap-12 mx-auto p-6">
-        <h1 class="text-center pt-12">Discover more for</h1>
-        <div class="flex flex-wrap justify-center gap-8 my-12">
-          <a
-            href="/products/men"
-            class="flex flex-col items-center border rounded-lg shadow-lg bg-gradient-to-r from-blue-50 to-blue-100 hover:bg-blue-100 transition duration-300 transform hover:scale-105 p-6"
-          >
-            <img
-              src="img/man.png"
-              alt="Men's Products"
-              class="h-48 w-48 object-cover mb-4"
-            />
-            <p class="text-center text-3xl font-semibold text-gray-800">MEN</p>
-          </a>
-          <a
-            href="/products/women"
-            class="flex flex-col items-center border rounded-lg shadow-lg bg-gradient-to-r from-pink-50 to-pink-100 hover:bg-pink-100 transition duration-300 transform hover:scale-105 p-6"
-          >
-            <img
-              src="img/woman.png"
-              alt="Women's Products"
-              class="h-48 w-48 object-cover mb-4"
-            />
-            <p class="text-center text-3xl font-semibold text-gray-800">
-              WOMEN
-            </p>
-          </a>
-          <a
-            href="/products/children"
-            class="flex flex-col items-center border rounded-lg shadow-lg bg-gradient-to-r from-yellow-50 to-yellow-100 hover:bg-yellow-100 transition duration-300 transform hover:scale-105 p-6"
-          >
-            <img
-              src="img/children.png"
-              alt="Children's Products"
-              class="h-48 w-48 object-cover mb-4"
-            />
-            <p class="text-center text-3xl font-semibold text-gray-800">
-              CHILDREN
-            </p>
-          </a>
+        <div class="flex flex-col">
+          <div class="flex">
+            <img src="img/man-portrait.webp" alt="" class="w-1/4" />
+            <div class="flex flex-col px-6">
+              <div class="py-6">
+                <div class="flex justify-between">
+                  <h3 class="uppercase text-3xl">Shop Men's Clothing</h3>
+                  <a href="/products/men" class="hover:text-cyan-800"
+                    >Show more <span class="text-xl">&rsaquo;</span></a
+                  >
+                </div>
+                <p class="text-gray-400">
+                  Explore a diverse collection of men's apparel, from timeless
+                  classics to the latest trends.
+                </p>
+              </div>
+
+              <div class="embla">
+                <div class="embla__viewport">
+                  <div class="embla__container">
+                    <div
+                      th:each="product, iterStat : ${menProducts}"
+                      class="embla__slide"
+                      th:if="${iterStat.index < 8}"
+                    >
+                      <div class="border shadow-lg rounded-lg h-full">
+                        <a
+                          th:href="'/products/' + ${product.gender.toLowerCase()} + '/' + ${product.category.categoryName.toLowerCase()} + '/' + ${product.productId}"
+                        >
+                          <div class="relative">
+                            <div class="p-2">
+                              <img
+                                th:src="${product.image}"
+                                th:alt="${product.name}"
+                                class="rounded-lg"
+                              />
+                              <div
+                                th:if="${indexController.isWithinLastWeek(product.createdAt)}"
+                                class="absolute top-4 left-4 bg-white rounded-lg flex gap-2 p-2 text-xs shadow-md items-center"
+                              >
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  fill="none"
+                                  viewBox="0 0 24 24"
+                                  stroke-width="1.5"
+                                  stroke="currentColor"
+                                  class="w-5 h-5"
+                                >
+                                  <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456ZM16.894 20.567 16.5 21.75l-.394-1.183a2.25 2.25 0 0 0-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 0 0 1.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 0 0 1.423 1.423l1.183.394-1.183.394a2.25 2.25 0 0 0-1.423 1.423Z"
+                                  />
+                                </svg>
+                                New
+                              </div>
+                            </div>
+                            <form
+                              action="/toggleSaveProductForUser"
+                              method="post"
+                            >
+                              <div
+                                class="absolute top-4 right-4 bg-white w-7 h-7 rounded-full flex justify-center items-center shadow-md"
+                              >
+                                <input
+                                  type="hidden"
+                                  name="productId"
+                                  th:value="${product.productId}"
+                                />
+                                <button type="submit">
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 24 24"
+                                    fill="currentColor"
+                                    th:style="'color: ' + (${savedStatusMap[product.productId]} ? '#d11a2a' : '#9CA3AF')"
+                                    class="w-4"
+                                  >
+                                    <path
+                                      d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z"
+                                    />
+                                  </svg>
+                                </button>
+                              </div>
+                            </form>
+                          </div>
+                          <div class="p-2">
+                            <p
+                              class="text-xl font-semibold pb-2"
+                              th:text="${product.name}"
+                            ></p>
+                            <div class="flex gap-2">
+                              <p
+                                th:text="${product.price + ' EUR'}"
+                                class="text-[#d11a2a] text-lg"
+                              ></p>
+                              <p
+                                th:text="${#numbers.formatDecimal(product.price * 1.5, 1, 2) + ' EUR'}"
+                                class="self-end line-through text-sm"
+                              ></p>
+                            </div>
+                          </div>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex my-12">
+            <img src="img/woman-portrait.webp" alt="" class="w-1/4" />
+            <div class="flex flex-col px-6">
+              <div class="py-6">
+                <div class="flex justify-between">
+                  <h3 class="uppercase text-3xl">Shop Women's Clothing</h3>
+                  <a href="/products/women" class="hover:text-cyan-800"
+                    >Show more <span class="text-xl">&rsaquo;</span></a
+                  >
+                </div>
+                <p class="text-gray-400">
+                  Dive into a world of fashion-forward women's clothing,
+                  featuring a curated selection of chic and versatile pieces.
+                </p>
+              </div>
+
+              <div class="embla">
+                <div class="embla__viewport">
+                  <div class="embla__container">
+                    <div
+                      th:each="product, iterStat : ${womenProducts}"
+                      class="embla__slide"
+                      th:if="${iterStat.index < 8}"
+                    >
+                      <div class="border shadow-lg rounded-lg h-full">
+                        <a
+                          th:href="'/products/' + ${product.gender.toLowerCase()} + '/' + ${product.category.categoryName.toLowerCase()} + '/' + ${product.productId}"
+                        >
+                          <div class="relative">
+                            <div class="p-2">
+                              <img
+                                th:src="${product.image}"
+                                th:alt="${product.name}"
+                                class="rounded-lg"
+                              />
+                              <div
+                                th:if="${indexController.isWithinLastWeek(product.createdAt)}"
+                                class="absolute top-4 left-4 bg-white rounded-lg flex gap-2 p-2 text-xs shadow-md items-center"
+                              >
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  fill="none"
+                                  viewBox="0 0 24 24"
+                                  stroke-width="1.5"
+                                  stroke="currentColor"
+                                  class="w-5 h-5"
+                                >
+                                  <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456ZM16.894 20.567 16.5 21.75l-.394-1.183a2.25 2.25 0 0 0-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 0 0 1.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 0 0 1.423 1.423l1.183.394-1.183.394a2.25 2.25 0 0 0-1.423 1.423Z"
+                                  />
+                                </svg>
+                                New
+                              </div>
+                            </div>
+                            <form
+                              action="/toggleSaveProductForUser"
+                              method="post"
+                            >
+                              <div
+                                class="absolute top-4 right-4 bg-white w-7 h-7 rounded-full flex justify-center items-center shadow-md"
+                              >
+                                <input
+                                  type="hidden"
+                                  name="productId"
+                                  th:value="${product.productId}"
+                                />
+                                <button type="submit">
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 24 24"
+                                    fill="currentColor"
+                                    th:style="'color: ' + (${savedStatusMap[product.productId]} ? '#d11a2a' : '#9CA3AF')"
+                                    class="w-4"
+                                  >
+                                    <path
+                                      d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z"
+                                    />
+                                  </svg>
+                                </button>
+                              </div>
+                            </form>
+                          </div>
+                          <div class="p-2">
+                            <p
+                              class="text-xl font-semibold pb-2"
+                              th:text="${product.name}"
+                            ></p>
+                            <div class="flex gap-2">
+                              <p
+                                th:text="${product.price + ' EUR'}"
+                                class="text-[#d11a2a] text-lg"
+                              ></p>
+                              <p
+                                th:text="${#numbers.formatDecimal(product.price * 1.5, 1, 2) + ' EUR'}"
+                                class="self-end line-through text-sm"
+                              ></p>
+                            </div>
+                          </div>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex">
+            <img src="img/children-portrait.webp" alt="" class="w-1/4" />
+            <div class="flex flex-col px-6">
+              <div class="py-6">
+                <div class="flex justify-between">
+                  <h3 class="uppercase text-3xl">Shop Children's Clothing</h3>
+                  <a href="/products/children" class="hover:text-cyan-800"
+                    >Show more <span class="text-xl">&rsaquo;</span></a
+                  >
+                </div>
+                <p class="text-gray-400">
+                  Browse through adorable and practical children's clothing
+                  options, perfect for every stage of their journey.
+                </p>
+              </div>
+
+              <div class="embla">
+                <div class="embla__viewport">
+                  <div class="embla__container">
+                    <div
+                      th:each="product, iterStat : ${childrenProducts}"
+                      class="embla__slide"
+                      th:if="${iterStat.index < 8}"
+                    >
+                      <div class="border shadow-lg rounded-lg h-full">
+                        <a
+                          th:href="'/products/' + ${product.gender.toLowerCase()} + '/' + ${product.category.categoryName.toLowerCase()} + '/' + ${product.productId}"
+                        >
+                          <div class="relative">
+                            <div class="p-2">
+                              <img
+                                th:src="${product.image}"
+                                th:alt="${product.name}"
+                                class="rounded-lg"
+                              />
+                              <div
+                                th:if="${indexController.isWithinLastWeek(product.createdAt)}"
+                                class="absolute top-4 left-4 bg-white rounded-lg flex gap-2 p-2 text-xs shadow-md items-center"
+                              >
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  fill="none"
+                                  viewBox="0 0 24 24"
+                                  stroke-width="1.5"
+                                  stroke="currentColor"
+                                  class="w-5 h-5"
+                                >
+                                  <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456ZM16.894 20.567 16.5 21.75l-.394-1.183a2.25 2.25 0 0 0-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 0 0 1.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 0 0 1.423 1.423l1.183.394-1.183.394a2.25 2.25 0 0 0-1.423 1.423Z"
+                                  />
+                                </svg>
+                                New
+                              </div>
+                            </div>
+                            <form
+                              action="/toggleSaveProductForUser"
+                              method="post"
+                            >
+                              <div
+                                class="absolute top-4 right-4 bg-white w-7 h-7 rounded-full flex justify-center items-center shadow-md"
+                              >
+                                <input
+                                  type="hidden"
+                                  name="productId"
+                                  th:value="${product.productId}"
+                                />
+                                <button type="submit">
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 24 24"
+                                    fill="currentColor"
+                                    th:style="'color: ' + (${savedStatusMap[product.productId]} ? '#d11a2a' : '#9CA3AF')"
+                                    class="w-4"
+                                  >
+                                    <path
+                                      d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z"
+                                    />
+                                  </svg>
+                                </button>
+                              </div>
+                            </form>
+                          </div>
+                          <div class="p-2">
+                            <p
+                              class="text-xl font-semibold pb-2"
+                              th:text="${product.name}"
+                            ></p>
+                            <div class="flex gap-2">
+                              <p
+                                th:text="${product.price + ' EUR'}"
+                                class="text-[#d11a2a] text-lg"
+                              ></p>
+                              <p
+                                th:text="${#numbers.formatDecimal(product.price * 1.5, 1, 2) + ' EUR'}"
+                                class="self-end line-through text-sm"
+                              ></p>
+                            </div>
+                          </div>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div>
-          <h1 class="my-8">New Arrivals</h1>
+        <div class="my-12">
+          <h1 class="font-normal text-center uppercase">New Arrivals</h1>
+          <p class="text-center mb-8 text-gray-400">
+            Discover the latest trends and styles with our new arrivals
+            collection.
+          </p>
+
           <div class="grid md:grid-cols-5 gap-8">
             <div
               th:each="product : ${lastAddedProducts}"
@@ -307,119 +578,81 @@
             </div>
           </div>
         </div>
-        <!-- <div class="pt-12 grid md:grid-cols-3 gap-8 text-lg">
-          <div
-            class="space-y-8 bg-white p-8 rounded-lg shadow-lg transform transition duration-300 hover:scale-105"
-          >
-            <h2 class="text-2xl font-bold flex items-center space-x-2">
-              <span>🚀</span>
-              <span>Discover Tailored Recommendations</span>
-            </h2>
-            <p class="leading-relaxed text-gray-700">
-              Say goodbye to endless scrolling! SmartPick uses cutting-edge AI
-              algorithms to understand your unique preferences. Explore a
-              curated selection of products that match your style, interests,
-              and needs.
-            </p>
-          </div>
-          <div
-            class="space-y-8 bg-white p-8 rounded-lg shadow-lg transform transition duration-300 hover:scale-105"
-          >
-            <h2 class="text-2xl font-bold flex items-center space-x-2">
-              <span>🎁</span>
-              <span>Exclusive Deals Just for You</span>
-            </h2>
-            <p class="leading-relaxed text-gray-700">
-              Unlock special discounts and exclusive offers tailored to your
-              preferences. SmartPick ensures you get the best deals on the
-              products you love. Saving money has never been this smart!
-            </p>
-          </div>
-          <div
-            class="space-y-8 bg-white p-8 rounded-lg shadow-lg transform transition duration-300 hover:scale-105"
-          >
-            <h2 class="text-2xl font-bold flex items-center space-x-2">
-              <span>🤖</span>
-              <span>Your Personal Shopping Assistant</span>
-            </h2>
-            <p class="leading-relaxed text-gray-700">
-              Meet your AI shopping guru! SmartPick learns from your choices and
-              refines its recommendations over time. It's like having a personal
-              shopper who knows you inside out, making every shopping spree a
-              delightful experience.
-            </p>
-          </div>
-        </div> -->
-
-        <h1>Products for You</h1>
-        <div class="grid md:grid-cols-5 gap-8">
-          <div class="border shadow-lg rounded-lg w-64 h-full">
-            <div class="relative">
-              <img
-                src="img/shirt-placeholder.webp"
-                alt=""
-                class="rounded-t-lg h-2/3 w-full"
-              />
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                class="w-6 h-6 absolute top-2 right-2 text-gray-400"
-              >
-                <path
-                  d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z"
+        <div>
+          <h1 class="font-normal text-center uppercase">Products for you</h1>
+          <p class="text-center mb-8 text-gray-400">
+            Find your perfect match among our curated selection of products
+            tailored just for you.
+          </p>
+          <div class="grid md:grid-cols-5 gap-8">
+            <div class="border shadow-lg rounded-lg w-64 h-full">
+              <div class="relative">
+                <img
+                  src="img/shirt-placeholder.webp"
+                  alt=""
+                  class="rounded-t-lg h-2/3 w-full"
                 />
-              </svg>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  class="w-6 h-6 absolute top-2 right-2 text-gray-400"
+                >
+                  <path
+                    d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z"
+                  />
+                </svg>
+              </div>
+              <div class="p-2">
+                <p>Majica kratkih rukava</p>
+                <p>24.99 EUR</p>
+              </div>
             </div>
-            <div class="p-2">
-              <p>Majica kratkih rukava</p>
-              <p>24.99 EUR</p>
-            </div>
-          </div>
-          <div class="border shadow-lg rounded-lg w-64 h-full">
-            <div class="relative">
-              <img
-                src="img/shirt-placeholder.webp"
-                alt=""
-                class="rounded-t-lg h-2/3 w-full"
-              />
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                class="w-6 h-6 absolute top-2 right-2 text-gray-400"
-              >
-                <path
-                  d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z"
+            <div class="border shadow-lg rounded-lg w-64 h-full">
+              <div class="relative">
+                <img
+                  src="img/shirt-placeholder.webp"
+                  alt=""
+                  class="rounded-t-lg h-2/3 w-full"
                 />
-              </svg>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  class="w-6 h-6 absolute top-2 right-2 text-gray-400"
+                >
+                  <path
+                    d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z"
+                  />
+                </svg>
+              </div>
+              <div class="p-2">
+                <p>Majica kratkih rukava</p>
+                <p>24.99 EUR</p>
+              </div>
             </div>
-            <div class="p-2">
-              <p>Majica kratkih rukava</p>
-              <p>24.99 EUR</p>
-            </div>
-          </div>
-          <div class="border shadow-lg rounded-lg w-64 h-full">
-            <div class="relative">
-              <img
-                src="img/shirt-placeholder.webp"
-                alt=""
-                class="rounded-t-lg h-2/3 w-full"
-              />
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                class="w-6 h-6 absolute top-2 right-2 text-gray-400"
-              >
-                <path
-                  d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z"
+            <div class="border shadow-lg rounded-lg w-64 h-full">
+              <div class="relative">
+                <img
+                  src="img/shirt-placeholder.webp"
+                  alt=""
+                  class="rounded-t-lg h-2/3 w-full"
                 />
-              </svg>
-            </div>
-            <div class="p-2">
-              <p>Majica kratkih rukava</p>
-              <p>24.99 EUR</p>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  class="w-6 h-6 absolute top-2 right-2 text-gray-400"
+                >
+                  <path
+                    d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z"
+                  />
+                </svg>
+              </div>
+              <div class="p-2">
+                <p>Majica kratkih rukava</p>
+                <p>24.99 EUR</p>
+              </div>
             </div>
           </div>
         </div>

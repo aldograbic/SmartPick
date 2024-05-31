@@ -1,10 +1,16 @@
-document.addEventListener("DOMContentLoaded", function () {
-  const autoplayOptions = {
-    delay: 8000,
-  };
+document.addEventListener("DOMContentLoaded", () => {
+  const emblaNodes = document.querySelectorAll(".embla");
 
-  const emblaNode = document.querySelector(".embla");
-  const embla = EmblaCarousel(emblaNode, { loop: true }, [
-    EmblaCarouselAutoplay(autoplayOptions),
-  ]);
+  emblaNodes.forEach((emblaNode) => {
+    const viewportNode = emblaNode.querySelector(".embla__viewport");
+    const embla = EmblaCarousel(viewportNode, {
+      loop: false,
+      align: "start",
+    });
+
+    EmblaCarouselAutoplay(embla, {
+      delay: 4000,
+      stopOnInteraction: true,
+    });
+  });
 });

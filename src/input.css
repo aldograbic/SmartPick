@@ -89,19 +89,21 @@
   }
 
   .embla {
-    @apply overflow-hidden;
+    overflow: hidden;
+  }
+
+  .embla__viewport {
+    overflow: hidden;
+    width: 100%;
   }
 
   .embla__container {
-    @apply flex;
+    @apply flex gap-5;
+    width: auto;
   }
 
   .embla__slide {
-    @apply w-full md:h-[35rem] min-w-0;
-    flex: 0 0 100%;
-  }
-
-  .embla__slide > img {
-    @apply w-full h-full;
+    position: relative;
+    min-width: 22%;
   }
 }
