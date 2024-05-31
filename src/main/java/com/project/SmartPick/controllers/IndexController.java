@@ -32,9 +32,15 @@ public class IndexController {
     @GetMapping("/")
     public String getIndexPage(Model model) {
 
+        List<Product> menProducts = productRepository.findByGender("Men");
+        List<Product> womenProducts = productRepository.findByGender("Women");
+        List<Product> childrenProducts = productRepository.findByGender("Children");
         List<Product> lastAddedProducts = productRepository.getLastAddedProducts();
         Map<Integer, Boolean> savedStatusMap = getSavedStatusMap(lastAddedProducts);
 
+        model.addAttribute("menProducts", menProducts);
+        model.addAttribute("womenProducts", womenProducts);
+        model.addAttribute("childrenProducts", childrenProducts);
         model.addAttribute("lastAddedProducts", lastAddedProducts);
         model.addAttribute("categories", productCategoryRepository.getAllProductCategories());
         model.addAttribute("savedStatusMap", savedStatusMap);
