@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -32,7 +31,6 @@ public class ProductsController {
     private final ProductCategoryRepository productCategoryRepository;
     private final UserRepository userRepository;
 
-    @Autowired
     public ProductsController(ProductRepository productRepository, ProductCategoryRepository productCategoryRepository, UserRepository userRepository) {
         this.productRepository = productRepository;
         this.productCategoryRepository = productCategoryRepository;
@@ -40,10 +38,10 @@ public class ProductsController {
     }
 
     @GetMapping
-    public String getAllProducts(@RequestParam(name = "size", required = false) String size,
-                                @RequestParam(name = "color", required = false) String color,
-                                @RequestParam(name = "minPrice", required = false) Integer minPrice,
-                                @RequestParam(name = "maxPrice", required = false) Integer maxPrice,
+    public String getAllProducts(@RequestParam(required = false) String size,
+                                @RequestParam(required = false) String color,
+                                @RequestParam(required = false) Integer minPrice,
+                                @RequestParam(required = false) Integer maxPrice,
                                 Model model) {
 
         List<Product> products;
@@ -66,10 +64,10 @@ public class ProductsController {
 
     @GetMapping("/{gender}")
     public String getProductsByGender(@PathVariable String gender,
-                                    @RequestParam(name = "size", required = false) String size,
-                                    @RequestParam(name = "color", required = false) String color,
-                                    @RequestParam(name = "minPrice", required = false) Integer minPrice,
-                                    @RequestParam(name = "maxPrice", required = false) Integer maxPrice,
+                                    @RequestParam(required = false) String size,
+                                    @RequestParam(required = false) String color,
+                                    @RequestParam(required = false) Integer minPrice,
+                                    @RequestParam(required = false) Integer maxPrice,
                                     Model model) {
 
         List<Product> products;
@@ -93,10 +91,10 @@ public class ProductsController {
     @GetMapping("/{gender}/{category}")
     public String getProductsByGenderAndCategory(@PathVariable String gender,
                                                 @PathVariable String category,
-                                                @RequestParam(name = "size", required = false) String size,
-                                                @RequestParam(name = "color", required = false) String color,
-                                                @RequestParam(name = "minPrice", required = false) Integer minPrice,
-                                                @RequestParam(name = "maxPrice", required = false) Integer maxPrice,
+                                                @RequestParam(required = false) String size,
+                                                @RequestParam(required = false) String color,
+                                                @RequestParam(required = false) Integer minPrice,
+                                                @RequestParam(required = false) Integer maxPrice,
                                                 Model model) {
         
         List<Product> products;
@@ -188,11 +186,11 @@ public class ProductsController {
     }
     
     @GetMapping("/search")
-    public String searchProducts(@RequestParam("search") String search,
-                                @RequestParam(name = "size", required = false) String size,
-                                @RequestParam(name = "color", required = false) String color,
-                                @RequestParam(name = "minPrice", required = false) Integer minPrice,
-                                @RequestParam(name = "maxPrice", required = false) Integer maxPrice,
+    public String searchProducts(@RequestParam String search,
+                                @RequestParam(required = false) String size,
+                                @RequestParam(required = false) String color,
+                                @RequestParam(required = false) Integer minPrice,
+                                @RequestParam(required = false) Integer maxPrice,
                                 Model model) {
         
         List<Product> searchResults;

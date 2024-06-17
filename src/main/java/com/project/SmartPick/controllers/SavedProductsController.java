@@ -50,7 +50,7 @@ public class SavedProductsController {
     }
 
     @PostMapping("/toggleSaveProductForUser")
-    public String toggleSaveProductForUser(@RequestParam("productId") int productId, HttpServletRequest request, RedirectAttributes redirectAttributes) {
+    public String toggleSaveProductForUser(@RequestParam int productId, HttpServletRequest request, RedirectAttributes redirectAttributes) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
         int userId = userRepository.findByUsername(username).getUserId();

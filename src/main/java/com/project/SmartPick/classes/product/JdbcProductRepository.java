@@ -33,33 +33,41 @@ public class JdbcProductRepository implements ProductRepository {
 
     @Override
     public List<Product> findByGenderAndCategoryName(String gender, String categoryName) {
-        String sql = "SELECT p.*, c.name AS category_name FROM product p " +
-                     "JOIN product_category c ON p.category_id = c.category_id " +
-                     "WHERE p.gender = ? AND c.name = ? ORDER BY created_at DESC";
+        String sql = """
+                     SELECT p.*, c.name AS category_name FROM product p \
+                     JOIN product_category c ON p.category_id = c.category_id \
+                     WHERE p.gender = ? AND c.name = ? ORDER BY created_at DESC\
+                     """;
         return jdbcTemplate.query(sql, new ProductRowMapper(productCategoryRepository), gender, categoryName);
     }
 
     @Override
     public List<Product> findByCategoryName(String categoryName) {
-        String sql = "SELECT p.*, c.name AS category_name FROM product p " +
-                     "JOIN product_category c ON p.category_id = c.category_id " +
-                     "WHERE c.name = ? ORDER BY created_at DESC";
+        String sql = """
+                     SELECT p.*, c.name AS category_name FROM product p \
+                     JOIN product_category c ON p.category_id = c.category_id \
+                     WHERE c.name = ? ORDER BY created_at DESC\
+                     """;
         return jdbcTemplate.query(sql, new ProductRowMapper(productCategoryRepository), categoryName);
     }
 
     @Override
     public List<Product> gellAllSavedProductsByUserId(int userId) {
-        String sql = "SELECT product.* FROM user_likes " + 
-                     "JOIN product ON user_likes.product_id = product.product_id " +
-                     "WHERE user_likes.user_id = ?";
+        String sql = """
+                     SELECT product.* FROM user_likes \
+                     JOIN product ON user_likes.product_id = product.product_id \
+                     WHERE user_likes.user_id = ?\
+                     """;
         return jdbcTemplate.query(sql, new ProductRowMapper(productCategoryRepository), userId);
     }
 
     @Override
     public List<Product> getAllProductsInShoppingCartByUserId(int userId) {
-        String sql = "SELECT product.* FROM user_shopping_cart " +
-                     "JOIN product ON user_shopping_cart.product_id = product.product_id " +
-                     "WHERE user_shopping_cart.user_id = ?";
+        String sql = """
+                     SELECT product.* FROM user_shopping_cart \
+                     JOIN product ON user_shopping_cart.product_id = product.product_id \
+                     WHERE user_shopping_cart.user_id = ?\
+                     """;
         return jdbcTemplate.query(sql, new ProductRowMapper(productCategoryRepository), userId);
     }
 
