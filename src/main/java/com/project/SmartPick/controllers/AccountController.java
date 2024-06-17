@@ -43,7 +43,7 @@ public class AccountController {
     }
 
     @PostMapping("/account/{username}/update")
-    public String updateUserDetails(@PathVariable("username") String username, User updatedUser, RedirectAttributes redirectAttributes, HttpSession session) {
+    public String updateUserDetails(@PathVariable String username, User updatedUser, RedirectAttributes redirectAttributes, HttpSession session) {
 
         User user = userRepository.findByUsername(username);
     

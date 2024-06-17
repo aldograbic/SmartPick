@@ -33,8 +33,8 @@ public class RegistrationController {
 
     @PostMapping("/registration")
     public String registration(@ModelAttribute User user,
-                            @RequestParam("confirmPassword") String confirmPassword,
-                            @RequestParam(name = "acceptTerms", required = false) String acceptTerms,
+                            @RequestParam String confirmPassword,
+                            @RequestParam(required = false) String acceptTerms,
                             RedirectAttributes redirectAttributes) {
 
         if (acceptTerms == null) {
@@ -77,7 +77,7 @@ public class RegistrationController {
     }
 
     @GetMapping("/confirm")
-    public String confirmEmail(@RequestParam("token") String token, RedirectAttributes redirectAttributes) {
+    public String confirmEmail(@RequestParam String token, RedirectAttributes redirectAttributes) {
 
         User user = userRepository.findByConfirmationToken(token);
         if (user == null) {

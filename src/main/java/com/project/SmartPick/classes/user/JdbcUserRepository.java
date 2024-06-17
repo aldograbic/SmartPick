@@ -35,15 +35,19 @@ public class JdbcUserRepository implements UserRepository{
 
     @Override
     public void saveUser(User user) {
-        String sql = "INSERT INTO user (first_name, last_name, username, email, password, address, city, email_verified, confirmation_token, role_id) " + 
-                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = """
+                    INSERT INTO user (first_name, last_name, username, email, password, address, city, email_verified, confirmation_token, role_id) \
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)\
+                    """;
         jdbcTemplate.update(sql, user.getFirstName(), user.getLastName(), user.getUsername(), user.getEmail(), user.getPassword(), user.getAddress(), user.getCity(), user.isEmailVerified(), user.getConfirmationToken(), user.getRoleId());
     }
 
     @Override
     public User findByConfirmationToken(String token) {
-        String sql = "SELECT user_id, first_name, last_name, username, email, password, profile_image, address, city, email_verified, confirmation_token, created_at, role_id " +
-                    "FROM user WHERE confirmation_token = ?";
+        String sql = """
+                    SELECT user_id, first_name, last_name, username, email, password, profile_image, address, city, email_verified, confirmation_token, created_at, role_id \
+                    FROM user WHERE confirmation_token = ?\
+                    """;
         try {
             return jdbcTemplate.queryForObject(sql, new UserRowMapper(roleRepository), token);
         } catch (EmptyResultDataAccessException ex) {
