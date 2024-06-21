@@ -19,7 +19,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.project.SmartPick.classes.product.Product;
 import com.project.SmartPick.classes.product.ProductRepository;
 import com.project.SmartPick.classes.productCategory.ProductCategoryRepository;
+import com.project.SmartPick.classes.user.User;
 import com.project.SmartPick.classes.user.UserRepository;
+import com.project.SmartPick.classes.userBehavior.UserBehavior;
+import com.project.SmartPick.classes.userBehavior.UserBehaviorRepository;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -30,11 +33,13 @@ public class ProductsController {
     private final ProductRepository productRepository;
     private final ProductCategoryRepository productCategoryRepository;
     private final UserRepository userRepository;
+    private final UserBehaviorRepository userBehaviorRepository;
 
-    public ProductsController(ProductRepository productRepository, ProductCategoryRepository productCategoryRepository, UserRepository userRepository) {
+    public ProductsController(ProductRepository productRepository, ProductCategoryRepository productCategoryRepository, UserRepository userRepository, UserBehaviorRepository userBehaviorRepository) {
         this.productRepository = productRepository;
         this.productCategoryRepository = productCategoryRepository;
         this.userRepository = userRepository;
+        this.userBehaviorRepository = userBehaviorRepository;
     }
 
     @GetMapping
@@ -122,7 +127,20 @@ public class ProductsController {
             @PathVariable String gender,
             @PathVariable String category,
             @PathVariable int productId,
-            Model model) {
+            Model model,
+            Authentication authentication) {
+
+        if (authentication != null && authentication.isAuthenticated()) {
+
+            String username = authentication.getName();
+            User user = userRepository.findByUsername(username);
+    
+            UserBehavior userBehavior = new UserBehavior();
+            userBehavior.setUserId(user.getUserId());
+            userBehavior.setProductId(productId);
+            userBehavior.setBehaviorType("view");
+            userBehaviorRepository.saveBehavior(userBehavior);
+        }
         
         List<Product> products;
 
