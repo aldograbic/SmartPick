@@ -61,7 +61,7 @@ public class ShoppingCartController {
     }
 
     @PostMapping("/putProductInShoppingCartForUser")
-    public String putProductInShoppingCartForUser(@RequestParam("productId") int productId, HttpServletRequest request, RedirectAttributes redirectAttributes) {
+    public String putProductInShoppingCartForUser(@RequestParam int productId, HttpServletRequest request, RedirectAttributes redirectAttributes) {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
@@ -90,7 +90,7 @@ public class ShoppingCartController {
     }
 
     @PostMapping("/removeProductFromShoppingCartForUser")
-    public String removeProductFromShoppingCartForUser(@RequestParam("productId") int productId, RedirectAttributes redirectAttributes) {
+    public String removeProductFromShoppingCartForUser(@RequestParam int productId, RedirectAttributes redirectAttributes) {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
@@ -110,7 +110,7 @@ public class ShoppingCartController {
     }
 
     @PostMapping("/processCheckout")
-    public String processCheckout(@RequestParam("estimatedTotal") BigDecimal estimatedTotal,
+    public String processCheckout(@RequestParam BigDecimal estimatedTotal,
                                 @RequestParam Map<String, String> params,
                                 HttpSession session, Model model) {
 
