@@ -2,6 +2,8 @@ package com.project.SmartPick.controllers;
 
 import com.project.SmartPick.classes.user.User;
 import com.project.SmartPick.classes.user.UserRepository;
+import com.project.SmartPick.classes.userBehavior.UserBehavior;
+import com.project.SmartPick.classes.userBehavior.UserBehaviorRepository;
 import com.project.SmartPick.config.EmailService;
 import com.project.SmartPick.classes.order.Order;
 import com.project.SmartPick.classes.order.OrderItem;
@@ -35,6 +37,9 @@ public class CheckoutController {
 
     @Autowired
     private EmailService emailService;
+
+    @Autowired
+    private UserBehaviorRepository userBehaviorRepository;
 
     @GetMapping("/checkout")
     public String getCheckoutPage(HttpSession session, Model model) {
@@ -85,6 +90,12 @@ public class CheckoutController {
         for (OrderItem orderItem : orderItems) {
             orderItem.setOrderId(orderId);
             orderRepository.createOrderItem(orderItem);
+
+            UserBehavior userBehavior = new UserBehavior();
+            userBehavior.setUserId(user.getUserId());
+            userBehavior.setProductId(orderItem.getProductId());
+            userBehavior.setBehaviorType("purchase");
+            userBehaviorRepository.saveBehavior(userBehavior);
         }
 
         model.addAttribute("userEmail", user.getEmail());

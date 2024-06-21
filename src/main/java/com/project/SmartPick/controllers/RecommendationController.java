@@ -8,22 +8,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.project.SmartPick.config.recommendationSystem.RecommendationService;
+import com.project.SmartPick.modelServices.RecommendationService;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/recommendations")
 public class RecommendationController {
     
     @Autowired
     private RecommendationService recommendationService;
 
-    @GetMapping("/recommendations/{userId}")
-    public List<String> getRecommendations(@PathVariable String userId) {
-        return recommendationService.getRecommendedProducts(userId);
-    }
-
-    @GetMapping("/similar/{productId}")
-    public List<String> getSimilarProducts(@PathVariable String productId) {
-        return recommendationService.getSimilarProducts(productId);
+    @GetMapping("/{userId}")
+    public List<Integer> getRecommendations(@PathVariable int userId) {
+        return recommendationService.getRecommendations(userId);
     }
 }
