@@ -29,9 +29,9 @@ public class ContactUsController {
     }
 
     @PostMapping("/contact-us")
-    public String contactUs(@RequestParam("name") String name, 
-                                @RequestParam("email") String email, 
-                                @RequestParam("message") String message, 
+    public String contactUs(@RequestParam String name, 
+                                @RequestParam String email, 
+                                @RequestParam String message, 
                                 RedirectAttributes redirectAttributes) {
 
          try {
