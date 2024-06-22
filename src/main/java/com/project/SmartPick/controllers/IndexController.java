@@ -42,7 +42,9 @@ public class IndexController {
         List<Product> womenProducts = productRepository.findByGender("Women");
         List<Product> childrenProducts = productRepository.findByGender("Children");
         List<Product> lastAddedProducts = productRepository.getLastAddedProducts();
-        Map<Integer, Boolean> savedStatusMap = getSavedStatusMap(lastAddedProducts);
+
+        List<Product> allProducts = productRepository.getAllProducts();
+        Map<Integer, Boolean> savedStatusMap = getSavedStatusMap(allProducts);
 
         model.addAttribute("menProducts", menProducts);
         model.addAttribute("womenProducts", womenProducts);

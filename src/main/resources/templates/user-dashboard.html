@@ -89,7 +89,7 @@
                   ></p>
                   <p
                     th:text="${#numbers.formatDecimal(product.price * 1.5, 1, 2) + ' EUR'}"
-                    class="self-end line-through text-sm"
+                    class="self-end line-through text-sm pb-0.5"
                   ></p>
                 </div>
               </div>
@@ -102,7 +102,7 @@
             th:each="order : ${previousOrders}"
             class="border shadow-lg rounded-lg h-full"
           >
-            <div class="flex flex-col gap-4 p-2">
+            <div class="flex flex-col gap-4 p-4">
               <div class="grid gap-4">
                 <p
                   th:text="${'Order ID: ' + order.orderId}"
@@ -116,16 +116,16 @@
                     ></p>
                   </div>
                   <div>
-                    <p class="font-semibold">Order total</p>
+                    <p class="font-semibold whitespace-nowrap">Order total</p>
                     <p th:text="${order.orderTotal + ' EUR'}"></p>
                   </div>
                   <div>
-                    <p class="font-semibold">Order status</p>
+                    <p class="font-semibold whitespace-nowrap">Order status</p>
                     <p>Paid</p>
                   </div>
                 </div>
               </div>
-              <div class="flex gap-2">
+              <div class="grid grid-cols-2 md:flex gap-4">
                 <div
                   th:each="orderItem : ${order.orderItems}"
                   class="border rounded-lg p-2 w-36"
