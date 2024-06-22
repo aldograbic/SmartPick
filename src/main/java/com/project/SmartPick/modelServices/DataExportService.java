@@ -21,6 +21,7 @@ public class DataExportService {
     public void exportBehaviorsToCsv(String filePath) throws IOException {
         List<UserBehavior> behaviors = userBehaviorRepository.findAll();
         FileWriter fileWriter = new FileWriter(filePath);
+        @SuppressWarnings("deprecation")
         CSVPrinter csvPrinter = new CSVPrinter(fileWriter, CSVFormat.DEFAULT.withHeader("userId", "productId", "behaviorType", "behaviorDate"));
 
         for (UserBehavior behavior : behaviors) {
