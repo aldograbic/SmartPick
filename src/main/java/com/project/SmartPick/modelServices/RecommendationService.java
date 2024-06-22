@@ -14,26 +14,24 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class RecommendationService {
-    
+
     @Autowired
     private DataExportService dataExportService;
 
     private static final Logger logger = LoggerFactory.getLogger(RecommendationService.class);
 
     public List<Integer> getRecommendations(int userId) {
-        
-        // Prvo eksportiramo interakcije u CSV
+
         String filePath = "src/main/resources/static/user_behavior.csv";
         String scriptPath = "src/main/resources/static/python/recommendation_script.py";
-
+    
         try {
             dataExportService.exportBehaviorsToCsv(filePath);
         } catch (IOException e) {
             logger.error("Failed to export behaviors to CSV", e);
             return Collections.emptyList();
         }
-
-        // Pozivamo Python skriptu
+    
         ProcessBuilder processBuilder = new ProcessBuilder("python", scriptPath, filePath, String.valueOf(userId));
         processBuilder.redirectErrorStream(true);
         List<Integer> recommendations = new ArrayList<>();
@@ -43,7 +41,11 @@ public class RecommendationService {
             String line;
             while ((line = reader.readLine()) != null) {
                 logger.info("Python script output: " + line);
-                recommendations.add(Integer.parseInt(line));
+                try {
+                    recommendations.add(Integer.parseInt(line));
+                } catch (NumberFormatException e) {
+                    logger.warn("Skipping non-integer output: " + line);
+                }
             }
             process.waitFor();
         } catch (IOException | InterruptedException e) {
@@ -51,4 +53,5 @@ public class RecommendationService {
         }
         return recommendations;
     }
+    
 }

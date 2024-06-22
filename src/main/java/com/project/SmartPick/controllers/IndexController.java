@@ -1,13 +1,16 @@
 package com.project.SmartPick.controllers;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +19,7 @@ import com.project.SmartPick.classes.product.Product;
 import com.project.SmartPick.classes.product.ProductRepository;
 import com.project.SmartPick.classes.productCategory.ProductCategoryRepository;
 import com.project.SmartPick.classes.user.UserRepository;
+import com.project.SmartPick.modelServices.RecommendationService;
 
 @Controller
 public class IndexController {
@@ -29,9 +33,11 @@ public class IndexController {
     @Autowired
     private UserRepository userRepository;
 
-    @GetMapping("/")
-    public String getIndexPage(Model model) {
+    @Autowired
+    private RecommendationService recommendationService;
 
+    @GetMapping("/")
+    public String getIndexPage(Model model, @AuthenticationPrincipal User user) {
         List<Product> menProducts = productRepository.findByGender("Men");
         List<Product> womenProducts = productRepository.findByGender("Women");
         List<Product> childrenProducts = productRepository.findByGender("Children");
@@ -44,6 +50,21 @@ public class IndexController {
         model.addAttribute("lastAddedProducts", lastAddedProducts);
         model.addAttribute("categories", productCategoryRepository.getAllProductCategories());
         model.addAttribute("savedStatusMap", savedStatusMap);
+
+        if (user != null) {
+            com.project.SmartPick.classes.user.User loggedUser = userRepository.findByUsername(user.getUsername());
+            int userId = loggedUser.getUserId();
+            List<Integer> recommendedProductIds = recommendationService.getRecommendations(userId);
+
+            List<Product> recommendedProducts = new ArrayList<>();
+            for (Integer productId : recommendedProductIds) {
+                Product product = productRepository.getProductByProductId(productId);
+                if (product != null) {
+                    recommendedProducts.add(product);
+                }
+            }
+            model.addAttribute("recommendedProducts", recommendedProducts);
+        }
 
         model.addAttribute("indexController", this);
         return "index";
