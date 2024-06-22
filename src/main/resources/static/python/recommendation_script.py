@@ -21,18 +21,8 @@ try:
     data = pd.read_csv(file_path)
     print("CSV file loaded successfully")
 
-    # Filter data for the specified user ID and keep both views and purchases
-    user_interactions = data[data['userId'] == user_id]
-
-    if user_interactions.empty:
-        print(f"No interaction data found for user ID {user_id}")
-        sys.exit(0)
-
-    print("User Interactions:")
-    print(user_interactions)
-
     # Create pivot table and normalize based on interactions (both views and purchases)
-    pivot_table = user_interactions.pivot_table(index='userId', columns='productId', values='behaviorType', aggfunc='size', fill_value=0)
+    pivot_table = data.pivot_table(index='userId', columns='productId', values='behaviorType', aggfunc='size', fill_value=0)
 
     # Optionally, you can apply weighting or normalization based on interaction frequency
     # For example, using log transformation to reduce the impact of very frequent items
