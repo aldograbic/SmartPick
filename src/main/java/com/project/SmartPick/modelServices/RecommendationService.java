@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,19 +18,23 @@ public class RecommendationService {
     @Autowired
     private DataExportService dataExportService;
 
+    private static final Logger logger = LoggerFactory.getLogger(RecommendationService.class);
+
     public List<Integer> getRecommendations(int userId) {
         
         // Prvo eksportiramo interakcije u CSV
-        String filePath = "interactions.csv";
+        String filePath = "src/main/resources/static/user_behavior.csv";
+        String scriptPath = "src/main/resources/static/python/recommendation_script.py";
+
         try {
             dataExportService.exportBehaviorsToCsv(filePath);
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("Failed to export behaviors to CSV", e);
             return Collections.emptyList();
         }
 
         // Pozivamo Python skriptu
-        ProcessBuilder processBuilder = new ProcessBuilder("python3", "recommendation_script.py", filePath, String.valueOf(userId));
+        ProcessBuilder processBuilder = new ProcessBuilder("python", scriptPath, filePath, String.valueOf(userId));
         processBuilder.redirectErrorStream(true);
         List<Integer> recommendations = new ArrayList<>();
         try {
@@ -36,11 +42,12 @@ public class RecommendationService {
             BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
             String line;
             while ((line = reader.readLine()) != null) {
+                logger.info("Python script output: " + line);
                 recommendations.add(Integer.parseInt(line));
             }
             process.waitFor();
         } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
+            logger.error("Error running the recommendation script", e);
         }
         return recommendations;
     }
