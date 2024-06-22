@@ -106,6 +106,13 @@
               class="absolute right-0 p-2 z-40 bg-white rounded-lg shadow-lg w-40 mt-2"
               x-cloak
             >
+              <p class="px-4 py-2 text-base">
+                Hi,
+                <span sec:authentication="name"></span>
+                <span class="text-xl">👋</span>
+              </p>
+
+              <hr class="py-1" />
               <a
                 th:href="${#authorization.expression('hasRole(''ADMIN'')') ? '/admin-dashboard' : '/user-dashboard'}"
                 class="block px-4 py-2 text-base hover:bg-gray-100 rounded-lg"

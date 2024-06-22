@@ -165,7 +165,7 @@
             <img src="img/man-portrait.webp" alt="" class="w-1/4" />
             <div class="flex flex-col px-6">
               <div class="py-6">
-                <div class="flex justify-between">
+                <div class="md:flex justify-between">
                   <h3 class="uppercase text-3xl">Shop Men's Clothing</h3>
                   <a href="/products/men" class="hover:text-cyan-800"
                     >Show more <span class="text-xl">&rsaquo;</span></a
@@ -257,7 +257,7 @@
                               ></p>
                               <p
                                 th:text="${#numbers.formatDecimal(product.price * 1.5, 1, 2) + ' EUR'}"
-                                class="self-end line-through text-sm"
+                                class="self-end line-through text-sm pb-0.5"
                               ></p>
                             </div>
                           </div>
@@ -366,7 +366,7 @@
                               ></p>
                               <p
                                 th:text="${#numbers.formatDecimal(product.price * 1.5, 1, 2) + ' EUR'}"
-                                class="self-end line-through text-sm"
+                                class="self-end line-through text-sm pb-0.5"
                               ></p>
                             </div>
                           </div>
@@ -475,7 +475,7 @@
                               ></p>
                               <p
                                 th:text="${#numbers.formatDecimal(product.price * 1.5, 1, 2) + ' EUR'}"
-                                class="self-end line-through text-sm"
+                                class="self-end line-through text-sm pb-0.5"
                               ></p>
                             </div>
                           </div>
@@ -570,7 +570,7 @@
                     ></p>
                     <p
                       th:text="${#numbers.formatDecimal(product.price * 1.5, 1, 2) + ' EUR'}"
-                      class="self-end line-through text-sm"
+                      class="self-end line-through text-sm pb-0.5"
                     ></p>
                   </div>
                 </div>
@@ -695,7 +695,7 @@
                     ></p>
                     <p
                       th:text="${#numbers.formatDecimal(product.price * 1.5, 1, 2) + ' EUR'}"
-                      class="self-end line-through text-sm"
+                      class="self-end line-through text-sm pb-0.5"
                     ></p>
                   </div>
                 </div>
