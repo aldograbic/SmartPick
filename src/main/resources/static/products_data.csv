@@ -1,0 +1,44 @@
+productId,name,description,size,color,gender,price,createdAt,categoryId,image
+1,Casual Shirt,Comfortable cotton shirt for everyday wear,M,Blue,Men,29.99,2024-01-16 14:27:52,1,https://i.ibb.co/QP29Svp/1.webp
+2,Formal Blouse,Elegant blouse suitable for formal occasions,S,White,Women,39.99,2024-01-16 14:27:52,1,https://i.ibb.co/k3K2ZSh/2.webp
+3,Striped Polo,Casual polo shirt with stripes pattern,L,Red/White,Children,24.99,2024-01-16 14:27:52,1,https://i.ibb.co/q0qXhTY/3.webp
+4,Leather Jacket,Classic leather jacket for a stylish look,XL,Black,Men,149.99,2024-01-16 14:27:52,2,https://i.ibb.co/t4Mp81g/4.webp
+5,Denim Jacket,Casual denim jacket for a laid-back style,M,Blue,Women,79.99,2024-01-16 14:27:52,2,https://i.ibb.co/hyVj4WJ/5.webp
+6,Windbreaker,Lightweight windbreaker for outdoor activities,L,Green,Children,54.99,2024-01-16 14:27:52,2,https://i.ibb.co/RgDWmp5/6.webp
+7,Slim Fit Jeans,Trendy slim fit jeans for a modern look,32x30,Dark Blue,Men,49.99,2024-01-16 14:27:52,3,https://i.ibb.co/BsL5sFB/7.webp
+8,Cargo Pants,Comfortable cargo pants with multiple pockets,28x32,Khaki,Women,39.99,2024-01-16 14:27:52,3,https://i.ibb.co/Br74zfP/8.webp
+9,Athletic Joggers,Athletic jogger pants for a sporty style,XL,Gray,Children,29.99,2024-01-16 14:27:52,3,https://i.ibb.co/y4jpXXD/9.webp
+10,Running Shoes,Durable running shoes for active individuals,9,Black/White,Children,89.99,2024-01-16 14:27:52,4,https://i.ibb.co/fGSnDkc/10.webp
+11,High Heels,Elegant high heels for special occasions,7,Red,Women,69.99,2024-01-16 14:27:52,4,https://i.ibb.co/BgV2sHh/11.webp
+12,Casual Sneakers,Comfortable sneakers for everyday wear,10,Navy Blue,Men,54.99,2024-01-16 14:27:52,4,https://i.ibb.co/Z8cTH9K/12.webp
+13,Leather Tote Bag,Spacious leather tote bag for daily essentials,,Brown,Women,119.99,2024-01-16 14:27:52,5,https://i.ibb.co/C19NWcq/13.webp
+14,Crossbody Purse,Compact crossbody purse for on-the-go style,,Black,Women,49.99,2024-01-16 14:27:52,5,https://i.ibb.co/Hxqs0tV/14.webp
+15,Canvas Backpack,Casual canvas backpack for a laid-back look,,Gray,Children,34.99,2024-01-16 14:27:52,5,https://i.ibb.co/1LZtNVj/15.webp
+16,Classic Watch,Timeless wristwatch for a polished appearance,,Silver,Children,79.99,2024-01-16 14:27:52,6,https://i.ibb.co/Vm9zwg8/16.webp
+17,Statement Necklace,Bold statement necklace for a fashionable look,,Gold,Women,29.99,2024-01-16 14:27:52,6,https://i.ibb.co/bPw8GPb/17.webp
+18,Leather Belt,Stylish leather belt to complete your outfit,36,Brown,Men,19.99,2024-01-16 14:27:52,6,https://i.ibb.co/Nt53mk5/18.webp
+19,Checked Button-down,Casual checked button-down shirt for a versatile look,XL,Green/Blue,Men,27.99,2024-02-09 16:57:45,1,https://i.ibb.co/SPvCYSb/19.webp
+20,Kids Graphic Tee,Fun graphic tee for kids with playful design,S,Green,Children,19.99,2024-02-09 16:57:45,1,https://i.ibb.co/GCQwtWc/20.webp
+21,Graphic Tee,Stylish graphic t-shirt for casual wear,L,Black,Men,19.99,2024-02-09 16:57:45,1,https://i.ibb.co/SVdsWZC/21.webp
+22,Silk Top,Chic silk top for an elegant look,M,Beige,Women,49.99,2024-02-09 16:57:45,1,https://i.ibb.co/5smg48K/22.webp
+23,Quilted Bomber Jacket,Quilted bomber jacket for a sporty yet stylish appearance,M,Blue,Men,89.99,2024-02-09 16:57:45,2,https://i.ibb.co/p2g6cxW/23.webp
+24,Faux Fur Coat,Chic faux fur coat to stay warm in winter,S,Pink,Women,129.99,2024-02-09 16:57:45,2,https://i.ibb.co/CBV6xkZ/24.webp
+25,Kids Hooded Jacket,Hooded jacket for kids to stay cozy in colder weather,L,Purple,Children,44.99,2024-02-09 16:57:45,2,https://i.ibb.co/cYm5GZV/25.webp
+26,Chino Trousers,Classic chino trousers for a polished look,34x32,Beige,Men,54.99,2024-02-09 16:57:45,3,https://i.ibb.co/89hrvq8/26.webp
+27,Kids Sweatpants,Cozy sweatpants for active kids,M,Blue,Children,24.99,2024-02-09 16:57:45,3,https://i.ibb.co/yQGBptd/27.webp
+28,Wide Leg Pants,Fashionable wide leg pants for comfort and style,M,Black,Women,59.99,2024-02-09 16:57:45,3,https://i.ibb.co/0CtRHBz/28.webp
+29,Hiking Boots,Sturdy hiking boots for outdoor adventures,8,Brown,Men,79.99,2024-02-09 16:57:45,4,https://i.ibb.co/ZVzLTNZ/29.webp
+30,Ankle Strap Sandals,Trendy ankle strap sandals for warm days,6,Brown,Women,39.99,2024-02-09 16:57:45,4,https://i.ibb.co/jyHcwZF/30.webp
+31,Kids Velcro Sneakers,Easy-to-wear velcro sneakers for kids,11,Pink/Blue,Children,29.99,2024-02-09 16:57:45,4,https://i.ibb.co/KLW7Yxm/31.webp
+32,Leather Boots,Durable leather boots for rugged style,11,Black,Men,119.99,2024-02-09 16:57:45,4,https://i.ibb.co/YWFNS7Y/32.webp
+33,Ballet Flats,Comfortable and stylish ballet flats,8,Pink,Women,49.99,2024-02-09 16:57:45,4,https://i.ibb.co/gmFLRrR/33.webp
+34,Satchel Bag,Chic satchel bag for a sophisticated look,,Brown,Women,89.99,2024-02-09 16:57:45,5,https://i.ibb.co/LYPGQDs/34.webp
+35,Messenger Bag,Stylish messenger bag for a modern and casual vibe,,Olive Green,Men,59.99,2024-02-09 16:57:45,5,https://i.ibb.co/F4GKxr2/35.webp
+36,Kids Mini Backpack,Adorable mini backpack for little ones,,Purple/Pink,Children,29.99,2024-02-09 16:57:45,5,https://i.ibb.co/cXLKqLQ/36.webp
+37,Weekender Bag,Large weekender bag for short trips,,Navy Blue,Women,89.99,2024-02-09 16:57:45,5,https://i.ibb.co/WcpbH0B/37.webp
+38,Sports Backpack,Durable backpack for sports or school,,Blue,Children,49.99,2024-02-09 16:57:45,5,https://i.ibb.co/VH9MCk3/38.webp
+39,Smartwatch,Modern smartwatch with advanced features,,Black,Men,129.99,2024-02-09 16:57:45,6,https://i.ibb.co/RTG4CkJ/39.webp
+40,Boho Earrings,Bohemian-inspired earrings for a free-spirited style,,Turquoise,Women,24.99,2024-02-09 16:57:45,6,https://i.ibb.co/dGhtzRF/40.webp
+41,Kids Sunglasses,Cute sunglasses for kids with UV protection,,Blue/Yellow,Children,14.99,2024-02-09 16:57:45,6,https://i.ibb.co/nR4V3qZ/41.webp
+42,Sunglasses,Modern sunglasses for stylish sun protection,,Black,Men,49.99,2024-02-09 16:57:45,6,https://i.ibb.co/fpX2n1r/42.webp
+43,Silk Scarf,Elegant silk scarf for a touch of luxury,,White/Blue,Women,39.99,2024-02-09 16:57:45,6,https://i.ibb.co/QYWTrkf/43.webp

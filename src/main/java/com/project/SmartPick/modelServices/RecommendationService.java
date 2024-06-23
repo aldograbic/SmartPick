@@ -53,4 +53,42 @@ public class RecommendationService {
         }
         return recommendations;
     }
+
+    // ZA CONTENT BASED STROJNO UCENJE
+    // public List<Integer> getRecommendations(int userId) {
+
+    //     String userBehaviorFilePath = "src/main/resources/static/user_behavior.csv";
+    //     String productsDataFilePath = "src/main/resources/static/products_data.csv";
+    
+    //     String scriptPath = "src/main/resources/static/python/recommendation_script_content_based.py";
+    
+    //     try {
+    //         dataExportService.exportBehaviorsToCsv(userBehaviorFilePath);
+    //     } catch (IOException e) {
+    //         logger.error("Failed to export behaviors to CSV", e);
+    //         return Collections.emptyList();
+    //     }
+    
+    //     ProcessBuilder processBuilder = new ProcessBuilder("python", scriptPath, userBehaviorFilePath, productsDataFilePath, String.valueOf(userId));
+
+    //     processBuilder.redirectErrorStream(true);
+    //     List<Integer> recommendations = new ArrayList<>();
+    //     try {
+    //         Process process = processBuilder.start();
+    //         BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+    //         String line;
+    //         while ((line = reader.readLine()) != null) {
+    //             logger.info("Python script output: " + line);
+    //             try {
+    //                 recommendations.add(Integer.parseInt(line.trim()));
+    //             } catch (NumberFormatException e) {
+    //                 logger.warn("Skipping non-integer output: " + line);
+    //             }
+    //         }
+    //         process.waitFor();
+    //     } catch (IOException | InterruptedException e) {
+    //         logger.error("Error running the recommendation script", e);
+    //     }
+    //     return recommendations;
+    // }
 }
