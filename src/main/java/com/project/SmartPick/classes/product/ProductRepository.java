@@ -51,4 +51,6 @@ public interface ProductRepository {
     List<Product> getMostPurchasedProducts();
 
     int getPurchaseCountForProduct(int productId);
+
+    List<Product> findSimilarProducts(String gender, String category, int excludeProductId);
 }

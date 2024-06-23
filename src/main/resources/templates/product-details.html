@@ -152,74 +152,84 @@
         <div class="my-8">
           <h2 class="mb-8">Similar products</h2>
           <div class="grid md:grid-cols-5 gap-8">
-            <div class="border shadow-lg rounded-lg w-64 h-full">
-              <div class="relative">
-                <img
-                  th:src="@{/img/shirt-placeholder.webp}"
-                  alt=""
-                  class="rounded-t-lg h-2/3 w-full"
-                />
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  class="w-6 h-6 absolute top-2 right-2 text-gray-400"
-                >
-                  <path
-                    d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z"
-                  />
-                </svg>
-              </div>
-              <div class="p-2">
-                <p>Majica kratkih rukava</p>
-                <p>24.99 EUR</p>
-              </div>
-            </div>
-            <div class="border shadow-lg rounded-lg w-64 h-full">
-              <div class="relative">
-                <img
-                  th:src="@{/img/shirt-placeholder.webp}"
-                  alt=""
-                  class="rounded-t-lg h-2/3 w-full"
-                />
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  class="w-6 h-6 absolute top-2 right-2 text-gray-400"
-                >
-                  <path
-                    d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z"
-                  />
-                </svg>
-              </div>
-              <div class="p-2">
-                <p>Majica kratkih rukava</p>
-                <p>24.99 EUR</p>
-              </div>
-            </div>
-            <div class="border shadow-lg rounded-lg w-64 h-full">
-              <div class="relative">
-                <img
-                  th:src="@{/img/shirt-placeholder.webp}"
-                  alt=""
-                  class="rounded-t-lg h-2/3 w-full"
-                />
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  class="w-6 h-6 absolute top-2 right-2 text-gray-400"
-                >
-                  <path
-                    d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z"
-                  />
-                </svg>
-              </div>
-              <div class="p-2">
-                <p>Majica kratkih rukava</p>
-                <p>24.99 EUR</p>
-              </div>
+            <div
+              th:each="product : ${similarProducts}"
+              class="border shadow-lg rounded-lg h-full"
+            >
+              <a
+                th:href="'/products/' + ${product.gender.toLowerCase()} + '/' + ${product.category.categoryName.toLowerCase()} + '/' + ${product.productId}"
+              >
+                <div class="relative">
+                  <div class="p-2">
+                    <img
+                      th:src="${product.image}"
+                      th:alt="${product.name}"
+                      class="rounded-lg"
+                    />
+                    <div
+                      th:if="${productsController.isWithinLastWeek(product.createdAt)}"
+                      class="absolute top-4 left-4 bg-white rounded-lg flex gap-2 p-2 text-xs shadow-md items-center"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.5"
+                        stroke="currentColor"
+                        class="w-5 h-5"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456ZM16.894 20.567 16.5 21.75l-.394-1.183a2.25 2.25 0 0 0-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 0 0 1.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 0 0 1.423 1.423l1.183.394-1.183.394a2.25 2.25 0 0 0-1.423 1.423Z"
+                        />
+                      </svg>
+                      New
+                    </div>
+                  </div>
+                  <form action="/toggleSaveProductForUser" method="post">
+                    <div
+                      class="absolute top-4 right-4 bg-white w-7 h-7 rounded-full flex justify-center items-center shadow-md"
+                    >
+                      <input
+                        type="hidden"
+                        name="productId"
+                        th:value="${product.productId}"
+                      />
+
+                      <button type="submit">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                          th:style="'color: ' + (${similarProductsSavedStatusMap[product.productId]} ? '#d11a2a' : '#9CA3AF')"
+                          class="w-4"
+                        >
+                          <path
+                            d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z"
+                          />
+                        </svg>
+                      </button>
+                    </div>
+                  </form>
+                </div>
+                <div class="p-2">
+                  <p
+                    class="text-lg font-semibold pb-2"
+                    th:text="${product.name}"
+                  ></p>
+                  <div class="flex gap-2">
+                    <p
+                      th:text="${product.price + ' EUR'}"
+                      class="text-[#d11a2a] text-lg"
+                    ></p>
+                    <p
+                      th:text="${#numbers.formatDecimal(product.price * 1.5, 1, 2) + ' EUR'}"
+                      class="self-end line-through text-sm pb-0.5"
+                    ></p>
+                  </div>
+                </div>
+              </a>
             </div>
           </div>
         </div>
