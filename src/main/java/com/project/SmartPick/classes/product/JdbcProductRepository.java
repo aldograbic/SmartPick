@@ -309,4 +309,25 @@ public class JdbcProductRepository implements ProductRepository {
         String sql = "SELECT COUNT(behavior_id) FROM user_behavior WHERE product_id = ? AND behavior_type = 'purchase'";
         return jdbcTemplate.queryForObject(sql, Integer.class, productId);
     }
+
+    @Override
+    public List<Product> findSimilarProducts(String gender, String category, int excludeProductId) {
+        String sql = """
+                    SELECT p.*, c.name AS category_name 
+                    FROM product p 
+                    JOIN product_category c ON p.category_id = c.category_id 
+                    WHERE (p.gender = ? AND c.name = ? AND p.product_id != ?) 
+                    OR (p.gender <> ? AND c.name = ? AND p.product_id != ?)
+                    ORDER BY 
+                        CASE 
+                            WHEN p.gender = ? THEN 1 
+                            ELSE 2 
+                        END,
+                        p.product_id DESC
+                        LIMIT 5
+                    """;
+        return jdbcTemplate.query(sql, new ProductRowMapper(productCategoryRepository), gender, category, excludeProductId, gender, category, excludeProductId, gender);
+    }
+    
+
 }

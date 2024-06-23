@@ -159,6 +159,14 @@ public class ProductsController {
         Product product = productRepository.getProductByProductId(productId);
         model.addAttribute("product", product);
 
+        List<Product> similarProducts = productRepository.findSimilarProducts(gender, category, productId);
+        model.addAttribute("similarProducts", similarProducts);
+
+        Map<Integer, Boolean> similarProductsSavedStatusMap = getSavedStatusMap(similarProducts);
+        model.addAttribute("similarProductsSavedStatusMap", similarProductsSavedStatusMap);
+
+        model.addAttribute("productsController", this);
+
         return "product-details";
     }
 
