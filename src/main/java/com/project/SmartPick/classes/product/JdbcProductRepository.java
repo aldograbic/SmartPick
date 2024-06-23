@@ -255,4 +255,58 @@ public class JdbcProductRepository implements ProductRepository {
         String sql = "DELETE FROM user_shopping_cart WHERE user_id = ?";
         jdbcTemplate.update(sql, userId);
     }
+
+    @Override
+    public List<Product> getMostViewedProducts() {
+        String sql = """
+                    SELECT p.*, COUNT(ub.behavior_id) AS view_count 
+                    FROM product p
+                    JOIN user_behavior ub ON p.product_id = ub.product_id
+                    WHERE ub.behavior_type = 'view'
+                    GROUP BY p.product_id, p.name, p.description, p.size, p.color, p.gender, p.price, p.image, p.created_at, p.category_id
+                    ORDER BY view_count DESC
+                    LIMIT 5
+                    """;
+        List<Product> products = jdbcTemplate.query(sql, new ProductRowMapper(productCategoryRepository));
+        
+        for (Product product : products) {
+            int viewCount = getViewCountForProduct(product.getProductId());
+            product.setViewCount(viewCount);
+        }
+        
+        return products;
+    }
+
+    @Override
+    public int getViewCountForProduct(int productId) {
+        String sql = "SELECT COUNT(behavior_id) FROM user_behavior WHERE product_id = ? AND behavior_type = 'view'";
+        return jdbcTemplate.queryForObject(sql, Integer.class, productId);
+    }
+
+    @Override
+    public List<Product> getMostPurchasedProducts() {
+        String sql = """
+                    SELECT p.*, COUNT(ub.behavior_id) AS purchase_count 
+                    FROM product p
+                    JOIN user_behavior ub ON p.product_id = ub.product_id
+                    WHERE ub.behavior_type = 'purchase'
+                    GROUP BY p.product_id, p.name, p.description, p.size, p.color, p.gender, p.price, p.image, p.created_at, p.category_id
+                    ORDER BY purchase_count DESC
+                    LIMIT 5
+                    """;
+        List<Product> products = jdbcTemplate.query(sql, new ProductRowMapper(productCategoryRepository));
+        
+        for (Product product : products) {
+            int purchaseCount = getPurchaseCountForProduct(product.getProductId());
+            product.setPurchaseCount(purchaseCount);
+        }
+        
+        return products;
+    }
+
+    @Override
+    public int getPurchaseCountForProduct(int productId) {
+        String sql = "SELECT COUNT(behavior_id) FROM user_behavior WHERE product_id = ? AND behavior_type = 'purchase'";
+        return jdbcTemplate.queryForObject(sql, Integer.class, productId);
+    }
 }

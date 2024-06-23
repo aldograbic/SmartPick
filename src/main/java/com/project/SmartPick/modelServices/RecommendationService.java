@@ -53,5 +53,4 @@ public class RecommendationService {
         }
         return recommendations;
     }
-    
 }

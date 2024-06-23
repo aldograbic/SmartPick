@@ -1,7 +1,9 @@
 package com.project.SmartPick.controllers;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -33,8 +35,8 @@ public class DashboardController {
     @Autowired
     private ProductRepository productRepository;
 
-    // @Autowired
-    // private RecommendationService recommendationService;
+    @Autowired
+    private RecommendationService recommendationService;
     
     @GetMapping("/user-dashboard")
     public String getUserDashboardPage(Model model) {
@@ -43,15 +45,15 @@ public class DashboardController {
         String username = authentication.getName();
         User user = userRepository.findByUsername(username);
 
-        // List<Integer> recommendedProductIds = recommendationService.getRecommendations(user.getUserId());
-        // List<Product> recommendedProducts = new ArrayList<>();
-        // for (Integer productId : recommendedProductIds) {
-        //     Product product = productRepository.getProductByProductId(productId);
-        //     if (product != null) {
-        //         recommendedProducts.add(product);
-        //     }
-        // }
-        // model.addAttribute("recommendedProducts", recommendedProducts);
+        List<Integer> recommendedProductIds = recommendationService.getRecommendations(user.getUserId());
+        List<Product> recommendedProducts = new ArrayList<>();
+        for (Integer productId : recommendedProductIds) {
+            Product product = productRepository.getProductByProductId(productId);
+            if (product != null) {
+                recommendedProducts.add(product);
+            }
+        }
+        model.addAttribute("recommendedProducts", recommendedProducts);
 
         List<Order> previousOrders = orderRepository.getAllOrdersByUserId(user.getUserId());
 
@@ -68,11 +70,42 @@ public class DashboardController {
 
         model.addAttribute("previousOrders", previousOrders);
 
+        Map<Integer, Boolean> savedStatusMap = getSavedStatusMap(recommendedProducts);
+        model.addAttribute("savedStatusMap", savedStatusMap);
+
         return "user-dashboard";
     }
 
+    private Map<Integer, Boolean> getSavedStatusMap(List<Product> products) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Map<Integer, Boolean> savedStatusMap = new HashMap<>();
+    
+        if (authentication != null && authentication.isAuthenticated() && !"anonymousUser".equals(authentication.getPrincipal())) {
+            String username = authentication.getName();
+            int userId = userRepository.findByUsername(username).getUserId();
+    
+            for (Product product : products) {
+                boolean isSaved = productRepository.hasUserSavedProduct(userId, product.getProductId());
+                savedStatusMap.put(product.getProductId(), isSaved);
+            }
+        } else {
+            for (Product product : products) {
+                savedStatusMap.put(product.getProductId(), false);
+            }
+        }
+    
+        return savedStatusMap;
+    }
+
     @GetMapping("/admin-dashboard")
-    public String getAdminDashboardPage() {
+    public String getAdminDashboardPage(Model model) {
+
+        List<Product> mostViewedProducts = productRepository.getMostViewedProducts();
+        model.addAttribute("mostViewedProducts", mostViewedProducts);
+
+        List<Product> mostPurchasedProducts = productRepository.getMostPurchasedProducts();
+        model.addAttribute("mostPurchasedProducts", mostPurchasedProducts);
+
         return "admin-dashboard";
     }
 }

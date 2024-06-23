@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
     <th:block th:insert="~{fragments/head :: head}"></th:block>
     <title>Admin Dashboard | SmartPick</title>
@@ -10,14 +10,103 @@
       th:insert="~{fragments/successMessage :: successMessage}"
     ></th:block>
     <th:block th:insert="~{fragments/errorMessage :: errorMessage}"></th:block>
-    <main>
-      <div class="container flex flex-col gap-8 mx-auto p-6">
-        <h1>Admin Dashboard</h1>
-        <hr />
-        <h2>A/B Testing</h2>
-        <h2>User Behavior Analytics</h2>
+
+    <main class="container mx-auto p-6">
+      <h1 class="text-3xl font-bold mb-6">Admin Dashboard</h1>
+      <hr class="my-6" />
+      <h2>Most viewed products</h2>
+      <div
+        class="overflow-x-auto bg-white rounded-lg shadow overflow-y-auto relative my-6"
+      >
+        <table class="min-w-full bg-white">
+          <thead class="bg-gray-100 text-gray-700">
+            <tr>
+              <th class="text-left py-2 px-3 uppercase font-semibold text-sm">
+                Rank
+              </th>
+              <th class="text-left py-2 px-3 uppercase font-semibold text-sm">
+                Name
+              </th>
+              <th class="text-left py-2 px-3 uppercase font-semibold text-sm">
+                Description
+              </th>
+              <th class="text-left py-2 px-3 uppercase font-semibold text-sm">
+                Price
+              </th>
+              <th class="text-left py-2 px-3 uppercase font-semibold text-sm">
+                Count
+              </th>
+            </tr>
+          </thead>
+          <tbody class="text-gray-600 text-sm font-light">
+            <tr th:each="product, iter : ${mostViewedProducts}">
+              <td class="py-2 px-3 whitespace-nowrap">
+                <span th:text="${iter.index + 1}"></span>
+              </td>
+              <td class="py-2 px-3 whitespace-nowrap">
+                <span th:text="${product.name}"></span>
+              </td>
+              <td class="py-2 px-3 max-w-xs truncate">
+                <span th:text="${product.description}"></span>
+              </td>
+              <td class="py-2 px-3">
+                <span th:text="${product.price + ' EUR'}"></span>
+              </td>
+              <td class="py-2 px-3">
+                <span th:text="${product.viewCount}"></span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Most purchased products</h2>
+      <div
+        class="overflow-x-auto bg-white rounded-lg shadow overflow-y-auto relative mt-6"
+      >
+        <table class="min-w-full bg-white">
+          <thead class="bg-gray-100 text-gray-700">
+            <tr>
+              <th class="text-left py-2 px-3 uppercase font-semibold text-sm">
+                Rank
+              </th>
+              <th class="text-left py-2 px-3 uppercase font-semibold text-sm">
+                Name
+              </th>
+              <th class="text-left py-2 px-3 uppercase font-semibold text-sm">
+                Description
+              </th>
+              <th class="text-left py-2 px-3 uppercase font-semibold text-sm">
+                Price
+              </th>
+              <th class="text-left py-2 px-3 uppercase font-semibold text-sm">
+                Count
+              </th>
+            </tr>
+          </thead>
+          <tbody class="text-gray-600 text-sm font-light">
+            <tr th:each="product, iter : ${mostPurchasedProducts}">
+              <td class="py-2 px-3 whitespace-nowrap">
+                <span th:text="${iter.index + 1}"></span>
+              </td>
+              <td class="py-2 px-3 whitespace-nowrap">
+                <span th:text="${product.name}"></span>
+              </td>
+              <td class="py-2 px-3 max-w-xs truncate">
+                <span th:text="${product.description}"></span>
+              </td>
+              <td class="py-2 px-3">
+                <span th:text="${product.price + ' EUR'}"></span>
+              </td>
+              <td class="py-2 px-3">
+                <span th:text="${product.purchaseCount}"></span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </main>
+
     <th:block th:insert="~{fragments/footer :: footer}"></th:block>
   </body>
 </html>

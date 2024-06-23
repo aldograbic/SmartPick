@@ -17,6 +17,9 @@ public class Product {
     private Timestamp createdAt;
     private int categoryId;
 
+    private int viewCount;
+    private int purchaseCount;
+
     private ProductCategory category;
 
     public Product() {}
@@ -116,5 +119,21 @@ public class Product {
 
     public void setCategoryId(int categoryId) {
         this.categoryId = categoryId;
+    }
+
+    public int getViewCount() {
+        return viewCount;
+    }
+
+    public void setViewCount(int viewCount) {
+        this.viewCount = viewCount;
+    }
+
+    public int getPurchaseCount() {
+        return purchaseCount;
+    }
+
+    public void setPurchaseCount(int purchaseCount) {
+        this.purchaseCount = purchaseCount;
     }
 }
