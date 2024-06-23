@@ -20,7 +20,19 @@ public class ScheduledTasks {
         String filePath = Paths.get("src/main/resources/static/user_behavior.csv").toString();
         try {
             dataExportService.exportBehaviorsToCsv(filePath);
-            System.out.println("Podaci su uspješno izvezeni u CSV datoteku.");
+            System.out.println("Podaci o interakcijama su uspješno izvezeni u CSV datoteku.");
+        } catch (IOException e) {
+            System.err.println("Greška prilikom izvoza podataka u CSV datoteku: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    @Scheduled(fixedRate = 24 * 60 * 60 * 1000)
+    public void exportProductsToCsvTask() {
+        String filePath = Paths.get("src/main/resources/static/products_data.csv").toString();
+        try {
+            dataExportService.exportProductsToCsv(filePath);
+            System.out.println("Podaci o proizvodima su uspješno izvezeni u CSV datoteku.");
         } catch (IOException e) {
             System.err.println("Greška prilikom izvoza podataka u CSV datoteku: " + e.getMessage());
             e.printStackTrace();
