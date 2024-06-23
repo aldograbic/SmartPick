@@ -43,4 +43,12 @@ public interface ProductRepository {
     List<Product> getLastAddedProducts();
 
     void removeAllProductsFromShoppingCartForUser(int userId);
+
+    List<Product> getMostViewedProducts();
+
+    int getViewCountForProduct(int productId);
+
+    List<Product> getMostPurchasedProducts();
+
+    int getPurchaseCountForProduct(int productId);
 }
