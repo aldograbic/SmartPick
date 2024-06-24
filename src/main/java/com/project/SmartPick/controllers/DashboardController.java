@@ -106,6 +106,18 @@ public class DashboardController {
         List<Product> mostPurchasedProducts = productRepository.getMostPurchasedProducts();
         model.addAttribute("mostPurchasedProducts", mostPurchasedProducts);
 
+        // Preuzimanje evaluacijskih metrika za sve korisnike
+        List<User> users = userRepository.findAll();
+        List<Map<String, String>> metricsList = new ArrayList<>();
+
+        for (User user : users) {
+            Map<String, String> metrics = recommendationService.getEvaluationMetrics(user.getUserId());
+            metrics.put("username", user.getUsername()); // Add the username to the metrics map
+            metricsList.add(metrics);
+        }
+
+        model.addAttribute("metricsList", metricsList);
+
         return "admin-dashboard";
     }
 }

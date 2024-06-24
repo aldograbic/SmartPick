@@ -4,6 +4,30 @@ import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.feature_extraction.text import TfidfVectorizer
 
+# Define functions for evaluation metrics
+def precision_recall_f1(recommended, relevant):
+    true_positive = len(set(recommended) & set(relevant))
+    precision = true_positive / len(recommended) if recommended else 0
+    recall = true_positive / len(relevant) if relevant else 0
+    f1 = 2 * (precision * recall) / (precision + recall) if (precision + recall) else 0
+    return precision, recall, f1
+
+def mean_average_precision(recommended, relevant):
+    hits = 0
+    sum_precisions = 0
+    for i, item in enumerate(recommended):
+        if item in relevant:
+            hits += 1
+            precision_at_i = hits / (i + 1)
+            sum_precisions += precision_at_i
+    return sum_precisions / len(relevant) if relevant else 0
+
+def mean_reciprocal_rank(recommended, relevant):
+    for i, item in enumerate(recommended):
+        if item in relevant:
+            return 1 / (i + 1)
+    return 0
+
 # Check if correct number of arguments are provided
 if len(sys.argv) < 4:
     print("Usage: python recommendation_script.py <interactions_file_path> <products_file_path> <user_id>")
@@ -67,10 +91,22 @@ try:
 
     # Get recommendations
     recommended_products = recommend_products(user_id, interactions_data, products_data, product_cosine_sim, top_n=10)
+    relevant_products = interactions_data[(interactions_data['userId'] == user_id) & (interactions_data['behaviorType'] == 'purchase')]['productId'].tolist()
 
     if recommended_products:
         for product in recommended_products:
             print(product)
+        # Calculate and print evaluation metrics
+        precision, recall, f1 = precision_recall_f1(recommended_products, relevant_products)
+        map_score = mean_average_precision(recommended_products, relevant_products)
+        mrr_score = mean_reciprocal_rank(recommended_products, relevant_products)
+
+        print(f"Precision: {precision}")
+        print(f"Recall: {recall}")
+        print(f"F1 Score: {f1}")
+        print(f"Mean Average Precision (MAP): {map_score}")
+        print(f"Mean Reciprocal Rank (MRR): {mrr_score}")
+
     else:
         print("No recommendations found for this user.")
 

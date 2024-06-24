@@ -1,5 +1,7 @@
 package com.project.SmartPick.classes.user;
 
+import java.util.List;
+
 public interface UserRepository {
 
     User findByUsername(String username);
@@ -10,4 +12,5 @@ public interface UserRepository {
     void contactUs(String name, String email, String message);
     void updateUser(User user);
     void deleteUser(User user);
+    List<User> findAll();
 }
