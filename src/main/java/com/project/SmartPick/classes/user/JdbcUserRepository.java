@@ -79,4 +79,10 @@ public class JdbcUserRepository implements UserRepository{
         String sql = "DELETE FROM user WHERE user_id = ?";
         jdbcTemplate.update(sql, user.getUserId());
     }
+
+    @Override
+    public List<User> findAll() {
+        String sql = "SELECT * FROM user ORDER BY created_at DESC";
+        return jdbcTemplate.query(sql, new UserRowMapper(roleRepository));
+    }
 }
