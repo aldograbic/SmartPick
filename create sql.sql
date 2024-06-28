@@ -87,7 +87,7 @@ CREATE TABLE `order_items` (
 
 
 -- User behavior tracking table (simplified)
-CREATE TABLE user_behavior (
+CREATE TABLE user_behaviors (
     behavior_id INT PRIMARY KEY AUTO_INCREMENT,
     user_id INT,
     product_id INT,

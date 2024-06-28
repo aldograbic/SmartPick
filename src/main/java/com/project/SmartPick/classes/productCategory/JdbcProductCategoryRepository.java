@@ -24,6 +24,5 @@ public class JdbcProductCategoryRepository implements ProductCategoryRepository 
     public ProductCategory getProductCategoryByCategoryId(int categoryId) {
         String sql = "SELECT * FROM product_categories WHERE category_id = ?";
         return jdbcTemplate.queryForObject(sql, new ProductCategoryRowMapper(), categoryId);
-    }
-    
+    } 
 }

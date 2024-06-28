@@ -6,8 +6,6 @@ public interface OrderRepository {
     
     void createOrder(Order order);
 
-    int getLastInsertedOrderId();
-
     void createOrderItem(OrderItem orderItem);
 
     List<OrderItem> getOrderItemsByOrderId(int orderId);
