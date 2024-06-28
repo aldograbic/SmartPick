@@ -16,13 +16,13 @@ public class JdbcProductCategoryRepository implements ProductCategoryRepository 
 
     @Override
     public List<ProductCategory> getAllProductCategories() {
-        String sql = "SELECT * FROM product_category";
+        String sql = "SELECT * FROM product_categories";
         return jdbcTemplate.query(sql, new ProductCategoryRowMapper());
     }
 
     @Override
     public ProductCategory getProductCategoryByCategoryId(int categoryId) {
-        String sql = "SELECT * FROM product_category WHERE category_id = ?";
+        String sql = "SELECT * FROM product_categories WHERE category_id = ?";
         return jdbcTemplate.queryForObject(sql, new ProductCategoryRowMapper(), categoryId);
     }
     

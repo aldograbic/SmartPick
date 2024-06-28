@@ -21,14 +21,14 @@ public class JdbcUserRepository implements UserRepository{
 
     @Override
     public User findByUsername(String username) {
-        String sql = "SELECT user_id, first_name, last_name, username, email, password, profile_image, address, city, email_verified, confirmation_token, created_at, role_id FROM user WHERE username = ?";
+        String sql = "SELECT user_id, first_name, last_name, username, email, password, profile_image, address, city, email_verified, confirmation_token, created_at, role_id FROM users WHERE username = ?";
         List<User> users = jdbcTemplate.query(sql, new UserRowMapper(roleRepository), username);
         return users.isEmpty() ? null : users.get(0);
     }
 
     @Override
     public User findByEmail(String email) {
-        String sql = "SELECT user_id, first_name, last_name, username, email, password, profile_image, address, city, email_verified, confirmation_token, created_at, role_id FROM user WHERE email = ?";
+        String sql = "SELECT user_id, first_name, last_name, username, email, password, profile_image, address, city, email_verified, confirmation_token, created_at, role_id FROM users WHERE email = ?";
         List<User> users = jdbcTemplate.query(sql, new UserRowMapper(roleRepository), email);
         return users.isEmpty() ? null : users.get(0);
     }
@@ -36,7 +36,7 @@ public class JdbcUserRepository implements UserRepository{
     @Override
     public void saveUser(User user) {
         String sql = """
-                    INSERT INTO user (first_name, last_name, username, email, password, address, city, email_verified, confirmation_token, role_id) \
+                    INSERT INTO users (first_name, last_name, username, email, password, address, city, email_verified, confirmation_token, role_id) \
                     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)\
                     """;
         jdbcTemplate.update(sql, user.getFirstName(), user.getLastName(), user.getUsername(), user.getEmail(), user.getPassword(), user.getAddress(), user.getCity(), user.isEmailVerified(), user.getConfirmationToken(), user.getRoleId());
@@ -46,7 +46,7 @@ public class JdbcUserRepository implements UserRepository{
     public User findByConfirmationToken(String token) {
         String sql = """
                     SELECT user_id, first_name, last_name, username, email, password, profile_image, address, city, email_verified, confirmation_token, created_at, role_id \
-                    FROM user WHERE confirmation_token = ?\
+                    FROM users WHERE confirmation_token = ?\
                     """;
         try {
             return jdbcTemplate.queryForObject(sql, new UserRowMapper(roleRepository), token);
@@ -57,32 +57,32 @@ public class JdbcUserRepository implements UserRepository{
 
     @Override
     public void updateEmailVerification(User user) {
-        String sql = "UPDATE user SET email_verified = ? WHERE user_id = ?";
+        String sql = "UPDATE users SET email_verified = ? WHERE user_id = ?";
         jdbcTemplate.update(sql, user.isEmailVerified(), user.getUserId());
     }
 
     @Override
     public void contactUs(String name, String email, String message) {
-        String sql = "INSERT INTO contact_message(name, email, message) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO contact_messages(name, email, message) VALUES (?, ?, ?)";
         jdbcTemplate.update(sql, name, email, message);
     }
 
     @Override
     public void updateUser(User user) {
-        String sql = "UPDATE user SET first_name = ?, last_name = ?, city = ?, address = ?, email = ?, username = ?, email_verified = ?, confirmation_token = ? WHERE user_id = ?";
+        String sql = "UPDATE users SET first_name = ?, last_name = ?, city = ?, address = ?, email = ?, username = ?, email_verified = ?, confirmation_token = ? WHERE user_id = ?";
         jdbcTemplate.update(sql, user.getFirstName(), user.getLastName(), user.getCity(), user.getAddress(), user.getEmail(), user.getUsername(), user.isEmailVerified(),
          user.getConfirmationToken(), user.getUserId());
     }
 
     @Override
     public void deleteUser(User user) {
-        String sql = "DELETE FROM user WHERE user_id = ?";
+        String sql = "DELETE FROM users WHERE user_id = ?";
         jdbcTemplate.update(sql, user.getUserId());
     }
 
     @Override
     public List<User> findAll() {
-        String sql = "SELECT * FROM user ORDER BY created_at DESC";
+        String sql = "SELECT * FROM users ORDER BY created_at DESC";
         return jdbcTemplate.query(sql, new UserRowMapper(roleRepository));
     }
 }
