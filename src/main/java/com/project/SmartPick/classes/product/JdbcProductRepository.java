@@ -27,7 +27,7 @@ public class JdbcProductRepository implements ProductRepository {
 
     @Override
     public List<Product> findByGender(String gender) {
-        String sql = "SELECT * FROM products WHERE gender = ? ORDER BY created_at DESC";
+        String sql = "SELECT * FROM products WHERE gender ILIKE ? ORDER BY created_at DESC";
         return jdbcTemplate.query(sql, new ProductRowMapper(productCategoryRepository), gender);
     }
 
@@ -36,7 +36,7 @@ public class JdbcProductRepository implements ProductRepository {
         String sql = """
                      SELECT p.*, c.name AS category_name FROM products p \
                      JOIN product_categories c ON p.category_id = c.category_id \
-                     WHERE p.gender = ? AND c.name = ? ORDER BY created_at DESC\
+                     WHERE p.gender ILIKE ? AND c.name ILIKE ? ORDER BY created_at DESC\
                      """;
         return jdbcTemplate.query(sql, new ProductRowMapper(productCategoryRepository), gender, categoryName);
     }
@@ -46,7 +46,7 @@ public class JdbcProductRepository implements ProductRepository {
         String sql = """
                      SELECT p.*, c.name AS category_name FROM products p \
                      JOIN product_categories c ON p.category_id = c.category_id \
-                     WHERE c.name = ? ORDER BY created_at DESC\
+                     WHERE c.name ILIKE ? ORDER BY created_at DESC\
                      """;
         return jdbcTemplate.query(sql, new ProductRowMapper(productCategoryRepository), categoryName);
     }
@@ -155,7 +155,7 @@ public class JdbcProductRepository implements ProductRepository {
 
     @Override
     public List<Product> getAllFilteredProductsWithGender(String gender, String size, String color, Integer minPrice, Integer maxPrice) {
-        String sql = "SELECT * FROM products WHERE gender = ?";
+        String sql = "SELECT * FROM products WHERE gender ILIKE ?";
 
         List<Object> params = new ArrayList<>();
         params.add(gender);
@@ -185,7 +185,7 @@ public class JdbcProductRepository implements ProductRepository {
 
     @Override
     public List<Product> getAllFilteredProductsWithCategory(String category, String size, String color, Integer minPrice, Integer maxPrice) {
-        String sql = "SELECT * FROM products WHERE category_id = (SELECT category_id FROM product_categories WHERE name = ?)";
+        String sql = "SELECT * FROM products WHERE category_id = (SELECT category_id FROM product_categories WHERE name ILIKE ?)";
 
         List<Object> params = new ArrayList<>();
         params.add(category);
@@ -215,7 +215,7 @@ public class JdbcProductRepository implements ProductRepository {
 
     @Override
     public List<Product> getAllFilteredProductsWithGenderAndCategory(String gender, String category, String size, String color, Integer minPrice, Integer maxPrice) {
-        String sql = "SELECT * FROM products WHERE gender = ? AND category_id = (SELECT category_id FROM product_categories WHERE name = ?)";
+        String sql = "SELECT * FROM products WHERE gender ILIKE ? AND category_id = (SELECT category_id FROM product_categories WHERE name ILIKE ?)";
 
         List<Object> params = new ArrayList<>();
         params.add(gender);
@@ -316,11 +316,11 @@ public class JdbcProductRepository implements ProductRepository {
                     SELECT p.*, c.name AS category_name 
                     FROM products p 
                     JOIN product_categories c ON p.category_id = c.category_id 
-                    WHERE (p.gender = ? AND c.name = ? AND p.product_id != ?) 
-                    OR (p.gender <> ? AND c.name = ? AND p.product_id != ?)
+                    WHERE (p.gender ILIKE ? AND c.name ILIKE ? AND p.product_id != ?) 
+                    OR (p.gender <> ? AND c.name ILIKE ? AND p.product_id != ?)
                     ORDER BY 
                         CASE 
-                            WHEN p.gender = ? THEN 1 
+                            WHEN p.gender ILIKE ? THEN 1 
                             ELSE 2 
                         END,
                         p.product_id DESC

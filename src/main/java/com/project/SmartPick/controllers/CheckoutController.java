@@ -83,12 +83,10 @@ public class CheckoutController {
 
         orderRepository.createOrder(order);
 
-        int orderId = orderRepository.getLastInsertedOrderId();
-
-        Order savedOrder = orderRepository.findById(orderId);
+        Order savedOrder = orderRepository.findById(order.getOrderId());
 
         for (OrderItem orderItem : orderItems) {
-            orderItem.setOrderId(orderId);
+            orderItem.setOrderId(order.getOrderId());
             orderRepository.createOrderItem(orderItem);
 
             UserBehavior userBehavior = new UserBehavior();
