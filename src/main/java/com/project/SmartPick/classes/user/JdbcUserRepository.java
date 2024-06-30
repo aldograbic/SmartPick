@@ -82,7 +82,7 @@ public class JdbcUserRepository implements UserRepository{
 
     @Override
     public List<User> findAll() {
-        String sql = "SELECT * FROM users ORDER BY created_at DESC";
+        String sql = "SELECT user_id, first_name, last_name, username, email, password, profile_image, address, city, email_verified, confirmation_token, created_at, role_id FROM users ORDER BY created_at DESC";
         return jdbcTemplate.query(sql, new UserRowMapper(roleRepository));
     }
 }

@@ -21,13 +21,13 @@ public class JdbcProductRepository implements ProductRepository {
 
     @Override
     public List<Product> getAllProducts() {
-        String sql = "SELECT * FROM products ORDER BY created_at DESC";
+        String sql = "SELECT product_id, name, description, size, color, gender, price, image, created_at, category_id FROM products ORDER BY created_at DESC";
         return jdbcTemplate.query(sql, new ProductRowMapper(productCategoryRepository));
     }
 
     @Override
     public List<Product> findByGender(String gender) {
-        String sql = "SELECT * FROM products WHERE gender ILIKE ? ORDER BY created_at DESC";
+        String sql = "SELECT product_id, name, description, size, color, gender, price, image, created_at, category_id FROM products WHERE gender ILIKE ? ORDER BY created_at DESC";
         return jdbcTemplate.query(sql, new ProductRowMapper(productCategoryRepository), gender);
     }
 
@@ -104,7 +104,7 @@ public class JdbcProductRepository implements ProductRepository {
 
     @Override
     public Product getProductByProductId(int productId) {
-        String sql = "SELECT * FROM products WHERE product_id = ?";
+        String sql = "SELECT product_id, name, description, size, color, gender, price, image, created_at, category_id FROM products WHERE product_id = ?";
         return jdbcTemplate.queryForObject(sql, new ProductRowMapper(productCategoryRepository), productId);
     }
 
@@ -118,7 +118,7 @@ public class JdbcProductRepository implements ProductRepository {
 
     @Override
     public List<Product> getAllProductsByPrompt(String prompt) {
-        String sql = "SELECT * FROM products WHERE name LIKE ? OR description LIKE ?";
+        String sql = "SELECT product_id, name, description, size, color, gender, price, image, created_at, category_id FROM products WHERE name LIKE ? OR description LIKE ?";
         String searchTerm = "%" + prompt + "%";
         
         return jdbcTemplate.query(sql, new ProductRowMapper(productCategoryRepository), searchTerm, searchTerm);
@@ -126,7 +126,7 @@ public class JdbcProductRepository implements ProductRepository {
 
     @Override
     public List<Product> getAllFilteredProducts(String size, String color, Integer minPrice, Integer maxPrice) {
-        String sql = "SELECT * FROM products WHERE 1=1 ";
+        String sql = "SELECT product_id, name, description, size, color, gender, price, image, created_at, category_id FROM products WHERE 1=1 ";
 
         List<Object> params = new ArrayList<>();
 
@@ -155,7 +155,7 @@ public class JdbcProductRepository implements ProductRepository {
 
     @Override
     public List<Product> getAllFilteredProductsWithGender(String gender, String size, String color, Integer minPrice, Integer maxPrice) {
-        String sql = "SELECT * FROM products WHERE gender ILIKE ?";
+        String sql = "SELECT product_id, name, description, size, color, gender, price, image, created_at, category_id FROM products WHERE gender ILIKE ?";
 
         List<Object> params = new ArrayList<>();
         params.add(gender);
@@ -185,7 +185,7 @@ public class JdbcProductRepository implements ProductRepository {
 
     @Override
     public List<Product> getAllFilteredProductsWithCategory(String category, String size, String color, Integer minPrice, Integer maxPrice) {
-        String sql = "SELECT * FROM products WHERE category_id = (SELECT category_id FROM product_categories WHERE name ILIKE ?)";
+        String sql = "SELECT product_id, name, description, size, color, gender, price, image, created_at, category_id FROM products WHERE category_id = (SELECT category_id FROM product_categories WHERE name ILIKE ?)";
 
         List<Object> params = new ArrayList<>();
         params.add(category);
@@ -215,7 +215,7 @@ public class JdbcProductRepository implements ProductRepository {
 
     @Override
     public List<Product> getAllFilteredProductsWithGenderAndCategory(String gender, String category, String size, String color, Integer minPrice, Integer maxPrice) {
-        String sql = "SELECT * FROM products WHERE gender ILIKE ? AND category_id = (SELECT category_id FROM product_categories WHERE name ILIKE ?)";
+        String sql = "SELECT product_id, name, description, size, color, gender, price, image, created_at, category_id FROM products WHERE gender ILIKE ? AND category_id = (SELECT category_id FROM product_categories WHERE name ILIKE ?)";
 
         List<Object> params = new ArrayList<>();
         params.add(gender);
@@ -246,7 +246,7 @@ public class JdbcProductRepository implements ProductRepository {
 
     @Override
     public List<Product> getLastAddedProducts() {
-        String sql = "SELECT * FROM products ORDER BY created_at DESC LIMIT 5";
+        String sql = "SELECT product_id, name, description, size, color, gender, price, image, created_at, category_id FROM products ORDER BY created_at DESC LIMIT 5";
         return jdbcTemplate.query(sql, new ProductRowMapper(productCategoryRepository));
     }
 
