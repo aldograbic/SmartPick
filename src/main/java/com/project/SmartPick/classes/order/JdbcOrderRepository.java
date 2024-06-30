@@ -1,5 +1,6 @@
 package com.project.SmartPick.classes.order;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -9,11 +10,8 @@ import java.util.List;
 @Repository
 public class JdbcOrderRepository implements OrderRepository {
 
-    private final JdbcTemplate jdbcTemplate;
-
-    public JdbcOrderRepository(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
-    }
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 
     @Override
     public void createOrder(Order order) {

@@ -21,8 +21,6 @@ import com.project.SmartPick.classes.user.User;
 import com.project.SmartPick.classes.user.UserRepository;
 import com.project.SmartPick.modelServices.RecommendationService;
 
-
-
 @Controller
 public class DashboardController {
 
@@ -106,13 +104,12 @@ public class DashboardController {
         List<Product> mostPurchasedProducts = productRepository.getMostPurchasedProducts();
         model.addAttribute("mostPurchasedProducts", mostPurchasedProducts);
 
-        // Preuzimanje evaluacijskih metrika za sve korisnike
         List<User> users = userRepository.findAll();
         List<Map<String, String>> metricsList = new ArrayList<>();
 
         for (User user : users) {
             Map<String, String> metrics = recommendationService.getEvaluationMetrics(user.getUserId());
-            metrics.put("username", user.getUsername()); // Add the username to the metrics map
+            metrics.put("username", user.getUsername());
             metricsList.add(metrics);
         }
 
