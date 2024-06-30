@@ -17,7 +17,7 @@ public class ScheduledTasks {
 
     @Scheduled(fixedRate = 300000)
     public void exportBehaviorsToCsvTask() {
-        String filePath = Paths.get("src/main/resources/static/user_behavior.csv").toString();
+        String filePath = Paths.get("/app/resources/static/user_behavior.csv").toString();
         try {
             dataExportService.exportBehaviorsToCsv(filePath);
             System.out.println("Podaci o interakcijama su uspješno izvezeni u CSV datoteku.");
@@ -29,7 +29,7 @@ public class ScheduledTasks {
 
     @Scheduled(fixedRate = 24 * 60 * 60 * 1000)
     public void exportProductsToCsvTask() {
-        String filePath = Paths.get("src/main/resources/static/products_data.csv").toString();
+        String filePath = Paths.get("/app/resources/static/products_data.csv").toString();
         try {
             dataExportService.exportProductsToCsv(filePath);
             System.out.println("Podaci o proizvodima su uspješno izvezeni u CSV datoteku.");
