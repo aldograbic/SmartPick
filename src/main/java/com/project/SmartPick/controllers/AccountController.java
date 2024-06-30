@@ -87,7 +87,7 @@ public class AccountController {
             user.setEmail(updatedUser.getEmail());
     
             userRepository.updateUser(user);
-            String confirmationLink = "http://localhost:8080/confirm?token=" + token;
+            String confirmationLink = "https://smartpick.onrender.com/confirm?token=" + token;
             emailService.sendMessage(user.getEmail(), "Confirm your e-mail address - SmartPick", "Hello, " + user.getFirstName() + "!\nWe see that you changed your e-mail address to this one!\nWe just need one more thing to get you going... click the link below to confirm your e-mail address!\nConfirmation link: " + confirmationLink);
             session.invalidate();
     

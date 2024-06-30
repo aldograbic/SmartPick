@@ -21,6 +21,12 @@ public class SecurityConfig {
     }
 
     @Autowired
+    private DatabaseLoginFailureHandler databaseLoginFailureHandler;
+     
+    @Autowired
+    private DatabaseLoginSuccessHandler databaseLoginSuccessHandler;
+
+    @Autowired
 	private PasswordEncoder passwordEncoder;
 
     @Bean
@@ -33,8 +39,6 @@ public class SecurityConfig {
                 .requestMatchers("/", "/login", "/registration", "/contact-us", "/products/**", "/confirm", "/privacy-policy", "/terms-and-conditions", "/recommendations/**").permitAll()
                 .requestMatchers("/user-dashboard").hasRole("USER")
                 .requestMatchers("/admin-dashboard").hasRole("ADMIN")
-                // .requestMatchers("/dashboard", "/contact-info").hasAnyRole("TENANT", "OWNER", "AGENT")
-                // .requestMatchers("/properties", "/tenants").hasAnyRole("OWNER", "AGENT")
                 .anyRequest().authenticated()
             )
             .formLogin((formLogin) -> formLogin
@@ -62,10 +66,4 @@ public class SecurityConfig {
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
         return authConfig.getAuthenticationManager();
     }
-
-    @Autowired
-    private DatabaseLoginFailureHandler databaseLoginFailureHandler;
-     
-    @Autowired
-    private DatabaseLoginSuccessHandler databaseLoginSuccessHandler;
 }

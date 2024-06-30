@@ -69,7 +69,7 @@ public class RegistrationController {
 
         userRepository.saveUser(user);
 
-        String confirmationLink = "http://localhost:8080/confirm?token=" + token;
+        String confirmationLink = "https://smartpick.onrender.com/confirm?token=" + token;
         emailService.sendMessage(user.getEmail(), "Confirm your e-mail address - SmartPick", "Hello, " + user.getFirstName() + "!\nWe are happy to see you want to join us!\nWe just need one more thing to get you going... click the link below to confirm your e-mail address!\nConfirmation link: " + confirmationLink);
         redirectAttributes.addFlashAttribute("successMessage", "Please check your e-mail inbox for instructions to confirm your e-mail address.");
 
