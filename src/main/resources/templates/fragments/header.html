@@ -257,21 +257,21 @@
           <li>
             <a
               href="/"
-              class="block p-6 font-medium rounded hover:font-semibold"
+              class="block px-6 pb-4 pt-6 font-medium rounded hover:font-semibold"
               >Home</a
             >
           </li>
           <li>
             <a
               href="/products"
-              class="block p-6 font-medium rounded hover:font-semibold"
+              class="block px-6 py-4 font-medium rounded hover:font-semibold"
               >Products</a
             >
           </li>
           <li>
             <a
               href="/contact-us"
-              class="block p-6 font-medium rounded hover:font-semibold"
+              class="block px-6 py-4 font-medium rounded hover:font-semibold"
               >Contact us</a
             >
           </li>
@@ -279,35 +279,35 @@
           <li sec:authorize="!isAuthenticated()">
             <a
               href="/login"
-              class="block p-6 font-medium rounded hover:font-semibold"
+              class="block px-6 py-4 font-medium rounded hover:font-semibold"
               >Login</a
             >
           </li>
           <li sec:authorize="!isAuthenticated()">
             <a
               href="/registration"
-              class="block p-6 font-medium rounded hover:font-semibold"
+              class="block px-6 py-4 font-medium rounded hover:font-semibold"
               >Sign Up</a
             >
           </li>
           <li sec:authorize="isAuthenticated()">
             <a
               th:href="${#authorization.expression('hasRole(''ADMIN'')') ? '/admin-dashboard' : '/user-dashboard'}"
-              class="block p-6 font-medium rounded hover:font-semibold"
+              class="block px-6 py-4 font-medium rounded hover:font-semibold"
               >Dashboard</a
             >
           </li>
           <li sec:authorize="isAuthenticated()">
             <a
               href="/account"
-              class="block p-6 font-medium rounded hover:font-semibold"
+              class="block px-6 py-4 font-medium rounded hover:font-semibold"
               >My account</a
             >
           </li>
           <li sec:authorize="isAuthenticated()">
             <a
               href="/logout"
-              class="block p-6 font-medium rounded hover:font-semibold"
+              class="block px-6 py-4 font-medium rounded hover:font-semibold"
               >Logout</a
             >
           </li>
