@@ -32,3 +32,9 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# --- secrets / build output (added by cleanup) ---
+src/main/resources/application.properties
+src/main/resources/application-*.properties
+target/
+*-service-account*.json
